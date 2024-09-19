@@ -53,7 +53,7 @@ void main() async {
       //prevent ssl error
       HttpOverrides.global = new MyHttpOverrides();
       //  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
-      // Run app!
+      // Run app! Ramesh Code
       runApp(MyApp()
           // LocalizedApp(
           //   child: MyApp(),
