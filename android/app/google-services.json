@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "168819158694",
+    "project_id": "midnightcity-e0172",
+    "storage_bucket": "midnightcity-e0172.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:168819158694:android:7c688c0030e17e36efce67",
+        "android_client_info": {
+          "package_name": "com.rvdholdings.midnightcitylagos"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "168819158694-u38u9osed90cr5viu9je143fc2pjgljj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTxOjIqLQtWCxzaL7DIW9v8uU0WMle7QM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "168819158694-u38u9osed90cr5viu9je143fc2pjgljj.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "168819158694-b5s0c872nn9741qpverln22sn0bo4c0e.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.rvdholdings.midnightcitylagos"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
