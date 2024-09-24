@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:midnightcity/constants/app_strings.dart';
 import 'package:midnightcity/models/search.dart';
@@ -49,9 +51,9 @@ class ListVendorsView extends StatelessWidget {
           type: type,
           byLocation: byLocation,
         ),
-        onModelReady: (model) => model.initialise(),
+        onViewModelReady: (model) => model.initialise(),
+        //  onModelReady: (model) => model.initialise(),
         builder: (context, model, child) {
-          //
           Widget listView = CustomListView(
             scrollDirection: scrollDirection,
             padding: EdgeInsets.symmetric(horizontal: 2),

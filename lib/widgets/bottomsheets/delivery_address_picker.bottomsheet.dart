@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/models/delivery_address.dart';
 import 'package:midnightcity/services/auth.service.dart';
 import 'package:midnightcity/utils/ui_spacer.dart';
@@ -46,8 +47,7 @@ class DeliveryAddressPicker extends StatelessWidget {
                 AuthServices.authenticated()
                     ? CustomButton(
                         title: "New".tr(),
-                        //  icon: FlutterIcons.plus_ant,
-                        icon: Icons.import_contacts_sharp,
+                        icon: FlutterIcons.plus_ant,
                         iconColor: Colors.white,
                         onPressed: vm.newDeliveryAddressPressed,
                       )
@@ -58,8 +58,7 @@ class DeliveryAddressPicker extends StatelessWidget {
             CustomTextFormField(
               hintText: "Search".tr(),
               prefixIcon: Icon(
-                Icons.import_contacts_sharp,
-                //FlutterIcons.search_fea,
+                FlutterIcons.search_fea,
                 size: 20,
               ),
               onChanged: () {
@@ -107,8 +106,7 @@ class DeliveryAddressPicker extends StatelessWidget {
                     child: TextButton.icon(
                       style: TextButton.styleFrom(alignment: Alignment.center),
                       label: "Choose on map".tr().text.make(),
-                      // icon: Icon(FlutterIcons.location_pin_ent),
-                      icon: Icon(Icons.location_on_sharp),
+                      icon: Icon(FlutterIcons.location_pin_ent),
                       onPressed: vm.pickFromMap,
                     ).wFull(context).px20(),
                   )

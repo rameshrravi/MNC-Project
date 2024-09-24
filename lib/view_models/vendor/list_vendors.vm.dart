@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:midnightcity/constants/app_routes.dart';
 import 'package:midnightcity/models/search.dart';
@@ -45,7 +47,6 @@ class ListVendorsViewModel extends MyBaseViewModel {
           "type": type.name,
         },
       );
-
       clearErrors();
     } catch (error) {
       print("error loading vendors ==> $error");

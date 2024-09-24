@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -107,24 +109,30 @@ class EmptyWelcome extends StatelessWidget {
                 //!vm.showGrid) ||
                 //(!HomeScreenConfig.isVendorTypeListingBoth &&
                 //    HomeScreenConfig.isVendorTypeListingListView),
-                child: CustomListView(
-                  padding: EdgeInsets.all(0),
-                  noScrollPhysics: true,
-                  dataSet: vm!.vendorTypes!,
-                  isLoading: vm!.isBusy,
-                  // loadingWidget: LoadingShimmer().px20(),
-                  itemBuilder: (context, index) {
-                    final vendorType = vt;
+                child: Flexible(
+                  child: CustomListView(
+                    padding: EdgeInsets.all(0),
+                    noScrollPhysics: true,
+                    dataSet: vm!.vendorTypes!,
+                    scrollDirection: Axis.vertical,
+                    isLoading: vm!.isBusy,
+                    // loadingWidget: LoadingShimmer().px20(),
+                    itemBuilder: (context, index) {
+                      //  debugger();
+                      final vendorType = vm!.vendorTypes![index];
 
-                    if (index != 2) {
-                      return SizedBox();
-                    } else {
-                      return ListVendorsView(
-                        vendorType!,
-                      );
-                    } //vm.vendorTypes[index];
-                  },
-                  //  separatorBuilder: (context, index) => UiSpacer.emptySpace(),
+                      if (index != 2) {
+                        return SizedBox();
+                      } else {
+                        return vendorType!.id == null
+                            ? SizedBox()
+                            : ListVendorsView(
+                                vendorType!,
+                              );
+                      } //vm.vendorTypes[index];
+                    },
+                    separatorBuilder: (context, index) => UiSpacer.emptySpace(),
+                  ),
                 ),
               ),
               Padding(

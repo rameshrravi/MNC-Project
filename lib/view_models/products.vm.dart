@@ -15,7 +15,7 @@ class ProductsViewModel extends MyBaseViewModel {
     BuildContext context,
     this.vendorType,
     this.type, {
-    required this.categoryId,
+    this.categoryId,
     this.byLocation = true,
   }) {
     this.viewContext = context;
@@ -27,11 +27,11 @@ class ProductsViewModel extends MyBaseViewModel {
 
   //
   VendorType? vendorType;
-  late int categoryId;
+  late int? categoryId;
   late ProductFetchDataType type;
   ProductRequest productRequest = ProductRequest();
   List<Product> products = [];
-  late bool byLocation;
+  late bool? byLocation;
   late String branch;
 
   bool get anyProductWithOptions {
@@ -79,8 +79,8 @@ class ProductsViewModel extends MyBaseViewModel {
           "vendor_type_id": vendorType!.id,
           "type": 'random',
           "vendor_id": int.parse(branch),
-          "latitude": byLocation ? deliveryaddress?.latitude : null,
-          "longitude": byLocation ? deliveryaddress?.longitude : null,
+          "latitude": byLocation! ? deliveryaddress?.latitude : null,
+          "longitude": byLocation! ? deliveryaddress?.longitude : null,
         },
       );
     } catch (error) {

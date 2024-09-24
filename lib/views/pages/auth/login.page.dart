@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/constants/app_images.dart';
 import 'package:midnightcity/view_models/login.view_model.dart';
@@ -10,6 +11,26 @@ import 'package:stacked/stacked.dart';
 import 'package:velocity_x/velocity_x.dart';
 
 import 'login/scan_login.view.dart';
+import 'package:flutter_launcher_icons/abs/icon_generator.dart';
+import 'package:flutter_launcher_icons/android.dart';
+import 'package:flutter_launcher_icons/config/config.dart';
+import 'package:flutter_launcher_icons/config/macos_config.dart';
+import 'package:flutter_launcher_icons/config/web_config.dart';
+import 'package:flutter_launcher_icons/config/windows_config.dart';
+import 'package:flutter_launcher_icons/constants.dart';
+import 'package:flutter_launcher_icons/custom_exceptions.dart';
+import 'package:flutter_launcher_icons/ios.dart';
+import 'package:flutter_launcher_icons/logger.dart';
+import 'package:flutter_launcher_icons/macos/macos_icon_generator.dart';
+import 'package:flutter_launcher_icons/macos/macos_icon_template.dart';
+import 'package:flutter_launcher_icons/main.dart';
+import 'package:flutter_launcher_icons/pubspec_parser.dart';
+import 'package:flutter_launcher_icons/utils.dart';
+import 'package:flutter_launcher_icons/web/web_icon_generator.dart';
+import 'package:flutter_launcher_icons/web/web_template.dart';
+import 'package:flutter_launcher_icons/windows/windows_icon_generator.dart';
+import 'package:flutter_launcher_icons/xml_templates.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({this.required = false, Key? key}) : super(key: key);
@@ -53,11 +74,11 @@ class _LoginPageState extends State<LoginPage> {
                         EdgeInsets.only(bottom: context.mq.viewInsets.bottom),
                     child: VStack(
                       [
+                        // icon: Icon(FlutterIcons.ios_arrow_back_ion,
                         IconButton(
-                          icon: Icon(Icons.qr_code,
-                              //FlutterIcons.ios_arrow_back_ion,
-                              color: AppColor.white,
-                              size: 28),
+                          //icon: Icon(FlutterIcons.ios_arrow_back_ion),
+                          icon: Icon(FlutterIcons.ios_arrow_back_ion,
+                              color: AppColor.white, size: 28),
                           onPressed: () => Navigator.pop(context),
                         ),
                         // "Welcome Back".tr().text.xl2.semiBold.color(Colors.white).make(),

@@ -41,12 +41,12 @@
 //                       itemBuilder: (context, i) {
 //                         return GestureDetector(
 //                           onTap: () {
-//                             print(model.vendor.categories[i].name +
+//                             print(model.vendor.categories![i].name +
 //                                 "***********");
 //                             print("***********" + vendor.name);
 //                             /*  context.nextPage(
 //                        VendorCategoryProductsPage(
-//                          category: model.categories[i],
+//                          category: model.categories![i],
 //                          vendor: vendor,
 //                        ),
 //                      );*/
@@ -56,7 +56,7 @@
 //                                 MaterialPageRoute(
 //                                     builder: (context) =>
 //                                         VendorCategoryProductsPageNew(
-//                                           category: model.vendor.categories[i],
+//                                           category: model.vendor.categories![i],
 //                                           vendor: model.vendor,
 //                                         )));
 //                           },
@@ -72,7 +72,7 @@
 //                                     ),
 //                                     padding: EdgeInsets.only(left: 0),
 //                                     child: Image.network(
-//                                       model.vendor.categories[i].imageUrl,
+//                                       model.vendor.categories![i].imageUrl,
 //                                       width: MediaQuery.of(context).size.width -
 //                                           40,
 //                                       height: 150,
@@ -90,37 +90,37 @@
 //                                           ),
 //                                           color:
 //                                               AppColor.midnightCityLightBlue),
-//                                       width: model.vendor.categories[i].name ==
+//                                       width: model.vendor.categories![i].name ==
 //                                               "Restaurant"
 //                                           ? 120
-//                                           : model.vendor.categories[i].name ==
+//                                           : model.vendor.categories![i].name ==
 //                                                   "Groceries"
 //                                               ? 120
-//                                               : model.vendor.categories[i]
+//                                               : model.vendor.categories![i]
 //                                                           .name ==
 //                                                       "Pharmacy"
 //                                                   ? 140
-//                                                   : model.vendor.categories[i]
+//                                                   : model.vendor.categories![i]
 //                                                               .name ==
 //                                                           "Orange Bar"
 //                                                       ? 180
 //                                                       : 120,
 //                                       child: Center(
 //                                         child: Text(
-//                                           model.vendor.categories[i].name ==
+//                                           model.vendor.categories![i].name ==
 //                                                   "Restaurant"
 //                                               ? "Great food"
-//                                               : model.vendor.categories[i]
+//                                               : model.vendor.categories![i]
 //                                                           .name ==
 //                                                       "Groceries"
 //                                                   ? "Essentials"
-//                                                   : model.vendor.categories[i]
+//                                                   : model.vendor.categories![i]
 //                                                               .name ==
 //                                                           "Pharmacy"
 //                                                       ? "Drugs and more"
 //                                                       : model
 //                                                                   .vendor
-//                                                                   .categories[i]
+//                                                                   .categories![i]
 //                                                                   .name ==
 //                                                               "Orange Bar"
 //                                                           ? "Cocktails and mocktails"
@@ -142,7 +142,7 @@
 //                                             MainAxisAlignment.spaceBetween,
 //                                         children: [
 //                                           Text(
-//                                             model.vendor.categories[i].name,
+//                                             model.vendor.categories![i].name,
 //                                             style: TextStyle(
 //                                                 color: Colors.black,
 //                                                 fontSize: 18),
@@ -153,14 +153,14 @@
 //                                             color: Colors.grey,
 //                                           ),
 //                                           Text(
-//                                             model.vendor.categories[i].name ==
+//                                             model.vendor.categories![i].name ==
 //                                                     "Restaurant"
 //                                                 ? "40 - 50 mins"
-//                                                 : model.vendor.categories[i]
+//                                                 : model.vendor.categories![i]
 //                                                             .name ==
 //                                                         "Groceries"
 //                                                     ? "20 - 40 mins"
-//                                                     : model.vendor.categories[i]
+//                                                     : model.vendor.categories![i]
 //                                                                 .name ==
 //                                                             "Pharmacy"
 //                                                         ? "15 - 30 mins"

@@ -16,6 +16,7 @@ import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:midnightcity/views/pages/onboarding.page.dart';
 
 import 'constants/app_languages.dart';
+import 'firebase/firebase_options.dart';
 
 //ssll handshake error
 class MyHttpOverrides extends HttpOverrides {
@@ -37,22 +38,24 @@ void main() async {
         languagesList: AppLanguages.codes,
         assetsDirectory: 'assets/lang/',
       );
-      // debugger();
       //
       await LocalStorageService.getPrefs();
       await CartServices.getCartItems();
       //setting up firebase notifications
-      // await Firebase.initializeApp();
-      // await NotificationService.clearIrrelevantNotificationChannels();
-      //await NotificationService.initializeAwesomeNotification();
-      //await NotificationService.listenToActions();
-      // await FirebaseService().setUpFirebaseMessaging();
-      // FirebaseMessaging.onBackgroundMessage(
-      //    GeneralAppService.onBackgroundMessageHandler);
+      //  await Firebase.initializeApp();
+      await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform,
+      );
+      await NotificationService.clearIrrelevantNotificationChannels();
+      await NotificationService.initializeAwesomeNotification();
+      await NotificationService.listenToActions();
+      await FirebaseService().setUpFirebaseMessaging();
+      FirebaseMessaging.onBackgroundMessage(
+          GeneralAppService.onBackgroundMessageHandler);
 
       //prevent ssl error
       HttpOverrides.global = new MyHttpOverrides();
-      //  FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
+      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
       // Run app! Ramesh Code
       runApp(MyApp()
           // LocalizedApp(
@@ -61,7 +64,7 @@ void main() async {
           );
     },
     (error, stackTrace) {
-      //FirebaseCrashlytics.instance.recordError(error, stackTrace);
+      FirebaseCrashlytics.instance.recordError(error, stackTrace);
     },
   );
 }

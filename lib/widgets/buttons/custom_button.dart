@@ -47,11 +47,12 @@ class CustomButton extends StatelessWidget {
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           elevation: this.elevation,
+          backgroundColor: this.color ?? AppColor.primaryColor,
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           disabledForegroundColor:
-              this.loading! ? AppColor.primaryColor : null!.withOpacity(0.38),
+              this.loading! ? AppColor.primaryColor : AppColor.primaryColor,
           disabledBackgroundColor:
-              this.loading! ? AppColor.primaryColor : null!.withOpacity(0.12),
+              this.loading! ? AppColor.primaryColor : AppColor.primaryColor,
           //  primary: this.color ?? AppColor.primaryColor,
           //   shape: this.shape ??
           //       RoundedRectangleBorder(

@@ -1,5 +1,6 @@
 import 'package:flag/flag.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/constants/app_images.dart';
 import 'package:midnightcity/constants/app_strings.dart';
@@ -36,12 +37,18 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     return ViewModelBuilder<RegisterViewModel>.reactive(
       viewModelBuilder: () => RegisterViewModel(context),
-      onModelReady: (model) {
+      onViewModelReady: (model) {
         model.nameTEC.text = widget.name!;
         model.emailTEC.text = widget.email!;
         model.phoneTEC.text = widget.phone!;
         model.initialise();
       },
+      // onModelReady: (model) {
+      //   model.nameTEC.text = widget.name!;
+      //   model.emailTEC.text = widget.email!;
+      //   model.phoneTEC.text = widget.phone!;
+      //   model.initialise();
+      // },
       builder: (context, model, child) {
         return BasePage(
           backgroundColor: Color(0xff121422),
@@ -61,8 +68,9 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: VStack(
                   [
                     IconButton(
-                      icon: Icon(Icons.abc_sharp,
-                          // FlutterIcons.ios_arrow_back_ion,
+                      icon: Icon(
+                          //Icons.abc_sharp,
+                          FlutterIcons.ios_arrow_back_ion,
                           color: AppColor.white,
                           size: 28),
                       onPressed: () => Navigator.pop(context),

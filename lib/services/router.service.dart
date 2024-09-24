@@ -33,7 +33,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case AppRoutes.loginRoute:
       return MaterialPageRoute(builder: (context) => LoginPage());
     case AppRoutes.registerRoute:
-      return MaterialPageRoute(builder: (context) => RegisterPage());
+      return MaterialPageRoute(
+          builder: (context) => RegisterPage(
+                name: "",
+                email: "",
+                phone: "",
+              ));
 
     case AppRoutes.forgotPasswordRoute:
       return MaterialPageRoute(builder: (context) => ForgotPasswordPage());

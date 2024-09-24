@@ -24,7 +24,8 @@ class _OnboardingPageState extends State<OnboardingPage> {
       backgroundColor: Color(0xff121422),
       body: ViewModelBuilder<OnboardingViewModel>.nonReactive(
         viewModelBuilder: () => OnboardingViewModel(context, finishLoading),
-        onModelReady: (vm) => vm.initialise(),
+        // onModelReady: (vm) => vm.initialise(),
+        onViewModelReady: (vm) => vm.initialise(),
         builder: (context, vm, child) {
           return VStack(
             [

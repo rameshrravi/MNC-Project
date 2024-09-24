@@ -51,6 +51,7 @@ class MyBaseViewModel extends BaseViewModel with UpdateService {
   RefreshController refreshController = RefreshController();
 
   void initialise() {
+    useUserLocation();
     // FirestoreRepository();
   }
 

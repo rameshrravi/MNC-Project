@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 //import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/constants/input.styles.dart';
@@ -190,15 +191,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             });
           },
           child: Icon(
-            Icons.import_contacts_sharp,
+            (!makePasswordVisible)
+                ? FlutterIcons.md_eye_off_ion
+                : FlutterIcons.md_eye_ion,
             color: Colors.grey,
           ),
-          // Icon(
-          //   (!makePasswordVisible)
-          //       ? FlutterIcons.md_eye_off_ion
-          //       : FlutterIcons.md_eye_ion,
-          //   color: Colors.grey,
-          // ),
         ),
       );
     } else {

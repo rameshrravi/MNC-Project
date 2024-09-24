@@ -699,6 +699,15 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.1"
+  flutter_icons:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: dart-3
+      resolved-ref: c83e143e940e2ed400b0201a5d8c97cf3bacabc3
+      url: "https://github.com/imclerran/flutter-icons.git"
+    source: git
+    version: "1.1.0"
   flutter_inappwebview:
     dependency: "direct main"
     description:
@@ -804,7 +813,7 @@ packages:
     source: hosted
     version: "1.0.0"
   flutter_launcher_icons:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: flutter_launcher_icons
       sha256: "526faf84284b86a4cb36d20a5e45147747b7563d921373d4ee0559c54fcdbcea"

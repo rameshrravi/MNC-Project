@@ -299,6 +299,7 @@ class RegisterViewModel extends MyBaseViewModel {
   }
 
   void openLogin() async {
+    Navigator.pop(viewContext!);
     // viewContext!.pop();
   }
 

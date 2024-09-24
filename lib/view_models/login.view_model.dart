@@ -264,6 +264,7 @@ class LoginViewModel extends MyBaseViewModel with QrcodeScannerTrait {
       );
 
       //
+      // Navigator.pop(viewContext!);
       await handleDeviceLogin(apiResponse);
 
       setBusy(false);
@@ -316,7 +317,8 @@ class LoginViewModel extends MyBaseViewModel with QrcodeScannerTrait {
         await AuthServices.setAuthBearerToken(apiResponse.body["token"]);
         await AuthServices.isAuthenticated();
         setBusy(false);
-        //  viewContext!.pop(true);
+        //viewContext!.pop(true);
+        Navigator.pop(viewContext!);
       }
     } on FirebaseAuthException catch (error) {
       CoolAlert.show(
@@ -338,9 +340,9 @@ class LoginViewModel extends MyBaseViewModel with QrcodeScannerTrait {
   ///
 
   void openRegister({
-    String? email,
-    String? name,
-    String? phone,
+    String? email = "",
+    String? name = "",
+    String? phone = "",
   }) async {
     // viewContext!.push(
     //   (context) => RegisterPage(

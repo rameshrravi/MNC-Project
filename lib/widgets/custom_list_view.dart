@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:midnightcity/utils/ui_spacer.dart';
 import 'package:midnightcity/widgets/states/empty.state.dart';
@@ -20,7 +22,7 @@ class CustomListView extends StatelessWidget {
   final bool? noScrollPhysics;
   final Axis? scrollDirection;
   final EdgeInsets? padding;
-  final Function(BuildContext, int)? itemBuilder;
+  final Function(BuildContext, int) itemBuilder;
   final Function(BuildContext, int)? separatorBuilder;
 
   //
@@ -43,7 +45,7 @@ class CustomListView extends StatelessWidget {
     this.reversed = false,
     this.noScrollPhysics = false,
     this.scrollDirection = Axis.vertical,
-    @required this.itemBuilder,
+    required this.itemBuilder,
     this.separatorBuilder,
     this.padding,
 
@@ -104,10 +106,32 @@ class CustomListView extends StatelessWidget {
       reverse: this.reversed!,
       physics: this.noScrollPhysics! ? NeverScrollableScrollPhysics() : null,
       scrollDirection: scrollDirection!,
-      itemBuilder: (context, index) => itemBuilder!(context, index),
+      itemBuilder: (context, index) => itemBuilder(context, index),
       itemCount: dataSet!.length,
-      separatorBuilder: (context, index) => separatorBuilder!(context, index),
+      separatorBuilder: (context, index) => separatorBuilder == null
+          ? UiSpacer.verticalSpace()
+          : UiSpacer.horizontalSpace(),
+
+      // separatorBuilder: (context, index) => UiSpacer.verticalSpace(),
+
       //
     );
   }
+
+  // Widget _getListView1() {
+  //   return ListView.separated(
+  //     controller: this.scrollController,
+  //     padding: this.padding,
+  //     shrinkWrap: true,
+  //     reverse: this.reversed!,
+  //     physics: this.noScrollPhysics! ? NeverScrollableScrollPhysics() : null,
+  //     scrollDirection: this.scrollDirection!,
+  //     itemBuilder: itemBuilder!,
+  //     itemCount: this.dataSet!.length,
+  //     separatorBuilder: this.separatorBuilder ??
+  //         (context, index) => this.scrollDirection == Axis.vertical
+  //             ? UiSpacer.verticalSpace()
+  //             : UiSpacer.horizontalSpace(),
+  //   );
+  // }
 }

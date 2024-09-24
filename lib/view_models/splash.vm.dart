@@ -44,7 +44,6 @@ class SplashViewModel extends MyBaseViewModel {
     setBusy(true);
     try {
       final appSettingsObject = await settingsRequest.appSettings();
-      debugger();
       //app settings
       await updateAppVariables(appSettingsObject.body["strings"]);
       //colors

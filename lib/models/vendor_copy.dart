@@ -3,7 +3,6 @@
 //     final vendor = vendorFromJson(jsonString);
 
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:midnightcity/models/category.dart';
 import 'package:midnightcity/models/delivery_address.dart';
@@ -123,13 +122,13 @@ class Vendor {
       description: json["description"] == null ? null : json["description"],
       baseDeliveryFee: json["base_delivery_fee"] == null
           ? 0.00
-          : double.parse(json["base_delivery_fee"].toString()),
+          : double.parse(json["base_delivery_fee"]),
       deliveryFee: json["delivery_fee"] == null
           ? 0.00
-          : double.parse(json["delivery_fee"].toString()),
+          : double.parse(json["delivery_fee"]),
       deliveryRange: json["delivery_range"] == null
           ? null
-          : double.parse(json["delivery_range"].toString()),
+          : double.parse(json["delivery_range"]),
       distance:
           json["distance"] == null ? null : double.parse(json["distance"]),
       tax: json["tax"] == null ? null : json["tax"],
@@ -140,22 +139,17 @@ class Vendor {
       longitude: json["longitude"] == null ? null : json["longitude"],
       comission:
           json["comission"] == null ? null : double.parse(json["comission"]),
-      pickup: json["pickup"] == null ? 0 : int.parse(json["pickup"].toString()),
-      is_busy:
-          json["is_busy"] == null ? 0 : int.parse(json["is_busy"].toString()),
+      pickup: json["pickup"] == null ? 0 : int.parse(json["pickup"]),
+      is_busy: json["is_busy"] == null ? 0 : int.parse(json["is_busy"]),
 
-      delivery:
-          json["delivery"] == null ? 0 : int.parse(json["delivery"].toString()),
-      rating:
-          json["rating"] == null ? null : int.parse(json["rating"].toString()),
+      delivery: json["delivery"] == null ? 0 : int.parse(json["delivery"]),
+      rating: json["rating"] == null ? null : int.parse(json["rating"]),
       reviews_count: json["reviews_count"],
       chargePerKm: json["charge_per_km"] == null
           ? null
-          : int.parse(json["charge_per_km"].toString()),
+          : int.parse(json["charge_per_km"]),
       isOpen: json["is_open"] == null ? true : json["is_open"],
-      isActive: json["is_active"] == null
-          ? null
-          : int.parse(json["is_active"].toString()),
+      isActive: json["is_active"] == null ? null : int.parse(json["is_active"]),
       createdAt: json["created_at"] == null
           ? null
           : DateTime.parse(json["created_at"]),

@@ -2,7 +2,7 @@
 
 class Api {
   static String get baseUrl {
-    return "https://xuo.hsk.mybluehost.me/api";
+    return "https://midnightcityng.com/api";
     //https://xuo.hsk.mybluehost.me/
   }
 
