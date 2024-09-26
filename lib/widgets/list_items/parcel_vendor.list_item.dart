@@ -4,11 +4,12 @@ import 'package:midnightcity/models/vendor.dart';
 import 'package:midnightcity/services/app.service.dart';
 import 'package:midnightcity/utils/ui_spacer.dart';
 import 'package:midnightcity/view_models/new_parcel.vm.dart';
-import 'package:midnightcity/views/pages/parcel/widgets/parcel_schedule.view.txt';
 import 'package:midnightcity/widgets/cards/custom.visibility.dart';
 import 'package:midnightcity/widgets/custom_image.view.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:velocity_x/velocity_x.dart';
+
+import '../../views/pages/parcel/widgets/parcel_schedule.view.dart';
 
 class ParcelVendorListItem extends StatelessWidget {
   const ParcelVendorListItem(

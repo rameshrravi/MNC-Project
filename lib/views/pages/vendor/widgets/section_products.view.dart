@@ -21,8 +21,8 @@ class SectionProductsView extends StatelessWidget {
     this.title = "",
     this.scrollDirection = Axis.vertical,
     this.type = ProductFetchDataType.BEST,
-    required this.itemWidth,
-    required this.itemHeight,
+    this.itemWidth,
+    this.itemHeight,
     this.viewType,
     this.listHeight = 195,
     this.separator,
@@ -34,8 +34,8 @@ class SectionProductsView extends StatelessWidget {
   final Axis scrollDirection;
   final ProductFetchDataType type;
   final String title;
-  final double itemWidth;
-  final double itemHeight;
+  final double? itemWidth;
+  final double? itemHeight;
   final dynamic viewType;
   final double listHeight;
   final Widget? separator;
@@ -109,7 +109,7 @@ class SectionProductsView extends StatelessWidget {
 
               //
               if (itemWidth != null) {
-                return itemView!.w(itemWidth);
+                return itemView!.w(itemWidth!);
               }
               return itemView;
             },

@@ -15,7 +15,7 @@
 //     this.selectedUrl,
 //   }) : super(key: key);
 //
-//   final String selectedUrl;
+//   final String? selectedUrl;
 //
 //   @override
 //   _CustomWebviewPageState createState() => _CustomWebviewPageState();
@@ -27,7 +27,7 @@
 //   String selectedUrl = "";
 //   bool isLoading = false;
 //   final GlobalKey webViewKey = GlobalKey();
-//   InAppWebViewController webViewController;
+//   InAppWebViewController? webViewController;
 //   InAppWebViewGroupOptions options = InAppWebViewGroupOptions(
 //       crossPlatform: InAppWebViewOptions(
 //         useShouldOverrideUrlLoading: true,
@@ -40,7 +40,7 @@
 //         allowsInlineMediaPlayback: true,
 //       ));
 //
-//   PullToRefreshController pullToRefreshController;
+//   PullToRefreshController? pullToRefreshController;
 //   String url = "";
 //   double progress = 0;
 //   final urlController = TextEditingController();
@@ -65,7 +65,7 @@
 //     );
 //
 //     ///
-//     selectedUrl = widget.selectedUrl.replaceFirst("http://", "https://");
+//     selectedUrl = widget.selectedUrl!.replaceFirst("http://", "https://");
 //     if (!selectedUrl.contains("?")) {
 //       selectedUrl = "$selectedUrl?lan=${translator.activeLocale.languageCode}";
 //     } else {
@@ -82,7 +82,8 @@
 //     controller.addJavaScriptHandler(
 //       handlerName: 'handlerClosePage',
 //       callback: (args) {
-//         context.pop();
+//         //context.pop();
+//         Navigator.pop(context);
 //       },
 //     );
 //   }
@@ -116,7 +117,7 @@
 //             padding: const EdgeInsets.all(8.0),
 //             child: InAppWebView(
 //               key: webViewKey,
-//               initialUrlRequest: URLRequest(url: Uri.parse(selectedUrl)),
+//               initialUrlRequest: URLRequest(url: Uri.parse(selectedUrl)),),
 //               initialOptions: options,
 //               pullToRefreshController: pullToRefreshController,
 //               onWebViewCreated: (controller) {

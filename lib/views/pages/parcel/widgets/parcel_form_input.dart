@@ -21,21 +21,21 @@ class ParcelFormInput extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final IconData iconData;
-  final Color iconColor;
-  final String labelText;
-  final String hintText;
-  final bool isReadOnly;
-  final Function onInputTap;
-  final TextEditingController tec;
-  final TextInputType keyboardType;
+  final IconData? iconData;
+  final Color? iconColor;
+  final String? labelText;
+  final String? hintText;
+  final bool? isReadOnly;
+  final Function? onInputTap;
+  final TextEditingController? tec;
+  final TextInputType? keyboardType;
 
   //
-  final Widget icon;
-  final Widget suffix;
-  final Widget content;
-  final bool centered;
-  final Function(String) formValidator;
+  final Widget? icon;
+  final Widget? suffix;
+  final Widget? content;
+  final bool? centered;
+  final Function(String)? formValidator;
   @override
   Widget build(BuildContext context) {
     return HStack(
@@ -53,7 +53,7 @@ class ParcelFormInput extends StatelessWidget {
         VStack(
           [
             labelText != null
-                ? labelText.text.semiBold.make()
+                ? labelText!.text.semiBold.make()
                 : UiSpacer.emptySpace(),
             content ??
                 CustomTextFormField(
@@ -74,7 +74,7 @@ class ParcelFormInput extends StatelessWidget {
         suffix ?? UiSpacer.emptySpace(),
       ],
       crossAlignment:
-          centered ? CrossAxisAlignment.center : CrossAxisAlignment.start,
+          centered! ? CrossAxisAlignment.center : CrossAxisAlignment.start,
     );
   }
 }

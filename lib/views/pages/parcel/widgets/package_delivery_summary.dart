@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:midnightcity/constants/app_strings.dart';
 import 'package:midnightcity/utils/ui_spacer.dart';
 import 'package:midnightcity/view_models/new_parcel.vm.dart';
-import 'package:midnightcity/views/pages/parcel/widgets/form_step_controller.txt';
 import 'package:midnightcity/widgets/cards/custom.visibility.dart';
 import 'package:midnightcity/widgets/custom_list_view.dart';
 import 'package:midnightcity/widgets/list_items/package_type.list_item.dart';
@@ -10,10 +9,12 @@ import 'package:midnightcity/widgets/list_items/parcel_vendor.list_item.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import 'form_step_controller.dart';
+
 class PackageDeliverySummary extends StatelessWidget {
   const PackageDeliverySummary({this.vm, Key? key}) : super(key: key);
 
-  final NewParcelViewModel vm;
+  final NewParcelViewModel? vm;
   @override
   Widget build(BuildContext context) {
     return VStack(
@@ -24,11 +25,11 @@ class PackageDeliverySummary extends StatelessWidget {
             "Summary".tr().text.xl2.semiBold.make().py20(),
             //package type
             "Package Type".tr().text.xl.medium.make().py8(),
-            PackageTypeListItem(packageType: vm.selectedPackgeType),
+            PackageTypeListItem(packageType: vm!.selectedPackgeType),
             UiSpacer.formVerticalSpace(),
             //
             "Courier Vendor".tr().text.xl.medium.make().py8(),
-            ParcelVendorListItem(vm.selectedVendor, vm: vm),
+            ParcelVendorListItem(vm!.selectedVendor, vm: vm),
             UiSpacer.formVerticalSpace(),
 
             //
@@ -36,7 +37,7 @@ class PackageDeliverySummary extends StatelessWidget {
             VStack(
               [
                 "FROM".tr().text.semiBold.make(),
-                vm.pickupLocation.address.text.make().pOnly(bottom: Vx.dp4),
+                vm!.pickupLocation.address!.text.make().pOnly(bottom: Vx.dp4),
                 UiSpacer.verticalSpace(space: 10),
                 //dropoff location
                 Visibility(
@@ -44,7 +45,7 @@ class PackageDeliverySummary extends StatelessWidget {
                   child: VStack(
                     [
                       "TO".tr().text.semiBold.make(),
-                      vm.dropoffLocation.address.text.make(),
+                      vm!.dropoffLocation.address!.text.make(),
                       UiSpacer.verticalSpace(space: 10),
                     ],
                   ),
@@ -53,10 +54,10 @@ class PackageDeliverySummary extends StatelessWidget {
                 //stops
                 Visibility(
                   visible: AppStrings.enableParcelMultipleStops,
-                  child: (vm.packageCheckout.stopsLocation != null)
+                  child: (vm!.packageCheckout.stopsLocation != null)
                       ? VStack(
                           [
-                            ...(vm.packageCheckout.stopsLocation
+                            ...(vm!.packageCheckout.stopsLocation!
                                 .mapIndexed((stop, index) {
                               return VStack(
                                 [
@@ -84,7 +85,7 @@ class PackageDeliverySummary extends StatelessWidget {
                     VStack(
                       [
                         "DATE".tr().text.semiBold.make(),
-                        (vm.pickupDate != null ? vm.pickupDate : "ASAP".tr())
+                        (vm!.pickupDate != null ? vm!.pickupDate : "ASAP".tr())
                             .text
                             .make(),
                       ],
@@ -94,7 +95,7 @@ class PackageDeliverySummary extends StatelessWidget {
                     VStack(
                       [
                         "TIME".tr().text.semiBold.make(),
-                        (vm.pickupTime != null ? vm.pickupTime : "ASAP".tr())
+                        (vm!.pickupTime != null ? vm!.pickupTime : "ASAP".tr())
                             .text
                             .make(),
                       ],
@@ -106,7 +107,7 @@ class PackageDeliverySummary extends StatelessWidget {
                 .p12()
                 .box
                 .roundedSM
-                .border(color: Colors.grey[300], width: 2)
+                .border(color: Colors.grey[300]!, width: 2)
                 .make(),
             UiSpacer.formVerticalSpace(),
 
@@ -115,13 +116,13 @@ class PackageDeliverySummary extends StatelessWidget {
             //recipients
             CustomListView(
               noScrollPhysics: true,
-              dataSet: vm.recipientNamesTEC,
+              dataSet: vm!.recipientNamesTEC,
               itemBuilder: (context, index) {
                 //
                 // OrderStop stop = vm.packageCheckout.stopsLocation[index];
-                final recipientNameTEC = vm.recipientNamesTEC[index];
-                final recipientPhoneTEC = vm.recipientPhonesTEC[index];
-                final noteTEC = vm.recipientNotesTEC[index];
+                final recipientNameTEC = vm!.recipientNamesTEC[index];
+                final recipientPhoneTEC = vm!.recipientPhonesTEC[index];
+                final noteTEC = vm!.recipientNotesTEC[index];
                 //
                 return VStack(
                   [
@@ -161,7 +162,7 @@ class PackageDeliverySummary extends StatelessWidget {
                     .p12()
                     .box
                     .roundedSM
-                    .border(color: Colors.grey[300], width: 2)
+                    .border(color: Colors.grey[300]!, width: 2)
                     .make()
                     .wFull(context);
               },
@@ -172,7 +173,7 @@ class PackageDeliverySummary extends StatelessWidget {
 
             //
             CustomVisibilty(
-              visible: vm.requireParcelInfo,
+              visible: vm!.requireParcelInfo,
               child: VStack(
                 [
                   "Package Parameters".tr().text.xl.medium.make().py8(),
@@ -184,14 +185,14 @@ class PackageDeliverySummary extends StatelessWidget {
                           VStack(
                             [
                               "Weight".tr().text.semiBold.make(),
-                              "${vm.packageWeightTEC.text}kg".text.make(),
+                              "${vm!.packageWeightTEC.text}kg".text.make(),
                             ],
                           ).expand(),
                           //length
                           VStack(
                             [
                               "Length".tr().text.semiBold.make(),
-                              "${vm.packageLengthTEC.text}cm".text.make(),
+                              "${vm!.packageLengthTEC.text}cm".text.make(),
                             ],
                           ).expand(),
                         ],
@@ -203,14 +204,14 @@ class PackageDeliverySummary extends StatelessWidget {
                           VStack(
                             [
                               "Width".tr().text.semiBold.make(),
-                              "${vm.packageWidthTEC.text}cm".text.make(),
+                              "${vm!.packageWidthTEC.text}cm".text.make(),
                             ],
                           ).expand(),
                           //time
                           VStack(
                             [
                               "Height".tr().text.semiBold.make(),
-                              "${vm.packageHeightTEC.text}cm".text.make(),
+                              "${vm!.packageHeightTEC.text}cm".text.make(),
                             ],
                           ).expand(),
                         ],
@@ -220,7 +221,7 @@ class PackageDeliverySummary extends StatelessWidget {
                       .p12()
                       .box
                       .roundedSM
-                      .border(color: Colors.grey[300], width: 2)
+                      .border(color: Colors.grey[300]!, width: 2)
                       .make()
                       .wFull(context),
                 ],
@@ -232,8 +233,8 @@ class PackageDeliverySummary extends StatelessWidget {
 
         //
         FormStepController(
-          onPreviousPressed: () => vm.nextForm(vm.requireParcelInfo ? 4 : 3),
-          onNextPressed: vm.prepareOrderSummary,
+          onPreviousPressed: () => vm!.nextForm(vm!.requireParcelInfo ? 4 : 3),
+          onNextPressed: vm!.prepareOrderSummary,
         ),
       ],
     );

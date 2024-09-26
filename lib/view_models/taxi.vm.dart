@@ -67,8 +67,8 @@ class TaxiViewModel extends TripTaxiViewModel {
     notifyListeners();
   }
 
-  toggleScheduleTaxiOrder(bool enabled) {
-    if (!enabled) {
+  toggleScheduleTaxiOrder(bool? enabled) {
+    if (!enabled!) {
       checkout?.pickupDate = null;
       checkout?.pickupTime = null;
     }

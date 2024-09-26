@@ -66,6 +66,7 @@ dependencies:
   firebase_messaging: ^15.1.1
   flag: ^7.0.0
   flutter_facebook_auth: ^7.1.1
+  flutter_datetime_picker_plus: ^2.2.0
 
 
 
@@ -92,7 +93,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   flutter_typeahead: ^5.2.0
   flutter_widget_from_html_core: ^0.15.2
-  fluttercontactpicker: ^4.7.0
+  #fluttercontactpicker: ^4.7.0
   fluttertoast: ^8.0.9
   form_builder_validators: ^11.0.0
   #geolocator: ^9.0.2
@@ -179,13 +180,13 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-flutter_launcher_icons:
-  android: "launcher_icon"
-  ios: true
-  remove_alpha_ios: true
-  image_path: "assets/images/app_icon.png"
-  adaptive_icon_foreground: "assets/images/app_icon.png"
-  adaptive_icon_background: "assets/images/splash_screen.png"
+#flutter_launcher_icons:
+ # android: "launcher_icon"
+  #ios: true
+  #remove_alpha_ios: true
+  #image_path: "assets/images/app_icon.png"
+ # adaptive_icon_foreground: "assets/images/app_icon.png"
+  #adaptive_icon_background: "assets/images/splash_screen.png"
 # The following section is specific to Flutter packages.
 flutter:
 

@@ -6,12 +6,13 @@ import 'package:midnightcity/models/delivery_address.dart';
 import 'package:midnightcity/services/validator.service.dart';
 import 'package:midnightcity/utils/ui_spacer.dart';
 import 'package:midnightcity/utils/utils.dart';
-import 'package:midnightcity/views/pages/parcel/widgets/parcel_form_input.txt';
 import 'package:midnightcity/widgets/bottomsheets/contact_permission.bottomsheet.dart';
 import 'package:midnightcity/widgets/buttons/custom_button.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:fluttercontactpicker/fluttercontactpicker.dart';
+
+import '../parcel_form_input.dart';
 
 class PackageStopRecipientView extends StatefulWidget {
   const PackageStopRecipientView(

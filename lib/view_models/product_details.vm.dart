@@ -115,223 +115,227 @@ class ProductDetailsViewModel extends MyBaseViewModel {
   }
 
   //
-  // calculateTotal() {
-  //   //
-  //   double? productPrice =
-  //       !product.showDiscount ? product.price : product.discountPrice;
+  calculateTotal() {
+    //
+    double? productPrice =
+        !product.showDiscount ? product.price : product.discountPrice;
+
+    //
+    double totalOptionPrice = 0.0;
+    selectedProductOptions.forEach((option) {
+      totalOptionPrice += option.price!;
+    });
+
+    //
+    if (product.plusOption == 1 || selectedProductOptions.isEmpty) {
+      subTotal = productPrice! + totalOptionPrice;
+    } else {
+      subTotal = totalOptionPrice;
+    }
+    total = subTotal * (product.selectedQty ?? 1);
+    notifyListeners();
+  }
+
   //
-  //   //
-  //   double totalOptionPrice = 0.0;
-  //   selectedProductOptions.forEach((option) {
-  //     totalOptionPrice += option.price!;
-  //   });
+  addToFavourite() async {
+    //
+    setBusy(true);
+
+    try {
+      //
+      final apiResponse = await _favouriteRequest.makeFavourite(product.id!);
+      if (apiResponse.allGood) {
+        //
+        product.isFavourite = true;
+
+        //
+        AlertService.success(text: apiResponse.message);
+      } else {
+        viewContext!.showToast(
+          msg: apiResponse.message!,
+          bgColor: Colors.red,
+          textColor: Colors.white,
+          position: VxToastPosition.top,
+        );
+      }
+    } catch (error) {
+      setError(error);
+    }
+    setBusy(false);
+  }
+
+  removeFromFavourite() async {
+    //
+    setBusy(true);
+
+    try {
+      //
+      final apiResponse = await _favouriteRequest.removeFavourite(product.id!);
+      if (apiResponse.allGood) {
+        //
+        product.isFavourite = false;
+        //
+        AlertService.success(text: apiResponse.message);
+      } else {
+        viewContext!.showToast(
+          msg: apiResponse.message!,
+          bgColor: Colors.red,
+          textColor: Colors.white,
+          position: VxToastPosition.top,
+        );
+      }
+    } catch (error) {
+      setError(error);
+    }
+    setBusy(false);
+  }
+
+  //check if the option groups with required setting has an option selected
+  optionGroupRequirementCheck() {
+    //check if the option groups with required setting has an option selected
+    bool optionGroupRequiredFail = false;
+    OptionGroup? optionGroupRequired;
+    //
+    for (var optionGroup in product.optionGroups!) {
+      //
+      optionGroupRequired = optionGroup;
+      //
+      final selectedOptionInOptionGroup = selectedProductOptions
+          .firstWhere((e) => e.optionGroupId == optionGroup.id);
+
+      //check if there is an option group that is required but customer is yet to select an option
+      if (optionGroup.required == 1 && selectedOptionInOptionGroup == null) {
+        optionGroupRequiredFail = true;
+        break;
+      }
+    }
+
+    //
+    if (optionGroupRequiredFail) {
+      //
+      CoolAlert.show(
+        context: viewContext!,
+        title: "Option required".tr(),
+        text: "You are required to select at least one option of".tr() +
+            " ${optionGroupRequired!.name!}",
+        type: CoolAlertType.error,
+      );
+
+      throw "Option required".tr();
+    }
+  }
+
   //
-  //   //
-  //   if (product.plusOption == 1 || selectedProductOptions.isEmpty) {
-  //     subTotal = productPrice! + totalOptionPrice;
-  //   } else {
-  //     subTotal = totalOptionPrice;
-  //   }
-  //   total = subTotal * (product.selectedQty ?? 1);
-  //   notifyListeners();
-  // }
+  Future<bool> addToCart({bool force = false, bool skip = false}) async {
+    //
+    final cart = Cart();
+    cart.price = subTotal;
+    cart.product = product;
+    cart.selectedQty = product.selectedQty ?? 1;
+    cart.options = selectedProductOptions;
+    cart.optionsIds = selectedProductOptionsIDs;
+    bool done = false;
+    //
+
+    try {
+      //check if the option groups with required setting has an option selected
+      optionGroupRequirementCheck();
+      //
+      setBusy(true);
+      final canAddToCart = product.isDigital
+          ? (await CartServices.canAddDigitalProductToCart(cart))
+          : (await CartServices.canAddToCart(cart));
+      if (canAddToCart || force) {
+        //
+        await CartServices.addToCart(cart);
+        //
+        if (!skip) {
+          done = await CoolAlert.show(
+            context: viewContext!,
+            title: "Add to cart".tr(),
+            text: "%s Added to cart".tr().fill([product.name]),
+            type: CoolAlertType.success,
+            showCancelBtn: true,
+            confirmBtnColor: AppColor.primaryColor!,
+            confirmBtnText: "GO TO CART".tr(),
+            confirmBtnTextStyle: viewContext!.textTheme!.bodyLarge!.copyWith(
+              fontSize: Vx.dp12,
+              color: Colors.white,
+            ),
+            onConfirmBtnTap: () async {
+              //
+              // viewContext!.pop(true);
+              Navigator.pop(viewContext!);
+              viewContext!.nextPage(CartPage());
+            },
+            cancelBtnText: "Keep Shopping".tr(),
+            cancelBtnTextStyle:
+                viewContext!.textTheme.bodyLarge!.copyWith(fontSize: Vx.dp12),
+          );
+        }
+      } else if (product.isDigital) {
+        //
+        CoolAlert.show(
+          context: viewContext!,
+          title: "Digital Product".tr(),
+          text:
+              "You can only buy/purchase digital products together with other digital products. Do you want to clear cart and add this product?"
+                  .tr(),
+          type: CoolAlertType.confirm,
+          onConfirmBtnTap: () async {
+            //
+            // viewContext!.pop();
+            Navigator.pop(viewContext!);
+            await CartServices.clearCart();
+            addToCart(force: true);
+          },
+        );
+      } else {
+        //
+        done = await CoolAlert.show(
+          context: viewContext!,
+          title: "Different Vendor".tr(),
+          text:
+              "Are you sure you'd like to change vendors? Your current items in cart will be lost."
+                  .tr(),
+          type: CoolAlertType.confirm,
+          onConfirmBtnTap: () async {
+            //
+            //   viewContext!.pop();
+            Navigator.pop(viewContext!);
+            await CartServices.clearCart();
+            addToCart(force: true);
+          },
+        );
+      }
+    } catch (error) {
+      print("Cart Error => $error");
+      setError(error);
+    }
+    setBusy(false);
+    return done;
+  }
+
   //
-  // //
-  // addToFavourite() async {
-  //   //
-  //   setBusy(true);
-  //
-  //   try {
-  //     //
-  //     final apiResponse = await _favouriteRequest.makeFavourite(product.id!);
-  //     if (apiResponse.allGood) {
-  //       //
-  //       product.isFavourite = true;
-  //
-  //       //
-  //       AlertService.success(text: apiResponse.message);
-  //     } else {
-  //       viewContext!.showToast(
-  //         msg: apiResponse.message,
-  //         bgColor: Colors.red,
-  //         textColor: Colors.white,
-  //         position: VxToastPosition.top,
-  //       );
-  //     }
-  //   } catch (error) {
-  //     setError(error);
-  //   }
-  //   setBusy(false);
-  // }
-  //
-  // removeFromFavourite() async {
-  //   //
-  //   setBusy(true);
-  //
-  //   try {
-  //     //
-  //     final apiResponse = await _favouriteRequest.removeFavourite(product.id);
-  //     if (apiResponse.allGood) {
-  //       //
-  //       product.isFavourite = false;
-  //       //
-  //       AlertService.success(text: apiResponse.message);
-  //     } else {
-  //       viewContext!.showToast(
-  //         msg: apiResponse.message,
-  //         bgColor: Colors.red,
-  //         textColor: Colors.white,
-  //         position: VxToastPosition.top,
-  //       );
-  //     }
-  //   } catch (error) {
-  //     setError(error);
-  //   }
-  //   setBusy(false);
-  // }
-  //
-  // //check if the option groups with required setting has an option selected
-  // optionGroupRequirementCheck() {
-  //   //check if the option groups with required setting has an option selected
-  //   bool optionGroupRequiredFail = false;
-  //   OptionGroup optionGroupRequired;
-  //   //
-  //   for (var optionGroup in product.optionGroups) {
-  //     //
-  //     optionGroupRequired = optionGroup;
-  //     //
-  //     final selectedOptionInOptionGroup = selectedProductOptions.firstWhere(
-  //       (e) => e.optionGroupId == optionGroup.id,
-  //       orElse: () => null,
-  //     );
-  //
-  //     //check if there is an option group that is required but customer is yet to select an option
-  //     if (optionGroup.required == 1 && selectedOptionInOptionGroup == null) {
-  //       optionGroupRequiredFail = true;
-  //       break;
-  //     }
-  //   }
-  //
-  //   //
-  //   if (optionGroupRequiredFail) {
-  //     //
-  //     CoolAlert.show(
-  //       context: viewContext,
-  //       title: "Option required".tr(),
-  //       text: "You are required to select at least one option of".tr() +
-  //           " ${optionGroupRequired.name}",
-  //       type: CoolAlertType.error,
-  //     );
-  //
-  //     throw "Option required".tr();
-  //   }
-  // }
-  //
-  // //
-  // Future<bool> addToCart({bool force = false, bool skip = false}) async {
-  //   //
-  //   final cart = Cart();
-  //   cart.price = subTotal;
-  //   cart.product = product;
-  //   cart.selectedQty = product.selectedQty ?? 1;
-  //   cart.options = selectedProductOptions;
-  //   cart.optionsIds = selectedProductOptionsIDs;
-  //   bool done = false;
-  //   //
-  //
-  //   try {
-  //     //check if the option groups with required setting has an option selected
-  //     optionGroupRequirementCheck();
-  //     //
-  //     setBusy(true);
-  //     final canAddToCart = product.isDigital
-  //         ? (await CartServices.canAddDigitalProductToCart(cart))
-  //         : (await CartServices.canAddToCart(cart));
-  //     if (canAddToCart || force) {
-  //       //
-  //       await CartServices.addToCart(cart);
-  //       //
-  //       if (!skip) {
-  //         done = await CoolAlert.show(
-  //           context: viewContext,
-  //           title: "Add to cart".tr(),
-  //           text: "%s Added to cart".tr().fill([product.name]),
-  //           type: CoolAlertType.success,
-  //           showCancelBtn: true,
-  //           confirmBtnColor: AppColor.primaryColor,
-  //           confirmBtnText: "GO TO CART".tr(),
-  //           confirmBtnTextStyle: viewContext!.textTheme.bodyText1.copyWith(
-  //             fontSize: Vx.dp12,
-  //             color: Colors.white,
-  //           ),
-  //           onConfirmBtnTap: () async {
-  //             //
-  //             viewContext!.pop(true);
-  //             viewContext!.nextPage(CartPage());
-  //           },
-  //           cancelBtnText: "Keep Shopping".tr(),
-  //           cancelBtnTextStyle:
-  //               viewContext!.textTheme.bodyText1.copyWith(fontSize: Vx.dp12),
-  //         );
-  //       }
-  //     } else if (product.isDigital) {
-  //       //
-  //       CoolAlert.show(
-  //         context: viewContext,
-  //         title: "Digital Product".tr(),
-  //         text:
-  //             "You can only buy/purchase digital products together with other digital products. Do you want to clear cart and add this product?"
-  //                 .tr(),
-  //         type: CoolAlertType.confirm,
-  //         onConfirmBtnTap: () async {
-  //           //
-  //           viewContext!.pop();
-  //           await CartServices.clearCart();
-  //           addToCart(force: true);
-  //         },
-  //       );
-  //     } else {
-  //       //
-  //       done = await CoolAlert.show(
-  //         context: viewContext,
-  //         title: "Different Vendor".tr(),
-  //         text:
-  //             "Are you sure you'd like to change vendors? Your current items in cart will be lost."
-  //                 .tr(),
-  //         type: CoolAlertType.confirm,
-  //         onConfirmBtnTap: () async {
-  //           //
-  //           viewContext!.pop();
-  //           await CartServices.clearCart();
-  //           addToCart(force: true);
-  //         },
-  //       );
-  //     }
-  //   } catch (error) {
-  //     print("Cart Error => $error");
-  //     setError(error);
-  //   }
-  //   setBusy(false);
-  //   return done;
-  // }
-  //
-  // //
-  // void openVendorPage() {
-  //   viewContext!.navigator.pushNamed(
-  //     AppRoutes.vendorDetails,
-  //     arguments: product.vendor,
-  //   );
-  // }
-  //
-  // buyNow() async {
-  //   try {
-  //     //check if the option groups with required setting has an option selected
-  //     optionGroupRequirementCheck();
-  //     await addToCart(skip: true);
-  //     viewContext!.pop();
-  //     viewContext!.nextPage(CartPage());
-  //   } catch (error) {
-  //     toastError("$error");
-  //   }
-  // }
+  void openVendorPage() {
+    // viewContext!.navigator.pushNamed(
+    //   AppRoutes.vendorDetails,
+    //   arguments: product.vendor,
+    // );
+
+    Navigator.pushNamed(viewContext!, AppRoutes.vendorDetails,
+        arguments: product.vendor);
+  }
+
+  buyNow() async {
+    try {
+      //check if the option groups with required setting has an option selected
+      optionGroupRequirementCheck();
+      await addToCart(skip: true);
+      Navigator.pop(viewContext!);
+      viewContext!.nextPage(CartPage());
+    } catch (error) {
+      toastError("$error");
+    }
+  }
 }

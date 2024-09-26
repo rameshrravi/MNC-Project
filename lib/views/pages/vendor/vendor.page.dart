@@ -63,7 +63,7 @@ class _VendorPageState extends State<VendorPage>
                 child: VStack(
                   [
                     //
-                    Banners(widget.vendorType),
+                    Banners(widget!.vendorType!),
                     //categories
                     VendorTypeCategories(
                       widget.vendorType,

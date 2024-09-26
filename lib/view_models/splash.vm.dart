@@ -50,6 +50,7 @@ class SplashViewModel extends MyBaseViewModel {
       await updateAppTheme(appSettingsObject.body["colors"]);
       loadNextPage();
     } catch (error) {
+      //debugger();
       setError(error);
       print("Error loading app settings ==> $error");
       //show a dialog

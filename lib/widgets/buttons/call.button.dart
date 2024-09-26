@@ -8,7 +8,7 @@ class CallButton extends StatelessWidget {
   const CallButton(this.vendor, {this.phone, this.size, Key? key})
       : super(key: key);
 
-  final Vendor vendor;
+  final Vendor? vendor;
   final double? size;
   final String? phone;
   @override
@@ -19,7 +19,7 @@ class CallButton extends StatelessWidget {
       size: size ?? 24,
       color: Colors.white,
     ).p8().box.color(AppColor.primaryColor!).roundedFull.make().onInkTap(() {
-      launchUrlString("tel://${vendor != null ? vendor.phone : phone}");
+      launchUrlString("tel://${vendor != null ? vendor!.phone : phone}");
     });
   }
 }

@@ -9,7 +9,7 @@ import 'package:velocity_x/velocity_x.dart';
 class ParcelDeliveryDiscountSection extends StatelessWidget {
   const ParcelDeliveryDiscountSection(this.vm, {Key? key}) : super(key: key);
 
-  final NewParcelViewModel vm;
+  final NewParcelViewModel? vm;
   @override
   Widget build(BuildContext context) {
     return VStack(
@@ -23,11 +23,12 @@ class ParcelDeliveryDiscountSection extends StatelessWidget {
             //
             CustomTextFormField(
               hintText: "Coupon Code".tr(),
-              textEditingController: vm.couponTEC,
-              errorText: vm.hasErrorForKey(vm.coupon)
-                  ? vm.error(vm.coupon).toString()
+              textEditingController: vm!.couponTEC,
+              errorText: vm!.hasErrorForKey(vm!.coupon)
+                  ? vm!.error(vm!.coupon).toString()
                   : null,
-              onChanged: vm.couponCodeChange,
+              onChanged: () => vm!.couponCodeChange,
+              //onChanged: vm.couponCodeChange,
             ).expand(flex: 2),
             //
             UiSpacer.horizontalSpace(),
@@ -36,11 +37,11 @@ class ParcelDeliveryDiscountSection extends StatelessWidget {
                 CustomButton(
                   title: "Apply".tr(),
                   isFixedHeight: true,
-                  loading: vm.busy(vm.coupon),
-                  onPressed: vm.canApplyCoupon ? vm.applyCoupon : null,
+                  loading: vm!.busy(vm!.coupon),
+                  onPressed: vm!.canApplyCoupon ? vm!.applyCoupon : null,
                 ).h(Vx.dp56),
                 //
-                vm.hasErrorForKey(vm.coupon)
+                vm!.hasErrorForKey(vm!.coupon)
                     ? UiSpacer.verticalSpace(space: 12)
                     : UiSpacer.verticalSpace(space: 1),
               ],

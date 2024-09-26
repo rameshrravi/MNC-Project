@@ -1,42 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:midnightcity/models/delivery_address.dart';
 import 'package:midnightcity/view_models/new_parcel.vm.dart';
-import 'package:midnightcity/views/pages/parcel/widgets/form_step_controller.txt';
 import 'package:midnightcity/views/pages/parcel/widgets/list_item/package_stop_recipient.view.dart';
 import 'package:midnightcity/widgets/custom_list_view.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import 'form_step_controller.dart';
+
 class PackageRecipientInfo extends StatelessWidget {
   const PackageRecipientInfo({this.vm, Key? key}) : super(key: key);
 
-  final NewParcelViewModel vm;
+  final NewParcelViewModel? vm;
   @override
   Widget build(BuildContext context) {
     return Form(
-      key: vm.recipientInfoFormKey,
+      key: vm!.recipientInfoFormKey,
       child: VStack(
         [
           //
           CustomListView(
-            dataSet: vm.recipientNamesTEC,
+            dataSet: vm!.recipientNamesTEC,
             itemBuilder: (context, index) {
               DeliveryAddress stop;
               if (index == 0) {
-                stop = vm.packageCheckout.pickupLocation;
+                stop = vm!.packageCheckout.pickupLocation!;
               } else {
-                stop =
-                    vm.packageCheckout.stopsLocation[index - 1].deliveryAddress;
+                stop = vm!
+                    .packageCheckout.stopsLocation![index - 1].deliveryAddress!;
               }
-              final recipientNameTEC = vm.recipientNamesTEC[index];
-              final recipientPhoneTEC = vm.recipientPhonesTEC[index];
-              final noteTEC = vm.recipientNotesTEC[index];
+              final recipientNameTEC = vm!.recipientNamesTEC[index];
+              final recipientPhoneTEC = vm!.recipientPhonesTEC[index];
+              final noteTEC = vm!.recipientNotesTEC[index];
               //
               return PackageStopRecipientView(
                 stop,
                 recipientNameTEC,
                 recipientPhoneTEC,
                 noteTEC,
-                isOpen: index == vm.openedRecipientFormIndex,
+                isOpen: index == vm!.openedRecipientFormIndex,
                 index: index + 1,
               );
             },
@@ -45,8 +46,8 @@ class PackageRecipientInfo extends StatelessWidget {
 
           //
           FormStepController(
-            onPreviousPressed: () => vm.nextForm(2),
-            onNextPressed: vm.validateRecipientInfo,
+            onPreviousPressed: () => vm!.nextForm(2),
+            onNextPressed: vm!.validateRecipientInfo,
           ),
         ],
       ),

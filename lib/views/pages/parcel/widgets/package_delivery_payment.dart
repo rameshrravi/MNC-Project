@@ -6,8 +6,7 @@ import 'package:midnightcity/extensions/string.dart';
 import 'package:midnightcity/utils/ui_spacer.dart';
 import 'package:midnightcity/view_models/new_parcel.vm.dart';
 import 'package:midnightcity/views/pages/cart/widgets/amount_tile.dart';
-import 'package:midnightcity/views/pages/parcel/widgets/form_step_controller.txt';
-import 'package:midnightcity/views/pages/parcel/widgets/package_delivery_discount_section.txt';
+import 'package:midnightcity/views/pages/parcel/widgets/package_delivery_discount_section.dart';
 import 'package:midnightcity/views/pages/parcel/widgets/parcel_order_payer.dart';
 import 'package:midnightcity/widgets/busy_indicator.dart';
 import 'package:midnightcity/widgets/cards/custom.visibility.dart';
@@ -17,10 +16,12 @@ import 'package:midnightcity/widgets/list_items/payment_method.list_item.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import 'form_step_controller.dart';
+
 class PackageDeliveryPayment extends StatelessWidget {
   const PackageDeliveryPayment({this.vm, Key? key}) : super(key: key);
 
-  final NewParcelViewModel vm;
+  final NewParcelViewModel? vm;
   @override
   Widget build(BuildContext context) {
     return VStack(
@@ -31,11 +32,11 @@ class PackageDeliveryPayment extends StatelessWidget {
             UiSpacer.formVerticalSpace(),
             DottedBorder(
               dashPattern: [5, 1],
-              color: AppColor.accentColor,
-              child: ParcelDeliveryDiscountSection(vm)
+              color: AppColor.accentColor!,
+              child: ParcelDeliveryDiscountSection(vm!)
                   .p20()
                   .box
-                  .color(AppColor.accentColor.withOpacity(0.10))
+                  .color(AppColor.accentColor!.withOpacity(0.10))
                   .clip(Clip.antiAlias)
                   .roundedSM
                   .make(),
@@ -45,20 +46,20 @@ class PackageDeliveryPayment extends StatelessWidget {
             ).py12(),
             DottedLine().py12(),
             //payer
-            ParcelOrderPayer(vm),
+            ParcelOrderPayer(vm!),
             DottedLine().py12(),
 
             "Payment".tr().text.xl2.semiBold.make().py12(),
             //payment details summary
             CustomVisibilty(
-              visible: vm.busy(vm.packageCheckout),
+              visible: vm!.busy(vm!..packageCheckout),
               child: BusyIndicator().centered(),
             ),
 
             //summary error
             CustomVisibilty(
-              visible: vm.hasErrorForKey(vm.packageCheckout),
-              child: "${vm.error(vm.packageCheckout)}"
+              visible: vm!.hasErrorForKey(vm!..packageCheckout),
+              child: "${vm!..error(vm!..packageCheckout)}"
                   .tr()
                   .text
                   .red500
@@ -66,58 +67,59 @@ class PackageDeliveryPayment extends StatelessWidget {
                   .box
                   .p12
                   .roundedSM
-                  .border(color: Colors.grey[400])
+                  .border(color: Colors.grey[400]!)
                   .make()
                   .wFull(context),
             ),
 
             CustomVisibilty(
-              visible: !vm.busy(vm.packageCheckout) &&
-                  !vm.hasErrorForKey(vm.packageCheckout),
+              visible: !vm!.busy(vm!..packageCheckout) &&
+                  !vm!.hasErrorForKey(vm!.packageCheckout),
               child: VStack(
                 [
                   AmountTile(
                     "Distance".tr(),
-                    vm.packageCheckout.distance.numCurrency + " km",
+                    vm!.packageCheckout.distance!.numCurrency + " km",
                   ),
                   AmountTile(
                     "Delivery Charges".tr(),
-                    "${vm.currencySymbol} ${vm.packageCheckout.deliveryFee}"
+                    "${vm!..currencySymbol} ${vm!..packageCheckout.deliveryFee}"
                         .currencyFormat(),
                   ),
                   AmountTile(
                     "Package Size Charges".tr(),
-                    "${vm.currencySymbol} ${vm.packageCheckout.packageTypeFee}"
+                    "${vm!.currencySymbol} ${vm!.packageCheckout.packageTypeFee}"
                         .currencyFormat(),
                   ),
                   DottedLine().py12(),
                   AmountTile(
                     "Subtotal".tr(),
-                    "${vm.currencySymbol} ${vm.packageCheckout.subTotal ?? ''}"
+                    "${vm!.currencySymbol} ${vm!.packageCheckout.subTotal ?? ''}"
                         .currencyFormat(),
                   ),
                   AmountTile(
                     "Discount".tr(),
                     "- " +
-                        "${vm.currencySymbol} ${vm.packageCheckout.discount}"
+                        "${vm!.currencySymbol} ${vm!.packageCheckout.discount}"
                             .currencyFormat(),
                   ),
                   DottedLine().py12(),
                   AmountTile(
-                    "Tax".tr() + " (${vm.packageCheckout.taxRate}%)",
-                    "${vm.currencySymbol} ${vm.packageCheckout.tax ?? ''}"
+                    "Tax".tr() + " (${vm!.packageCheckout.taxRate}%)",
+                    "${vm!.currencySymbol} ${vm!.packageCheckout.tax ?? ''}"
                         .currencyFormat(),
                   ),
                   //fees
                   VendorFeesView(
-                    fees: vm.packageCheckout.vendor.fees,
-                    subTotal: vm.packageCheckout.subTotal,
+                    fees: vm?.packageCheckout.vendor!.fees,
+                    subTotal: vm?.packageCheckout.subTotal,
                   ),
                   DottedLine().py12(),
                   //total
                   AmountTile(
                     "Total".tr(),
-                    "${vm.currencySymbol} ${(vm.packageCheckout.total - vm.packageCheckout.discount) ?? ''}"
+                    // "${vm?.currencySymbol} ${(vm?.packageCheckout.total! - vm!.packageCheckout.discount!) ?? ''}"
+                    "${vm?.currencySymbol} ${(vm!.packageCheckout.total! - vm!.packageCheckout.discount!) ?? ''}"
                         .currencyFormat(),
                   ),
                 ],
@@ -131,17 +133,17 @@ class PackageDeliveryPayment extends StatelessWidget {
             "Please select your mode of payment".tr().text.lg.make(),
             CustomGridView(
               noScrollPhysics: true,
-              dataSet: vm.paymentMethods,
+              dataSet: vm!.paymentMethods,
               childAspectRatio: 3,
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
               itemBuilder: (context, index) {
                 //
-                final paymentMethod = vm.paymentMethods[index];
+                final paymentMethod = vm!.paymentMethods[index];
                 return PaymentOptionListItem(
                   paymentMethod,
-                  selected: paymentMethod == vm.selectedPaymentMethod,
-                  onSelected: vm.changeSelectedPaymentMethod,
+                  selected: paymentMethod == vm!.selectedPaymentMethod,
+                  onSelected: vm!.changeSelectedPaymentMethod,
                 );
               },
             ).pOnly(top: Vx.dp16),
@@ -150,13 +152,19 @@ class PackageDeliveryPayment extends StatelessWidget {
 
         //
         FormStepController(
-          onPreviousPressed: () => vm.nextForm(5),
+          onPreviousPressed: () => vm!.nextForm(5),
           nextTitle: "PLACE ORDER".tr(),
           nextBtnWidth: context.percentWidth * 45,
-          onNextPressed: vm.selectedPaymentMethod != null &&
-                  !vm.hasErrorForKey(vm.packageCheckout)
-              ? vm.initiateOrderPayment
-              : null,
+          onNextPressed: () {
+            if (vm?.selectedPaymentMethod != null &&
+                !vm!.hasErrorForKey(vm!.packageCheckout)) {
+              vm!.initiateOrderPayment();
+            }
+          },
+          // onNextPressed: vm.selectedPaymentMethod != null &&
+          //         !vm.hasErrorForKey(vm.packageCheckout)
+          //     ? vm.initiateOrderPayment
+          //     : null,
         ),
       ],
     );

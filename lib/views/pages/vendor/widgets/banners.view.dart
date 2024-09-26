@@ -20,7 +20,7 @@ class Banners extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final VendorType vendorType;
+  final VendorType? vendorType;
   final double viewportFraction;
   final bool showIndicators;
   final bool featured;

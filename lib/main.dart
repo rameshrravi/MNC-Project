@@ -46,12 +46,12 @@ void main() async {
       await Firebase.initializeApp(
         options: DefaultFirebaseOptions.currentPlatform,
       );
-      await NotificationService.clearIrrelevantNotificationChannels();
-      await NotificationService.initializeAwesomeNotification();
-      await NotificationService.listenToActions();
-      await FirebaseService().setUpFirebaseMessaging();
-      FirebaseMessaging.onBackgroundMessage(
-          GeneralAppService.onBackgroundMessageHandler);
+      //  await NotificationService.clearIrrelevantNotificationChannels();
+      //await NotificationService.initializeAwesomeNotification();
+      //await NotificationService.listenToActions();
+      // await FirebaseService().setUpFirebaseMessaging();
+      // FirebaseMessaging.onBackgroundMessage(
+      //     GeneralAppService.onBackgroundMessageHandler);
 
       //prevent ssl error
       HttpOverrides.global = new MyHttpOverrides();

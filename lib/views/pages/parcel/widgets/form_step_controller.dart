@@ -17,13 +17,13 @@ class FormStepController extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final Function onPreviousPressed;
+  final Function? onPreviousPressed;
   final bool showPrevious;
-  final Function onNextPressed;
+  final Function? onNextPressed;
   final bool showNext;
   final bool showLoadingNext;
-  final String nextTitle;
-  final double nextBtnWidth;
+  final String? nextTitle;
+  final double? nextBtnWidth;
   @override
   Widget build(BuildContext context) {
     return HStack(
@@ -33,7 +33,7 @@ class FormStepController extends StatelessWidget {
             ? OutlinedButton(
                 // height: Vx.dp40,
                 child: "PREVIOUS".tr().text.make(),
-                onPressed: onPreviousPressed,
+                onPressed: () => onPreviousPressed,
               ).py20().w(context.percentWidth * 35)
             : UiSpacer.emptySpace(),
         Spacer(),

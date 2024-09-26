@@ -19,9 +19,9 @@ class SectionVendorsView extends StatelessWidget {
     this.title = "",
     this.scrollDirection = Axis.vertical,
     this.type = SearchFilterType.sales,
-    required this.itemWidth,
+    this.itemWidth,
     this.viewType,
-    required this.separator,
+    this.separator,
     this.byLocation = false,
     Key? key,
   }) : super(key: key);
@@ -30,9 +30,9 @@ class SectionVendorsView extends StatelessWidget {
   final Axis scrollDirection;
   final SearchFilterType type;
   final String title;
-  final double itemWidth;
+  final double? itemWidth;
   final dynamic viewType;
-  final Widget separator;
+  final Widget? separator;
   final bool byLocation;
 
   @override
