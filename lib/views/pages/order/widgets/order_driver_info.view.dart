@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/models/order.dart';
 import 'package:midnightcity/utils/ui_spacer.dart';
@@ -40,8 +41,8 @@ class OrderDriverInfoView extends StatelessWidget {
                       child: HStack(
                         [
                           Icon(
-                            Icons.access_alarm_outlined,
-                            // FlutterIcons.star_ant,
+                            // Icons.access_alarm_outlined,
+                            FlutterIcons.star_ant,
                             size: 14,
                             color: Utils.textColorByTheme(),
                           ),

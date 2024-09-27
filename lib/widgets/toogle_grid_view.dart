@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 ///import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/widgets/cards/custom.visibility.dart';
@@ -35,8 +36,8 @@ class _ToogleGridViewIconState extends State<ToogleGridViewIcon> {
         CustomVisibilty(
           visible: showGrid,
           child: Icon(
-            Icons.list,
-            //FlutterIcons.list_fea,
+            //Icons.list,
+            FlutterIcons.list_fea,
             size: 20,
             color: AppColor.midnightCityLightBlue,
           ),
@@ -46,8 +47,8 @@ class _ToogleGridViewIconState extends State<ToogleGridViewIcon> {
         CustomVisibilty(
           visible: !showGrid,
           child: Icon(
-            Icons.list,
-            //FlutterIcons.grid_fea, Ramesh hide
+            //Icons.list,
+            FlutterIcons.grid_fea,
             size: 20,
             color: AppColor.midnightCityLightBlue,
           ),

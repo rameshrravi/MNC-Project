@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/constants/app_images.dart';
 import 'package:midnightcity/view_models/base.view_model.dart';
@@ -62,16 +63,16 @@ class _AccountVerificationEntryState extends State<AccountVerificationEntry> {
       body: SafeArea(
         child: VStack(
           [
-            // IconButton(
-            //   icon: Icon(FlutterIcons.ios_arrow_back_ion,
-            //       color: AppColor.white, size: 28),
-            //   onPressed: () => Navigator.pop(context),
-            // ),
             IconButton(
-              icon:
-                  Icon(Icons.import_contacts, color: AppColor.white, size: 28),
+              icon: Icon(FlutterIcons.ios_arrow_back_ion,
+                  color: AppColor.white, size: 28),
               onPressed: () => Navigator.pop(context),
             ),
+            // IconButton(
+            //   icon:
+            //       Icon(Icons.import_contacts, color: AppColor.white, size: 28),
+            //   onPressed: () => Navigator.pop(context),
+            // ),
 
             //
             /*    Image.asset(
@@ -364,7 +365,9 @@ class _AccountVerificationEntryState extends State<AccountVerificationEntry> {
                 color: AppColor.midnightCityLightBlue,
                 height: 35,
                 title: "Verify".tr(),
-                loading: widget.vm!.busy(widget.vm!.firebaseVerificationId!),
+                loading: widget.vm!.firebaseVerificationId != null
+                    ? widget.vm!.busy(widget.vm!.firebaseVerificationId!)
+                    : false,
                 onPressed: () {
                   //
                   if (smsCode == null || smsCode!.length != 6) {

@@ -1,5 +1,6 @@
 import 'package:autocomplete_textfield/autocomplete_textfield.dart' as ac;
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/models/search.dart';
 import 'package:midnightcity/services/app.service.dart';
 import 'package:midnightcity/utils/ui_spacer.dart';
@@ -287,8 +288,8 @@ class SearchBarInput extends StatelessWidget {
                 onPressed: null,
                 color: context.backgroundColor,
                 icon: Icon(
-                  //FlutterIcons.sliders_faw,
-                  Icons.slideshow_rounded,
+                  FlutterIcons.sliders_faw,
+                  //Icons.slideshow_rounded,
                   color: context.primaryColor,
                   size: 20,
                 ),

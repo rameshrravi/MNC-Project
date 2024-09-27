@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/extensions/string.dart';
 import 'package:midnightcity/models/option.dart';
@@ -54,8 +55,8 @@ class OptionListItem extends StatelessWidget {
                     left: 5,
                     right: 5,
                     child: Icon(
-                      //FlutterIcons.check_ant,
-                      Icons.ac_unit_outlined,
+                      FlutterIcons.check_ant,
+                      //Icons.ac_unit_outlined,
 
                       color: Colors.white,
                     ).box.color(AppColor.midnightCityLightBlue).make(),

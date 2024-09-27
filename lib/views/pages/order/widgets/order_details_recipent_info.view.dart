@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/utils/ui_spacer.dart';
@@ -29,8 +30,7 @@ class OrderDetailsRecipentInfoView extends StatelessWidget {
                   ).expand(),
                   //call
                   CustomButton(
-                    //icon: FlutterIcons.phone_call_fea,
-                    icon: Icons.abc_sharp,
+                    icon: FlutterIcons.phone_call_fea,
                     iconColor: Colors.white,
                     title: "",
                     color: AppColor.primaryColor,

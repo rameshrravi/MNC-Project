@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/extensions/string.dart';
 import 'package:midnightcity/models/cart.dart';
@@ -123,8 +124,8 @@ class CartListItem extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(9.0),
                 child: Icon(
-                  //FlutterIcons.x_fea,
-                  Icons.access_alarm_outlined,
+                  FlutterIcons.x_fea,
+                  //Icons.access_alarm_outlined,
                   size: 20,
                   color: Colors.black,
                 )

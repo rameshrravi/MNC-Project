@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/view_models/order_details.vm.dart';
 import 'package:midnightcity/widgets/buttons/custom_button.dart';
 import 'package:midnightcity/widgets/cards/custom.visibility.dart';
@@ -21,8 +22,8 @@ class OrderPaymentInfoView extends StatelessWidget {
             titleStyle: context.textTheme.bodyLarge?.copyWith(
               color: Colors.white,
             ),
-            //icon: FlutterIcons.payment_mdi,
-            icon: Icons.access_alarm_outlined,
+            icon: FlutterIcons.payment_mdi,
+            //icon: Icons.access_alarm_outlined,
             iconSize: 18,
             iconColor: Colors.white,
             onPressed: () => vm.openExternalWebpageLink(vm.order.paymentLink!),
@@ -37,8 +38,8 @@ class OrderPaymentInfoView extends StatelessWidget {
             titleStyle: context.textTheme.bodyLarge?.copyWith(
               color: Colors.white,
             ),
-            //icon: FlutterIcons.credit_card_fea,
-            icon: Icons.access_alarm_outlined,
+            icon: FlutterIcons.credit_card_fea,
+            //icon: Icons.access_alarm_outlined,
             iconSize: 18,
             loading: vm.busy(vm.order.paymentStatus),
             onPressed: vm.openPaymentMethodSelection,

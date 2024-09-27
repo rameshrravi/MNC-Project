@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart' hide MenuItem;
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_images.dart';
 import 'package:midnightcity/constants/app_strings.dart';
 import 'package:midnightcity/constants/app_ui_settings.dart';
@@ -122,8 +123,8 @@ class ProfileCard extends StatelessWidget {
                     child: "Logout".tr().text.red500.make(),
                     onPressed: model.logoutPressed,
                     suffix: Icon(
-                      Icons.import_contacts_rounded,
-                      //FlutterIcons.logout_ant,
+                      //Icons.import_contacts_rounded,
+                      FlutterIcons.logout_ant,
                       size: 16,
                     ),
                   ),

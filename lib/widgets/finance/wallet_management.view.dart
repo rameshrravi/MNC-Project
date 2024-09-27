@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_strings.dart';
 import 'package:midnightcity/constants/app_ui_settings.dart';
 import 'package:midnightcity/extensions/string.dart';
@@ -100,8 +101,8 @@ class _WalletManagementViewState extends State<WalletManagementView>
                             [
                               Icon(
                                 // Icons.add,
-                                //FlutterIcons.plus_ant,
-                                Icons.add,
+                                FlutterIcons.plus_ant,
+                                //Icons.add,
                               ),
                               UiSpacer.verticalSpace(space: 5),
                               //
@@ -150,8 +151,8 @@ class _WalletManagementViewState extends State<WalletManagementView>
                             child: VStack(
                               [
                                 Icon(
-                                  //FlutterIcons.download_fea,
-                                  Icons.abc_outlined,
+                                  FlutterIcons.download_fea,
+                                  //Icons.abc_outlined,
                                 ),
                                 UiSpacer.verticalSpace(space: 5),
                                 //

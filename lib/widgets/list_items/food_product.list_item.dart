@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/extensions/string.dart';
 import 'package:midnightcity/models/product.dart';
@@ -146,8 +147,8 @@ class _FoodProductListItemState extends State<FoodProductListItem> {
                             visible: widget.product!.selectedQty == null ||
                                 widget.product!.selectedQty! < 1,
                             child: Icon(
-                              //FlutterIcons.plus_ant,
-                              Icons.import_contacts_sharp,
+                              FlutterIcons.plus_ant,
+                              //Icons.import_contacts_sharp,
                               size: 16,
                               color: Colors.white,
                             )

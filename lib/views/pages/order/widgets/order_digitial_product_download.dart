@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/models/order.dart';
 import 'package:midnightcity/models/order_product.dart';
 import 'package:midnightcity/services/toast.service.dart';
@@ -31,8 +32,7 @@ class DigitialProductOrderDownload extends StatelessWidget {
                 "Download".tr().text.make(),
                 UiSpacer.hSpace(10),
                 Icon(
-                  Icons.access_alarm_outlined,
-                  //  FlutterIcons.download_ant,
+                  FlutterIcons.download_ant,
                   size: 20,
                 ),
               ],
@@ -42,8 +42,8 @@ class DigitialProductOrderDownload extends StatelessWidget {
           UiSpacer.hSpace(),
           CustomButton(
             child: Icon(
-              Icons.access_alarm_outlined,
-              //FlutterIcons.copy_ent,
+              // Icons.access_alarm_outlined,
+              FlutterIcons.copy_ent,
               size: 20,
               color: Utils.textColorByTheme(),
             ),

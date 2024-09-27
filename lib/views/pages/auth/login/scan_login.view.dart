@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_strings.dart';
 import 'package:midnightcity/utils/ui_spacer.dart';
 import 'package:midnightcity/view_models/login.view_model.dart';
@@ -24,8 +25,9 @@ class ScanLoginView extends StatelessWidget {
           "Scan to login".tr().text.make(),
           UiSpacer.smHorizontalSpace(),
           Icon(
-              //   FlutterIcons.qrcode_ant,
-              Icons.abc_sharp),
+              FlutterIcons.qrcode_ant,
+
+            ),
         ],
       )
           .centered()

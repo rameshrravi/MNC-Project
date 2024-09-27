@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/models/vendor.dart';
 import 'package:map_launcher/map_launcher.dart';
@@ -12,8 +13,8 @@ class RouteButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Icon(
-      //FlutterIcons.navigation_fea,
-      Icons.import_contacts_rounded,
+      FlutterIcons.navigation_fea,
+      //Icons.import_contacts_rounded,
       size: size ?? 24,
       color: Colors.white,
     )

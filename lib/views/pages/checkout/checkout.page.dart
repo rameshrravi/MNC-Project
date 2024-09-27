@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_strings.dart';
 import 'package:midnightcity/models/checkout.dart';
 import 'package:midnightcity/utils/ui_spacer.dart';
@@ -112,8 +113,7 @@ class CheckoutPage extends StatelessWidget {
               //
               CustomButton(
                 title: "PLACE ORDER".tr().padRight(14),
-                icon: Icons.ac_unit_rounded,
-                // icon: FlutterIcons.credit_card_fea,
+                 icon: FlutterIcons.credit_card_fea,
                 onPressed: vm.placeOrder,
                 loading: vm.isBusy,
               ).centered().py16(),

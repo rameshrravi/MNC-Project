@@ -40,6 +40,7 @@ class ListVendorsViewModel extends MyBaseViewModel {
     setBusy(true);
     try {
       //filter by location if user selects delivery address
+      // debugger();
       vendors = await _vendorRequest.vendorsRequest(
         byLocation: byLocation ?? true,
         params: {
@@ -66,6 +67,7 @@ class ListVendorsViewModel extends MyBaseViewModel {
 
     // viewContext!.navigator
     //    .pushNamedAndRemoveUntil(AppRoutes.homeRoute, (route) => false);
+    pushNamedAndRemoveUntil(viewContext!, AppRoutes.homeRoute);
     setBusy(false);
     /*   if (vendor.name == "MidNight City Abuja") {
       VxDialog.showAlert(viewContext,

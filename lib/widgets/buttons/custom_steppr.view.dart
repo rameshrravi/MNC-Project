@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 
@@ -35,8 +36,8 @@ class _CustomStepperState extends State<CustomStepper> {
           padding: const EdgeInsets.only(left: 10),
           child: Center(
             child: Icon(
-              //FlutterIcons.minus_ant,
-              Icons.minimize,
+              FlutterIcons.minus_ant,
+              //Icons.minimize,
               size: 14,
               color: Colors.white,
             ).px4().onInkTap(() {

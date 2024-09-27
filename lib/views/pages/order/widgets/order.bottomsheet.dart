@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/utils/ui_spacer.dart';
 import 'package:midnightcity/view_models/order_details.vm.dart';
@@ -20,8 +21,8 @@ class OrderBottomSheet extends StatelessWidget {
                     ? CustomButton(
                         title: "Cancel Order".tr(),
                         color: AppColor.closeColor,
-                        // icon: FlutterIcons.close_ant,
-                        icon: Icons.access_alarm_outlined,
+                        icon: FlutterIcons.close_ant,
+                        // icon: Icons.access_alarm_outlined,
                         onPressed: vm.cancelOrder,
                         loading: vm.busy(vm.order),
                       ).p20()

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
@@ -86,22 +87,29 @@ class HomeViewModel extends MyBaseViewModel {
     handleAppLink();
 
     //determine if homeview should be multiple vendor types or single vendor page
-    // if (AppStrings.isSingleVendorMode) {
-    //   VendorType vendorType = VendorType.fromJson(AppStrings.enabledVendorType);
-    //   homeView = NavigationService.vendorTypePage(
-    //     vendorType,
-    //     context: viewContext,
-    //   );
-    //   //require login
-    //   if (vendorType.authRequired && !AuthServices.authenticated()) {
-    //     await viewContext!.push(
-    //       (context) => LoginPage(
-    //         required: true,
-    //       ),
-    //     );
-    //   }
-    //   notifyListeners();
-    // }
+    debugger();
+    if (AppStrings.isSingleVendorMode) {
+      VendorType vendorType = VendorType.fromJson(AppStrings.enabledVendorType);
+      homeView = NavigationService.vendorTypePage(
+        vendorType,
+        context: viewContext,
+      );
+      //require login
+      if (vendorType.authRequired && !AuthServices.authenticated()) {
+        Navigator.push(
+            viewContext!,
+            MaterialPageRoute(
+                builder: (context) => LoginPage(
+                      required: true,
+                    )));
+        // await viewContext!.pushMethod(
+        //   (context) => LoginPage(
+        //     required: true,
+        //   ),
+        // );
+      }
+      notifyListeners();
+    }
 
     //start listening to changes to items in cart
     LocalStorageService.rxPrefs!.getIntStream(CartServices.totalItemKey).listen(
@@ -123,12 +131,14 @@ class HomeViewModel extends MyBaseViewModel {
 
     try {
       //filter by location if user selects delivery address
+      debugger();
       vendors = await _vendorRequest.vendorsRequest(
         byLocation: false, // byLocation ?? true,
         params: {
           "vendor_type_id": 2,
         },
       );
+      debugger();
       print("********" + vendors.length.toString());
       print("0 ==> " + vendors[0].name.toString());
       print("1 ==> " + vendors[1].name.toString());
@@ -143,7 +153,7 @@ class HomeViewModel extends MyBaseViewModel {
       }
       print("v_id is " + v_id.toString());
       dvendor = await vendors[v_id];
-
+      debugger();
       print("dvendor name is " + dvendor.name!);
 
       clearErrors();
@@ -170,7 +180,7 @@ class HomeViewModel extends MyBaseViewModel {
           "type": "small",
         },
       );
-
+      debugger();
       //empty menu
       dvendor.menus!.insert(
         0,
@@ -211,6 +221,11 @@ class HomeViewModel extends MyBaseViewModel {
     //   AppRoutes.product,
     //   arguments: product,
     // );
+    Navigator.pushNamed(
+      viewContext!,
+      AppRoutes.product,
+      arguments: product,
+    );
 
     //
     notifyListeners();
@@ -224,19 +239,23 @@ class HomeViewModel extends MyBaseViewModel {
   //
   loadMenuProduts() {
     //
+    debugger();
     refreshContollers = List.generate(
       dvendor.menus!.length,
       (index) => new RefreshController(),
     );
+    debugger();
     refreshContollerKeys = List.generate(
       dvendor.menus!.length,
       (index) => vendor.menus![index].id!,
     );
     //
+    debugger();
     dvendor.menus!.forEach((element) {
       loadMoreProducts(element.id!);
       menuProductsQueryPages[element.id!] = 1;
     });
+    debugger();
   }
 
   //
@@ -285,6 +304,13 @@ class HomeViewModel extends MyBaseViewModel {
     // viewContext!.push(
     //       (context) => VendorSearchPage(vendor),
     // );
+
+    Navigator.push(
+        viewContext!,
+        MaterialPageRoute(
+            builder: (context) => VendorSearchPage(
+                  vendor,
+                )));
   }
   //
   // dispose() {
@@ -351,17 +377,29 @@ class HomeViewModel extends MyBaseViewModel {
           product = await _productRequest.productDetails(product.id!);
           AlertService.stopLoading();
           if (!product.vendor!.vendorType!.slug!.contains("commerce")) {
+            nextPageScreenUseNavigotorPush();
+
             // viewContext!.push(
             //   (context) => ProductDetailsPage(
             //     product: product,
             //   ),
             // );
+            pushMethod(
+                viewContext!,
+                ProductDetailsPage(
+                  product: product,
+                ));
           } else {
             // viewContext!.push(
             //   (context) => AmazonStyledCommerceProductDetailsPage(
             //     product: product,
             //   ),
             // );
+            pushMethod(
+                viewContext!,
+                AmazonStyledCommerceProductDetailsPage(
+                  product: product,
+                ));
           }
         } else if (dataSection.contains("vendor")) {
           Vendor vendor = Vendor(id: int.parse(dataId));
@@ -374,6 +412,12 @@ class HomeViewModel extends MyBaseViewModel {
           //     vendor: vendor,
           //   ),
           // );
+
+          pushMethod(
+              viewContext!,
+              VendorDetailsPage(
+                vendor: vendor,
+              ));
         } else if (dataSection.contains("service")) {
           Service service = Service(id: int.parse(dataId));
           ServiceRequest _serviceRequest = ServiceRequest();
@@ -383,6 +427,7 @@ class HomeViewModel extends MyBaseViewModel {
           // viewContext!.push(
           //   (context) => ServiceDetailsPage(service),
           // );
+          pushMethod(viewContext!, ServiceDetailsPage(service));
         }
       } catch (error) {
         AlertService.stopLoading();

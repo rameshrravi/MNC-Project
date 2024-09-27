@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/models/order.dart';
 import 'package:midnightcity/utils/ui_spacer.dart';
@@ -83,8 +84,7 @@ class _OrderDetailsPageState extends State<OrderDetailsPage>
           actions: vm.order.isPackageDelivery
               ? [
                   Icon(
-                    // FlutterIcons.share_2_fea,
-                    Icons.share,
+                    FlutterIcons.share_2_fea,
                     color: Colors.white,
                   ).p8().onInkTap(vm.shareOrderDetails).p8(),
                 ]

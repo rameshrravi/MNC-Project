@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/utils/ui_spacer.dart';
 import 'package:midnightcity/view_models/cart.vm.dart';
 import 'package:midnightcity/widgets/buttons/custom_button.dart';
@@ -31,9 +32,10 @@ class ApplyCoupon extends StatelessWidget {
                   vm.couponCodeChange;
                 },
                 suffixIcon: CustomButton(
-                  child: Icon(Icons.ac_unit_rounded
-                      //FlutterIcons.check_ant,
-                      ),
+                  child: Icon(
+                    //Icons.ac_unit_rounded
+                    FlutterIcons.check_ant,
+                  ),
                   isFixedHeight: true,
                   loading: vm.busy(vm.coupon),
                   onPressed: vm.canApplyCoupon! ? vm.applyCoupon : null,

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_strings.dart';
 import 'package:midnightcity/extensions/string.dart';
 import 'package:midnightcity/view_models/order_details.vm.dart';
@@ -48,8 +49,8 @@ class OrderDetailsHeaderView extends StatelessWidget {
             ).expand(),
             //qr code icon
             Icon(
-              Icons.access_alarm_outlined,
-              //FlutterIcons.qrcode_ant,
+              //Icons.access_alarm_outlined,
+              FlutterIcons.qrcode_ant,
               size: 28,
             ).onInkTap(vm.showVerificationQRCode),
           ],

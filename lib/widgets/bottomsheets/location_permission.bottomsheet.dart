@@ -29,7 +29,7 @@ class LocationPermissionDialog extends StatelessWidget {
           CustomButton(
             title: "Next".tr(),
             onPressed: () {
-              onResult!(true)!;
+              onResult!(true);
               //AppService().navigatorKey.currentContext!.pop();
               Navigator.pop(AppService().navigatorKey.currentContext!);
             },

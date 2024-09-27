@@ -1,3 +1,4 @@
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_strings.dart';
 import 'package:midnightcity/widgets/buttons/custom_button.dart';
 import 'package:midnightcity/widgets/cards/custom.visibility.dart';
@@ -125,8 +126,8 @@ class OrderStatusView extends StatelessWidget {
                       color: AppColor.primaryColor,
                       size: 24,
                       child: Icon(
-                        // FlutterIcons.check_ant,
-                        Icons.access_alarm_outlined,
+                        FlutterIcons.check_ant,
+                        // Icons.access_alarm_outlined,
                         size: 12,
                         color: Colors.white,
                       ),
@@ -174,8 +175,8 @@ class OrderStatusView extends StatelessWidget {
                         vm.order.driverId != null)
                     ? CustomButton(
                         title: "Track Order".tr(),
-                        //icon: FlutterIcons.map_ent,
-                        icon: Icons.access_alarm_outlined,
+                        icon: FlutterIcons.map_ent,
+                        // icon: Icons.access_alarm_outlined,
                         onPressed: vm.trackOrder,
                         loading: vm.busy(vm.order),
                       ).p20()

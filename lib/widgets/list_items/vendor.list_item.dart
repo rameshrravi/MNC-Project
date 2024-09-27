@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/constants/app_strings.dart';
 import 'package:midnightcity/models/vendor.dart';
@@ -123,8 +124,8 @@ class VendorListItem extends StatelessWidget {
                     .medium
                     .make(),
                 Icon(
-                  Icons.abc_sharp,
-                  //FlutterIcons.star_ent,
+                  //Icons.abc_sharp,
+                  FlutterIcons.star_ent,
                   color: AppColor.ratingColor,
                   size: 10,
                 ),

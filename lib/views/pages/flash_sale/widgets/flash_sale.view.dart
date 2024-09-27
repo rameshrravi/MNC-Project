@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/models/flash_sale.dart';
 import 'package:midnightcity/models/vendor_type.dart';
@@ -74,8 +75,8 @@ class _FlashSaleViewState extends State<FlashSaleView> {
       Widget title = HStack(
         [
           Icon(
-            Icons.ac_unit,
-            //   FlutterIcons.local_offer_mdi,
+            // Icons.ac_unit,
+            FlutterIcons.local_offer_mdi,
             color: Colors.black,
           ),
           UiSpacer.hSpace(10),

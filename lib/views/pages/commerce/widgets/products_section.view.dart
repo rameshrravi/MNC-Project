@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/enums/product_fetch_data_type.enum.dart';
 import 'package:midnightcity/models/category.dart';
 import 'package:midnightcity/models/search.dart';
@@ -57,12 +58,11 @@ class ProductsSectionView extends StatelessWidget {
                     [
                       "See all".tr().text.make(),
                       UiSpacer.smHorizontalSpace(),
-                      Icon(Icons.import_contacts),
-                      // Icon(
-                      //   Utils.isArabic
-                      //       ? FlutterIcons.arrow_left_evi
-                      //       : FlutterIcons.arrow_right_evi,
-                      // ),
+                      Icon(
+                        Utils.isArabic
+                            ? FlutterIcons.arrow_left_evi
+                            : FlutterIcons.arrow_right_evi,
+                      ),
                     ],
                   ).onInkTap(() => openSearchPage(context)),
                 ],

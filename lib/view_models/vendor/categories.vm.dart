@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:midnightcity/models/category.dart';
 import 'package:midnightcity/models/search.dart';
@@ -61,7 +63,7 @@ class CategoriesViewModel extends MyBaseViewModel {
 
   initialise({bool all = false}) async {
     setBusy(true);
-
+    debugger();
     try {
       //filter by location if user selects delivery address
       vendors = await _vendorRequest!.vendorsRequest(

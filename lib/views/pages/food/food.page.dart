@@ -73,7 +73,8 @@ class _FoodPageState extends State<FoodPage>
       key: pageKey,
       body: ViewModelBuilder<VendorViewModel>.reactive(
         viewModelBuilder: () => VendorViewModel(context, widget.vendorType),
-        onModelReady: (model) => model.initialise(),
+        // onModelReady: (model) => model.initialise(),
+        onViewModelReady: (model) => model.initialise(),
         builder: (context, model, child) {
           return SafeArea(
             child: VStack(

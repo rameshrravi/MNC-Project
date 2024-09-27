@@ -56,10 +56,10 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     vm = HomeViewModel(context);
-    WidgetsBinding.instance?.addPostFrameCallback(
+    WidgetsBinding.instance.addPostFrameCallback(
       (_) {
         LocationService.prepareLocationListener();
-        vm?.initialise();
+        vm.initialise();
       },
     );
     super.initState();
@@ -92,26 +92,22 @@ class _HomePageState extends State<HomePage> {
                     padding: const EdgeInsets.only(top: 30.0),
                     child: SafeArea(
                       child: Container(
-                        height: MediaQuery.of(context).size.height * .9,
-                        child: Text("kajsbab"),
-                        // child: VendorCategoryProductsPageNewHome(
-                        //   vendor: vm.dvendor,
-                        //   category: vm.dvendor.categories[0],
-                        // )
-                      ),
+                          height: MediaQuery.of(context).size.height * .9,
+                          child: VendorCategoryProductsPageNewHome(
+                            vendor: vm.dvendor,
+                            category: vm.dvendor.categories![0],
+                          )),
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 30.0),
                     child: SafeArea(
                       child: Container(
-                        height: MediaQuery.of(context).size.height * .9,
-                        child: Text("saasas"),
-                        // child: VendorCategoryProductsPageNewHome(
-                        //   vendor: vm.dvendor,
-                        //   category: vm.dvendor.categories[1],
-                        // )
-                      ),
+                          height: MediaQuery.of(context).size.height * .9,
+                          child: VendorCategoryProductsPageNewHome(
+                            vendor: vm.dvendor,
+                            category: vm.dvendor.categories![1],
+                          )),
                     ),
                   ),
                   Padding(

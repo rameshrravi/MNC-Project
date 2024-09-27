@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/models/order.dart';
 import 'package:midnightcity/services/location.service.dart';
@@ -78,9 +79,7 @@ class OrderTrackingPage extends StatelessWidget {
 
                       //call
                       CustomButton(
-                        //icon: FlutterIcons.phone_call_fea,
-                        icon: Icons.access_alarm,
-                        iconColor: Colors.white,
+                        icon: FlutterIcons.phone_call_fea,
                         title: "",
                         color: AppColor.primaryColor,
                         shapeRadius: Vx.dp24,

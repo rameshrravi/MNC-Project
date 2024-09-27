@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:midnightcity/models/user.dart';
@@ -63,6 +64,7 @@ class VendorViewModel extends MyBaseViewModel {
     setBusy(true);
     try {
       //filter by location if user selects delivery address
+      debugger();
       vendors = await _vendorRequest.vendorsRequest(
         byLocation: false, // byLocation ?? true,
         params: {
@@ -130,6 +132,7 @@ class VendorViewModel extends MyBaseViewModel {
     setBusy(true);
     try {
       //filter by location if user selects delivery address
+      debugger();
       vendors = await _vendorRequest.vendorsRequest(
         byLocation: false, // byLocation ?? true,
         params: {

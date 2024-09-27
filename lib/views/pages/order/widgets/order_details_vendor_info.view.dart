@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/constants/app_ui_settings.dart';
 import 'package:midnightcity/extensions/dynamic.dart';
@@ -50,8 +51,8 @@ class OrderDetailsVendorInfoView extends StatelessWidget {
                 visible: AppUISettings.canVendorChat,
                 child: CustomButton(
                   height: 32,
-                  //icon: FlutterIcons.chat_ent,
-                  icon: Icons.access_alarm_outlined,
+                  icon: FlutterIcons.chat_ent,
+                  // icon: Icons.access_alarm_outlined,
                   iconColor: Colors.white,
                   title: "Chat with us".tr().fill([
                     (!vm.order.isSerice ? "Vendor" : "Service Provider").tr()
@@ -65,7 +66,7 @@ class OrderDetailsVendorInfoView extends StatelessWidget {
 
             vm.order.canRateVendor
                 ? CustomButton(
-                    // icon: FlutterIcons.rate_review_mdi,
+                    icon: FlutterIcons.rate_review_mdi,
                     //icon: Icons.access_alarm_outlined,
                     iconColor: Colors.white,
                     title: "Rate %s".tr().fill([

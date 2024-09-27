@@ -461,4 +461,36 @@ class MyBaseViewModel extends BaseViewModel with UpdateService {
     //  await Share.share(shareLink);
     setBusyForObject(shareService, false);
   }
+
+  void nextPageScreenUseNavigotorPush() {
+    Navigator.push(
+        viewContext!,
+        MaterialPageRoute(
+            builder: (context) => LoginPage(
+                  required: true,
+                )));
+  }
+
+  Future<T?> pushMethod<T extends Object?>(BuildContext context, Widget page) {
+    return Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => page),
+    );
+  }
+
+  // Method to replace the current screen with a new one
+  Future<T?> pushReplacement<T extends Object?, TO extends Object?>(
+      BuildContext context, Widget page) {
+    return Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(builder: (context) => page),
+    );
+  }
+
+  Future<T?> pushNamedAndRemoveUntil<T extends Object?, TO extends Object?>(
+      BuildContext context, String page) {
+    return Navigator.pushNamedAndRemoveUntil(
+        viewContext!, page, (route) => false);
+  }
+  // Method to pop the current screen
 }

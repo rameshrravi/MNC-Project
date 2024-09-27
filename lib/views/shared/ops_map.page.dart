@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
 import 'package:midnightcity/models/address.dart';
 import 'package:midnightcity/utils/ui_spacer.dart';
@@ -37,8 +38,8 @@ class OPSMapPage extends StatelessWidget {
                   [
                     //close btn
                     Icon(
-                      Icons.access_alarm_outlined,
-                      //FlutterIcons.arrow_back_mdi,
+                      //Icons.access_alarm_outlined,
+                      FlutterIcons.arrow_back_mdi,
                     ).p2().onInkTap(() {
                       // context.pop();
                     }),

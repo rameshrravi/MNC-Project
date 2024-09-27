@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/utils/ui_spacer.dart';
 import 'package:midnightcity/view_models/delivery_address/delivery_addresses.vm.dart';
@@ -28,8 +29,8 @@ class DeliveryAddressesPage extends StatelessWidget {
           fab: FloatingActionButton(
             backgroundColor: AppColor.primaryColor,
             child: Icon(
-              Icons.ac_unit,
-              //FlutterIcons.plus_ant,
+              // Icons.ac_unit,
+              FlutterIcons.plus_ant,
               color: Colors.white,
             ),
             onPressed: vm.newDeliveryAddressPressed,

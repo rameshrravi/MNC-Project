@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 //import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/constants/app_ui_settings.dart';
@@ -35,8 +36,7 @@ class OrderDetailsDriverInfoView extends StatelessWidget {
                         //call
                         vm.order.canChatDriver
                             ? CustomButton(
-                                // icon: FlutterIcons.phone_call_fea,
-                                icon: Icons.abc_sharp,
+                                icon: FlutterIcons.phone_call_fea,
                                 iconColor: Colors.white,
                                 title: "",
                                 color: AppColor.primaryColor,
@@ -51,8 +51,7 @@ class OrderDetailsDriverInfoView extends StatelessWidget {
                 Visibility(
                   visible: AppUISettings.canDriverChat,
                   child: CustomButton(
-                    // icon: FlutterIcons.chat_ent,
-                    icon: Icons.access_alarm_outlined,
+                    icon: FlutterIcons.chat_ent,
                     iconColor: Colors.white,
                     title: "Chat with driver".tr(),
                     color: AppColor.primaryColor,
@@ -65,8 +64,8 @@ class OrderDetailsDriverInfoView extends StatelessWidget {
               //rate driver
               vm.order.canRateDriver
                   ? CustomButton(
-                      // icon: FlutterIcons.rate_review_mdi,
-                      icon: Icons.access_alarm_outlined,
+                      icon: FlutterIcons.rate_review_mdi,
+                      //icon: Icons.access_alarm_outlined,
                       iconColor: Colors.white,
                       title: "Rate The Driver".tr(),
                       color: AppColor.primaryColor,

@@ -324,7 +324,7 @@ class EmptyWelcome extends StatelessWidget {
       // );
     } else {
       //
-      //await AuthServices.logout();
+      await AuthServices.logout();
     }
   }
 }

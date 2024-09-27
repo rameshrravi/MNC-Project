@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/utils/ui_spacer.dart';
@@ -34,8 +35,8 @@ class OrderStopsView extends StatelessWidget {
                   color: AppColor.primaryColor,
                   size: 24,
                   child: Icon(
-                    //   FlutterIcons.location_pin_ent,
-                    Icons.access_alarm_outlined,
+                    FlutterIcons.location_pin_ent,
+                    // Icons.access_alarm_outlined,
                     size: 12,
                     color: Colors.white,
                   ),

@@ -153,34 +153,38 @@ class LoginViewModel extends MyBaseViewModel with QrcodeScannerTrait {
     //
     setBusy(false);
     //
-    // await viewContext!.push(
-    //   (context) => AccountVerificationEntry(
-    //     vm: this,
-    //     phone: accountPhoneNumber,
-    //     onSubmit: (smsCode) {
-    //       //
-    //       if (AppStrings.isFirebaseOtp) {
-    //         verifyFirebaseOTP(smsCode);
-    //       } else {
-    //         verifyCustomOTP(smsCode);
-    //       }
-    //
-    //       viewContext!.pop();
-    //     },
-    //     onResendCode: AppStrings.isCustomOtp
-    //         ? () async {
-    //             try {
-    //               final response = await authRequest.sendOTP(
-    //                 accountPhoneNumber,
-    //               );
-    //               toastSuccessful(response.message);
-    //             } catch (error) {
-    //               viewContext!.showToast(msg: "$error", bgColor: Colors.red);
-    //             }
-    //           }
-    //         : null,
-    //   ),
-    // );
+
+    Navigator.push(
+      viewContext!,
+      MaterialPageRoute(
+          builder: (context) => AccountVerificationEntry(
+                vm: this,
+                phone: accountPhoneNumber,
+                onSubmit: (smsCode) {
+                  //
+                  if (AppStrings.isFirebaseOtp) {
+                    verifyFirebaseOTP(smsCode);
+                  } else {
+                    verifyCustomOTP(smsCode);
+                  }
+
+                  //viewContext!.pop();
+                },
+                onResendCode: AppStrings.isCustomOtp
+                    ? () async {
+                        try {
+                          final response = await authRequest.sendOTP(
+                            accountPhoneNumber,
+                          );
+                          toastSuccessful(response.message!);
+                        } catch (error) {
+                          viewContext!
+                              .showToast(msg: "$error", bgColor: Colors.red);
+                        }
+                      }
+                    : null,
+              )),
+    );
   }
 
   //
@@ -209,13 +213,14 @@ class LoginViewModel extends MyBaseViewModel with QrcodeScannerTrait {
     //
     setBusy(true);
     // Sign the user in (or link) with the credential
+    debugger();
     try {
       final apiResponse = await authRequest.verifyOTP(
         accountPhoneNumber,
         smsCode,
         isLogin: true,
       );
-
+      debugger();
       //
       await handleDeviceLogin(apiResponse);
     } catch (error) {
@@ -311,8 +316,10 @@ class LoginViewModel extends MyBaseViewModel with QrcodeScannerTrait {
         //everything works well
         //firebase auth
         setBusy(true);
+        debugger();
         final fbToken = apiResponse.body["fb_token"];
         await FirebaseAuth.instance.signInWithCustomToken(fbToken);
+        debugger();
         await AuthServices.saveUser(apiResponse.body["user"]);
         await AuthServices.setAuthBearerToken(apiResponse.body["token"]);
         await AuthServices.isAuthenticated();

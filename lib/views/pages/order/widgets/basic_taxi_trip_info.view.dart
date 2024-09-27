@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 //import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/constants/app_strings.dart';
@@ -75,18 +76,16 @@ class BasicTaxiTripInfoView extends StatelessWidget {
               nodePositionBuilder: (context, index) => 0.00,
               indicatorBuilder: (context, index) {
                 return DotIndicator(
-                    color: AppColor.primaryColor,
-                    size: 28,
-                    child: Icon(Icons.insert_comment_sharp)
-
-                    // Icon(
-                    //   index == 0
-                    //       ? FlutterIcons.my_location_mdi
-                    //       : FlutterIcons.location_pin_ent,
-                    //   size: 20,
-                    //   color: Utils.textColorByTheme(),
-                    // ).p4(),
-                    );
+                  color: AppColor.primaryColor,
+                  size: 28,
+                  child: Icon(
+                    index == 0
+                        ? FlutterIcons.my_location_mdi
+                        : FlutterIcons.location_pin_ent,
+                    size: 20,
+                    color: Utils.textColorByTheme(),
+                  ).p4(),
+                );
               },
               connectorBuilder: (context, index, connectorType) {
                 return DashedLineConnector(

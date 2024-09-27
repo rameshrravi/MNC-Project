@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 //import 'package:flutter_icons/flutter_icons.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:midnightcity/constants/app_colors.dart';
@@ -10,7 +11,7 @@ import 'package:midnightcity/widgets/bottomsheets/contact_permission.bottomsheet
 import 'package:midnightcity/widgets/buttons/custom_button.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:velocity_x/velocity_x.dart';
-import 'package:fluttercontactpicker/fluttercontactpicker.dart';
+//import 'package:fluttercontactpicker/fluttercontactpicker.dart';
 
 import '../parcel_form_input.dart';
 
@@ -81,8 +82,7 @@ class _PackageStopRecipientViewState extends State<PackageStopRecipientView> {
             ).expand(),
             UiSpacer.hSpace(10),
             Icon(
-              // isOpen ? FlutterIcons.caret_down_faw : FlutterIcons.caret_up_faw,
-              Icons.icecream_rounded,
+              isOpen ? FlutterIcons.caret_down_faw : FlutterIcons.caret_up_faw,
               color: AppColor.primaryColor,
             ),
           ],
@@ -110,8 +110,7 @@ class _PackageStopRecipientViewState extends State<PackageStopRecipientView> {
                 //name
                 ParcelFormInput(
                   isReadOnly: false,
-                  //iconData: FlutterIcons.user_fea,
-                  iconData: Icons.access_alarm_outlined,
+                  iconData: FlutterIcons.user_fea,
                   iconColor: AppColor.primaryColor!,
                   labelText: "Name".tr().toUpperCase(),
                   hintText: "Contact Name".tr(),
@@ -125,8 +124,7 @@ class _PackageStopRecipientViewState extends State<PackageStopRecipientView> {
                 //phone
                 ParcelFormInput(
                   isReadOnly: false,
-                  //  iconData: FlutterIcons.phone_fea,
-                  iconData: Icons.access_alarm_outlined,
+                  iconData: FlutterIcons.phone_fea,
                   iconColor: AppColor.primaryColor!,
                   labelText: "phone".tr().toUpperCase(),
                   hintText: "Contact Phone number".tr(),
@@ -156,42 +154,42 @@ class _PackageStopRecipientViewState extends State<PackageStopRecipientView> {
 
   _openContactPicker() async {
     //
-    bool granted = true;
-    if (!(await FlutterContactPicker.hasPermission())) {
-      granted = false;
-      //show the contact dialog before showing the grant permission
-      final result = await showDialog(
-        context: context,
-        builder: (ctx) => ContactPermissionDialog(),
-      );
-      //
-      if (result == null || !(result as bool)) {
-        return;
-      }
-      //request for permission now
-      granted = await FlutterContactPicker.requestPermission();
-    }
-
-    if (granted) {
-      final PhoneContact contact =
-          await FlutterContactPicker.pickPhoneContact();
-
-      //
-      setState(() {
-        widget.recipientNameTEC.text = contact!.fullName!;
-        widget.recipientPhoneTEC.text =
-            contact!.phoneNumber!.number!.removeAllWhiteSpace();
-      });
-    } else {
-      Fluttertoast.showToast(
-        msg: "Permission Denied".tr(),
-        toastLength: Toast.LENGTH_SHORT,
-        gravity: ToastGravity.BOTTOM,
-        timeInSecForIosWeb: 2,
-        backgroundColor: Colors.red,
-        textColor: Colors.white,
-        fontSize: 14.0,
-      );
-    }
+    // bool granted = true;
+    // if (!(await FlutterContactPicker.hasPermission())) {
+    //   granted = false;
+    //   //show the contact dialog before showing the grant permission
+    //   final result = await showDialog(
+    //     context: context,
+    //     builder: (ctx) => ContactPermissionDialog(),
+    //   );
+    //   //
+    //   if (result == null || !(result as bool)) {
+    //     return;
+    //   }
+    //   //request for permission now
+    //   granted = await FlutterContactPicker.requestPermission();
+    // }
+    //
+    // if (granted) {
+    //   final PhoneContact contact =
+    //       await FlutterContactPicker.pickPhoneContact();
+    //
+    //   //
+    //   setState(() {
+    //     widget.recipientNameTEC.text = contact!.fullName!;
+    //     widget.recipientPhoneTEC.text =
+    //         contact!.phoneNumber!.number!.removeAllWhiteSpace();
+    //   });
+    // } else {
+    //   Fluttertoast.showToast(
+    //     msg: "Permission Denied".tr(),
+    //     toastLength: Toast.LENGTH_SHORT,
+    //     gravity: ToastGravity.BOTTOM,
+    //     timeInSecForIosWeb: 2,
+    //     backgroundColor: Colors.red,
+    //     textColor: Colors.white,
+    //     fontSize: 14.0,
+    //   );
+    // }
   }
 }

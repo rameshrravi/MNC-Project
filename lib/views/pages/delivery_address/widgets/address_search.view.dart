@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_map_settings.dart';
 import 'package:midnightcity/constants/app_strings.dart';
 import 'package:midnightcity/constants/input.styles.dart';
@@ -53,8 +54,7 @@ class _AddressSearchViewState extends State<AddressSearchView> {
               focusedErrorBorder: InputStyles.inputUnderlineFocusBorder(),
               focusedBorder: InputStyles.inputUnderlineFocusBorder(),
               prefixIcon: Icon(
-                //   FlutterIcons.search_fea,
-                Icons.ac_unit_rounded,
+                FlutterIcons.search_fea,
                 size: 18,
               ),
               // suffixIcon: ,
@@ -102,8 +102,7 @@ class _AddressSearchViewState extends State<AddressSearchView> {
               focusedErrorBorder: InputStyles.inputUnderlineFocusBorder(),
               focusedBorder: InputStyles.inputUnderlineFocusBorder(),
               prefixIcon: Icon(
-                Icons.ac_unit_rounded,
-                //    FlutterIcons.search_fea,
+                FlutterIcons.search_fea,
                 size: 18,
               ),
               // suffixIcon: ,

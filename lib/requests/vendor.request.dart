@@ -6,8 +6,11 @@ import 'package:midnightcity/models/api_response.dart';
 import 'package:midnightcity/models/delivery_address.dart';
 import 'package:midnightcity/models/review.dart';
 import 'package:midnightcity/models/vendor.dart';
+import 'package:midnightcity/models/vendor_copy.dart' as vendorcopi;
 import 'package:midnightcity/services/http.service.dart';
 import 'package:midnightcity/services/location.service.dart';
+
+import '../services/auth.service.dart';
 
 class VendorRequest extends HttpService {
   //
@@ -26,23 +29,41 @@ class VendorRequest extends HttpService {
           ? LocationService?.currenctAddress?.coordinates?.longitude
           : null,
     };
+    if (!AuthServices.authenticated()) {
+      final apiResult = await get(
+        Api.vendors,
+        //queryParameters: queryParameters,
+      );
 
-    //
-    final apiResult = await get(
-      Api.vendors,
-      queryParameters: queryParameters,
-    );
+      print("queryParametersnoquary ==> $queryParameters");
 
-    print("queryParameters ==> $queryParameters");
+      final apiResponse = ApiResponse.fromResponse(apiResult);
+      if (apiResponse.allGood) {
+        return apiResponse.data
+            .map((jsonObject) => Vendor.fromJson(jsonObject))
+            .toList();
+      }
 
-    final apiResponse = ApiResponse.fromResponse(apiResult);
-    if (apiResponse.allGood) {
-      return apiResponse.data
-          .map((jsonObject) => Vendor.fromJson(jsonObject))
-          .toList();
+      throw apiResponse.message!;
+    } else {
+      final apiResult = await get(
+        Api.vendors,
+        queryParameters: queryParameters,
+      );
+      debugger();
+      print("queryParameters ==> $queryParameters");
+
+      final apiResponse = ApiResponse.fromResponse(apiResult);
+      if (apiResponse.allGood) {
+        return apiResponse.data
+            .map((jsonObject) => Vendor.fromJson(jsonObject))
+            .toList();
+      }
+
+      throw apiResponse.message!;
     }
 
-    throw apiResponse.message!;
+    //
   }
 
   //
@@ -80,6 +101,7 @@ class VendorRequest extends HttpService {
     bool byLocation = false,
     Map? params,
   }) async {
+    debugger();
     final apiResult = await get(
       Api.vendors,
       queryParameters: {
@@ -131,6 +153,7 @@ class VendorRequest extends HttpService {
     @required int? vendorTypeId,
     DeliveryAddress? deliveryAddress,
   }) async {
+    debugger();
     final apiResult = await get(
       Api.vendors,
       queryParameters: {
@@ -138,7 +161,7 @@ class VendorRequest extends HttpService {
         "package_type_id": "$packageTypeId"
       },
     );
-
+    debugger();
     final apiResponse = ApiResponse.fromResponse(apiResult);
     if (apiResponse.allGood) {
       List<Vendor> vendors = apiResponse.data

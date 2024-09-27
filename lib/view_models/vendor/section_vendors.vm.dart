@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:midnightcity/constants/app_routes.dart';
@@ -35,6 +37,7 @@ class SectionVendorsViewModel extends MyBaseViewModel {
     setBusy(true);
     try {
       //filter by location if user selects delivery address
+      debugger();
       vendors = await _vendorRequest.vendorsRequest(
         byLocation: byLocation ?? true,
         params: {
