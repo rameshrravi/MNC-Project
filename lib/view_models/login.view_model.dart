@@ -220,7 +220,6 @@ class LoginViewModel extends MyBaseViewModel with QrcodeScannerTrait {
         smsCode,
         isLogin: true,
       );
-      debugger();
       //
       await handleDeviceLogin(apiResponse);
     } catch (error) {
@@ -316,10 +315,8 @@ class LoginViewModel extends MyBaseViewModel with QrcodeScannerTrait {
         //everything works well
         //firebase auth
         setBusy(true);
-        debugger();
         final fbToken = apiResponse.body["fb_token"];
         await FirebaseAuth.instance.signInWithCustomToken(fbToken);
-        debugger();
         await AuthServices.saveUser(apiResponse.body["user"]);
         await AuthServices.setAuthBearerToken(apiResponse.body["token"]);
         await AuthServices.isAuthenticated();

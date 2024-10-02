@@ -63,7 +63,6 @@ class CategoriesViewModel extends MyBaseViewModel {
 
   initialise({bool all = false}) async {
     setBusy(true);
-    debugger();
     try {
       //filter by location if user selects delivery address
       vendors = await _vendorRequest!.vendorsRequest(

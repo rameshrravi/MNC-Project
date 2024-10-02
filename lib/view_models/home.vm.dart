@@ -87,7 +87,6 @@ class HomeViewModel extends MyBaseViewModel {
     handleAppLink();
 
     //determine if homeview should be multiple vendor types or single vendor page
-    debugger();
     if (AppStrings.isSingleVendorMode) {
       VendorType vendorType = VendorType.fromJson(AppStrings.enabledVendorType);
       homeView = NavigationService.vendorTypePage(
@@ -131,14 +130,12 @@ class HomeViewModel extends MyBaseViewModel {
 
     try {
       //filter by location if user selects delivery address
-      debugger();
       vendors = await _vendorRequest.vendorsRequest(
         byLocation: false, // byLocation ?? true,
         params: {
           "vendor_type_id": 2,
         },
       );
-      debugger();
       print("********" + vendors.length.toString());
       print("0 ==> " + vendors[0].name.toString());
       print("1 ==> " + vendors[1].name.toString());
@@ -153,7 +150,6 @@ class HomeViewModel extends MyBaseViewModel {
       }
       print("v_id is " + v_id.toString());
       dvendor = await vendors[v_id];
-      debugger();
       print("dvendor name is " + dvendor.name!);
 
       clearErrors();
@@ -180,7 +176,6 @@ class HomeViewModel extends MyBaseViewModel {
           "type": "small",
         },
       );
-      debugger();
       //empty menu
       dvendor.menus!.insert(
         0,
@@ -239,23 +234,19 @@ class HomeViewModel extends MyBaseViewModel {
   //
   loadMenuProduts() {
     //
-    debugger();
     refreshContollers = List.generate(
       dvendor.menus!.length,
       (index) => new RefreshController(),
     );
-    debugger();
     refreshContollerKeys = List.generate(
       dvendor.menus!.length,
       (index) => vendor.menus![index].id!,
     );
     //
-    debugger();
     dvendor.menus!.forEach((element) {
       loadMoreProducts(element.id!);
       menuProductsQueryPages[element.id!] = 1;
     });
-    debugger();
   }
 
   //

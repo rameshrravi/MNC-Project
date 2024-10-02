@@ -216,7 +216,7 @@ class CheckoutBaseViewModel extends PaymentViewModel {
     checkout!.pickupTime = null;
     checkout!.deliverySlotTime = "";
 
-    // await Jiffy.locale(translator.activeLocale.languageCode);
+    await Jiffy.setLocale(translator.activeLocale.languageCode);
 
     notifyListeners();
   }

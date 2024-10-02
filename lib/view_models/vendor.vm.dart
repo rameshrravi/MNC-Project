@@ -64,7 +64,6 @@ class VendorViewModel extends MyBaseViewModel {
     setBusy(true);
     try {
       //filter by location if user selects delivery address
-      debugger();
       vendors = await _vendorRequest.vendorsRequest(
         byLocation: false, // byLocation ?? true,
         params: {
@@ -132,7 +131,6 @@ class VendorViewModel extends MyBaseViewModel {
     setBusy(true);
     try {
       //filter by location if user selects delivery address
-      debugger();
       vendors = await _vendorRequest.vendorsRequest(
         byLocation: false, // byLocation ?? true,
         params: {

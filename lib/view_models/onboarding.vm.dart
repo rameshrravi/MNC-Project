@@ -138,6 +138,10 @@ class OnboardingViewModel extends MyBaseViewModel {
     //   (route) => false,
     // );
 
-    Navigator.pushNamed(viewContext!, AppRoutes.chooseVendorRoute);
+    Navigator.pushNamedAndRemoveUntil(
+      viewContext!,
+      AppRoutes.chooseVendorRoute,
+      (route) => false,
+    );
   }
 }

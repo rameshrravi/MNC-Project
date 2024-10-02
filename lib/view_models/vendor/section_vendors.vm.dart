@@ -37,7 +37,6 @@ class SectionVendorsViewModel extends MyBaseViewModel {
     setBusy(true);
     try {
       //filter by location if user selects delivery address
-      debugger();
       vendors = await _vendorRequest.vendorsRequest(
         byLocation: byLocation ?? true,
         params: {

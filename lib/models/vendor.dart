@@ -3,7 +3,6 @@
 //     final vendor = vendorFromJson(jsonString);
 
 import 'dart:convert';
-import 'dart:developer';
 
 import 'package:midnightcity/models/category.dart';
 import 'package:midnightcity/models/delivery_address.dart';
@@ -109,11 +108,11 @@ class Vendor {
   String? prepareTime;
   String? deliveryTime;
 
-  factory Vendor.fromRawJson(String? str) => Vendor.fromJson(json.decode(str!));
+  factory Vendor.fromRawJson(String str) => Vendor.fromJson(json.decode(str));
 
-  String? toRawJson() => json.encode(toJson());
+  String toRawJson() => json.encode(toJson());
 
-  factory Vendor.fromJson(Map<String?, dynamic> json) {
+  factory Vendor.fromJson(Map<String, dynamic> json) {
     return Vendor(
       id: json["id"] == null ? null : json["id"],
       vendorType: json["vendor_type"] == null
@@ -130,16 +129,18 @@ class Vendor {
       deliveryRange: json["delivery_range"] == null
           ? null
           : double.parse(json["delivery_range"].toString()),
-      distance:
-          json["distance"] == null ? null : double.parse(json["distance"]),
+      distance: json["distance"] == null
+          ? null
+          : double.parse(json["distance"].toString()),
       tax: json["tax"] == null ? null : json["tax"],
       phone: json["phone"] == null ? null : json["phone"],
       email: json["email"] == null ? null : json["email"],
       address: json["address"] == null ? null : json["address"],
       latitude: json["latitude"] == null ? null : json["latitude"],
       longitude: json["longitude"] == null ? null : json["longitude"],
-      comission:
-          json["comission"] == null ? null : double.parse(json["comission"]),
+      comission: json["comission"] == null
+          ? null
+          : double.parse(json["comission"].toString()),
       pickup: json["pickup"] == null ? 0 : int.parse(json["pickup"].toString()),
       is_busy:
           json["is_busy"] == null ? 0 : int.parse(json["is_busy"].toString()),
@@ -277,11 +278,15 @@ class Vendor {
       vendorType != null && vendorType?.slug == "pharmacy";
 
   //
-  bool? canServiceLocation(DeliveryAddress deliveryaddress) {
+  bool canServiceLocation(DeliveryAddress deliveryaddress) {
     //cities,states & countries
     if (this.countries != null) {
-      final foundCountry = this.countries!.firstWhere((element) =>
-          element.toLowerCase() == "${deliveryaddress.country}".toLowerCase());
+      final foundCountry = this.countries!.firstWhere(
+            (element) =>
+                element.toLowerCase() ==
+                "${deliveryaddress.country}".toLowerCase(),
+            // orElse: () => null,
+          );
 
       //
       if (foundCountry != null) {
@@ -292,8 +297,12 @@ class Vendor {
 
     //states
     if (this.states != null) {
-      final foundState = this.states!.firstWhere((element) =>
-          element.toLowerCase() == "${deliveryaddress.state}".toLowerCase());
+      final foundState = this.states!.firstWhere(
+            (element) =>
+                element.toLowerCase() ==
+                "${deliveryaddress.state}".toLowerCase(),
+            //orElse: () => null,
+          );
 
       //
       if (foundState != null) {
@@ -308,6 +317,7 @@ class Vendor {
         (element) {
           return element.toLowerCase() == deliveryaddress.city!.toLowerCase();
         },
+        //orElse: () => null,
       );
 
       //

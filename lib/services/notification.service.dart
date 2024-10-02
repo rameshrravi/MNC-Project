@@ -155,14 +155,16 @@ class NotificationService {
     AwesomeNotifications()
         .listScheduledNotifications()
         .then((receivedNotification) {
-      FirebaseService().saveNewNotification(
-        null,
-        title: receivedNotification!.first.content!.title!,
-        body: receivedNotification!.first.content!.body,
-      );
-      FirebaseService().notificationPayloadData =
-          receivedNotification.first.content!.payload;
-      FirebaseService().selectNotification("");
+      if (receivedNotification.isNotEmpty) {
+        FirebaseService().saveNewNotification(
+          null,
+          title: receivedNotification!.first.content!.title!,
+          body: receivedNotification!.first.content!.body,
+        );
+        FirebaseService().notificationPayloadData =
+            receivedNotification.first.content!.payload;
+        FirebaseService().selectNotification("");
+      }
     });
 
     // AwesomeNotifications().actionStream.listen((receivedNotification) async {

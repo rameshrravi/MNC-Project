@@ -52,7 +52,7 @@ class AppLanguageSelector extends StatelessWidget {
 
   void _onSelected(BuildContext context, String code) async {
     await AuthServices.setLocale(code);
-    // await Jiffy.locale(code);
+    await Jiffy.setLocale(code);
     //
     await translator.setNewLanguage(
       context,

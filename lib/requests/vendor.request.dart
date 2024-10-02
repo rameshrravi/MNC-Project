@@ -19,6 +19,9 @@ class VendorRequest extends HttpService {
     bool byLocation = false,
     Map? params,
   }) async {
+    // debugger();
+    LocationService?.currenctAddress;
+
     Map<String, dynamic> queryParameters = {
       ...(params != null ? params : {}),
       "page": "$page",
@@ -35,7 +38,7 @@ class VendorRequest extends HttpService {
         //queryParameters: queryParameters,
       );
 
-      print("queryParametersnoquary ==> $queryParameters");
+      print("queryParametersnoquary000 ==> $queryParameters");
 
       final apiResponse = ApiResponse.fromResponse(apiResult);
       if (apiResponse.allGood) {
@@ -50,7 +53,6 @@ class VendorRequest extends HttpService {
         Api.vendors,
         queryParameters: queryParameters,
       );
-      debugger();
       print("queryParameters ==> $queryParameters");
 
       final apiResponse = ApiResponse.fromResponse(apiResult);
@@ -137,11 +139,11 @@ class VendorRequest extends HttpService {
     );
     print("w8-2");
     final apiResponse = ApiResponse.fromResponse(apiResult);
-    print(apiResponse.data.toString());
+    //  print(apiResponse.data.toString());
 
     if (apiResponse.allGood) {
       print("w8-433");
-      print(apiResponse.body.toString());
+      // print(apiResponse.body.toString());
       return Vendor.fromJson(apiResponse.body);
     }
     print("w8-4");
