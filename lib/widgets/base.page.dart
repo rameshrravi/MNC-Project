@@ -87,7 +87,9 @@ class _BasePageState extends State<BasePage> {
                                       ? widget.appBarItemColor
                                       : AppColor.primaryColor,
                             ),
-                            onPressed: () {})
+                            onPressed: () {
+                              Navigator.pop(context);
+                            })
                         : widget.leading
                     : null,
                 title: widget.title!.text.black

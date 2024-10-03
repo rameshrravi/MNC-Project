@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:midnightcity/constants/app_routes.dart';
 import 'package:midnightcity/models/category.dart';

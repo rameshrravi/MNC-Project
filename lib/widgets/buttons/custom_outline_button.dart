@@ -46,8 +46,9 @@ class CustomOutlineButton extends StatelessWidget {
         style: OutlinedButton.styleFrom(
             tapTargetSize: MaterialTapTargetSize.shrinkWrap,
             //primary: this.color ?? AppColor.primaryColor,
-            disabledForegroundColor:
-                this.loading! ? AppColor.primaryColor : null!.withOpacity(0.38),
+            disabledForegroundColor: this.loading!
+                ? AppColor.primaryColor
+                : AppColor.primaryColor!.withOpacity(0.38),
             // shape: this.shape ??
             //     RoundedRectangleBorder(
             //       borderRadius: BorderRadius.circular(this.shapeRadius),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/services/cart.service.dart';
 import 'package:midnightcity/utils/utils.dart';
 import 'package:midnightcity/views/pages/cart/cart.page.dart';
@@ -39,7 +40,7 @@ class _PageCartActionState extends State<PageCartAction> {
       initialData: 0,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         return Icon(
-          Icons.import_contacts_sharp,
+          FlutterIcons.shopping_cart_fea,
           color: Colors.white, // widget.color,
           size: widget.iconSize,
         )

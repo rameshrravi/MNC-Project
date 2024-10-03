@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:midnightcity/models/vendor_type.dart';
 import 'package:midnightcity/view_models/vendor/categories.vm.dart';
@@ -23,17 +25,15 @@ class GroceryCategoryProducts extends StatelessWidget {
     return ViewModelBuilder<CategoriesViewModel>.reactive(
       viewModelBuilder: () =>
           CategoriesViewModel(context, vendorType: vendorType),
-      onModelReady: (model) => model.initialise(),
+      // onModelReady: (model) => model.initialise(),
+      onViewModelReady: (model) => model.initialise(),
       builder: (context, model, child) {
         return VStack(
           [
             //
-            ...(model.dvendor!.categories!
-                .sublist(
-                    0,
-                    model.categories!.length < length
-                        ? model.categories!.length!
-                        : length)
+            ...(model.dvendor!.categories!.length < length
+                    ? model.dvendor!.categories!
+                    : model.dvendor!.categories!.sublist(0, length))
                 .map(
               (category) {
                 //
@@ -46,7 +46,7 @@ class GroceryCategoryProducts extends StatelessWidget {
                   category: category,
                 );
               },
-            ).toList()),
+            ).toList(),
           ],
         );
       },

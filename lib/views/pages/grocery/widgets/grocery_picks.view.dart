@@ -48,7 +48,8 @@ class GroceryProductsSectionView extends StatelessWidget {
         type,
         categoryId: category!.id!,
       ),
-      onModelReady: (vm) => vm.initialise(),
+      //onModelReady: (vm) => vm.initialise(),
+      onViewModelReady: (vm) => vm.initialise(),
       builder: (context, vm, child) {
         return CustomVisibilty(
           visible: vm.products.isNotEmpty && !vm.isBusy,
@@ -93,14 +94,14 @@ class GroceryProductsSectionView extends StatelessWidget {
                       );
                        */
 
-                      // Navigator.push(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //         builder: (context) =>
-                      //             VendorCategoryProductsPageNewViewAll(
-                      //               category: category!,
-                      //               vendor: vendor,
-                      //             )));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  VendorCategoryProductsPageNewViewAll(
+                                    category: category!,
+                                    vendor: vendor,
+                                  )));
                     },
                   ),
                 ],

@@ -103,7 +103,7 @@ class ProductDetailsPage extends StatelessWidget {
                 child: VStack(
                   [
                     Padding(
-                      padding: const EdgeInsets.only(left: 20.0),
+                      padding: const EdgeInsets.only(left: 5.0),
                       child: HStack(
                         [
                           product!.name!.text

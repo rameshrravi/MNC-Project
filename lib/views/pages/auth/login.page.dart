@@ -74,9 +74,7 @@ class _LoginPageState extends State<LoginPage> {
                         EdgeInsets.only(bottom: context.mq.viewInsets.bottom),
                     child: VStack(
                       [
-                        // icon: Icon(FlutterIcons.ios_arrow_back_ion,
                         IconButton(
-                          //icon: Icon(FlutterIcons.ios_arrow_back_ion),
                           icon: Icon(FlutterIcons.ios_arrow_back_ion,
                               color: AppColor.white, size: 28),
                           onPressed: () => Navigator.pop(context),

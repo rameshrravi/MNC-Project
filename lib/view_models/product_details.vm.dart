@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:midnightcity/constants/app_colors.dart';
@@ -200,9 +202,10 @@ class ProductDetailsViewModel extends MyBaseViewModel {
       //
       optionGroupRequired = optionGroup;
       //
+      debugger();
       final selectedOptionInOptionGroup = selectedProductOptions
           .firstWhere((e) => e.optionGroupId == optionGroup.id);
-
+      debugger();
       //check if there is an option group that is required but customer is yet to select an option
       if (optionGroup.required == 1 && selectedOptionInOptionGroup == null) {
         optionGroupRequiredFail = true;
@@ -264,9 +267,10 @@ class ProductDetailsViewModel extends MyBaseViewModel {
             ),
             onConfirmBtnTap: () async {
               //
-              // viewContext!.pop(true);
               Navigator.pop(viewContext!);
+              debugger();
               viewContext!.nextPage(CartPage());
+              debugger();
             },
             cancelBtnText: "Keep Shopping".tr(),
             cancelBtnTextStyle:
@@ -309,7 +313,7 @@ class ProductDetailsViewModel extends MyBaseViewModel {
         );
       }
     } catch (error) {
-      print("Cart Error => $error");
+      print("Cart Error00 => $error");
       setError(error);
     }
     setBusy(false);

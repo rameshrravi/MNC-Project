@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:midnightcity/constants/app_routes.dart';
+import 'package:midnightcity/models/checkout.dart';
+import 'package:midnightcity/models/order.dart';
+import 'package:midnightcity/models/product.dart';
+import 'package:midnightcity/models/search.dart';
+import 'package:midnightcity/models/vendor.dart';
 import 'package:midnightcity/views/pages/auth/forgot_password.page.dart';
 import 'package:midnightcity/views/pages/auth/login.page.dart';
 import 'package:midnightcity/views/pages/auth/register.page.dart';
@@ -53,79 +58,82 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
 
     //SEARCH
-    // case AppRoutes.search:
-    //   return MaterialPageRoute(
-    //     settings: RouteSettings(name: AppRoutes.search),
-    //     builder: (context) => SearchPage(search: settings.arguments),
-    //   );
+    case AppRoutes.search:
+      final search = settings!.arguments as Search;
+      return MaterialPageRoute(
+        settings: RouteSettings(name: AppRoutes.search),
+        builder: (context) => SearchPage(search: search),
+      );
+    //Product details
+    case AppRoutes.product:
+      final product = settings!.arguments as Product;
+      return MaterialPageRoute(
+        settings: RouteSettings(name: AppRoutes.product),
+        builder: (context) => ProductDetailsPage(product: product),
+      );
+
+    //Vendor details
+    case AppRoutes.vendorDetails:
+      return MaterialPageRoute(
+        settings: RouteSettings(name: AppRoutes.vendorDetails),
+        builder: (context) =>
+            VendorDetailsPage(vendor: settings!.arguments as Vendor),
+      );
+
+    case AppRoutes.vendorDetails2:
+      return MaterialPageRoute(
+        settings: RouteSettings(name: AppRoutes.vendorDetails),
+        builder: (context) =>
+            VendorDetailsPage(vendor: settings.arguments as Vendor),
+      );
+
+    case AppRoutes.vendorDetails3:
+      return MaterialPageRoute(
+        settings: RouteSettings(name: AppRoutes.vendorDetails),
+        builder: (context) =>
+            VendorDetailsPage(vendor: settings.arguments as Vendor),
+      );
+
+    //Checkout page
+    case AppRoutes.checkoutRoute:
+      return MaterialPageRoute(
+        settings: RouteSettings(name: AppRoutes.checkoutRoute),
+        builder: (context) => CheckoutPage(
+          checkout: settings.arguments as CheckOut,
+        ),
+      );
+
+    //order details page
+    case AppRoutes.orderDetailsRoute:
+      return MaterialPageRoute(
+        settings: RouteSettings(name: AppRoutes.orderDetailsRoute),
+        builder: (context) => OrderDetailsPage(
+          order: settings.arguments as Order,
+        ),
+      );
+    //order tracking page
+    case AppRoutes.orderTrackingRoute:
+      return MaterialPageRoute(
+        settings: RouteSettings(name: AppRoutes.orderTrackingRoute),
+        builder: (context) => OrderTrackingPage(
+          order: settings.arguments as Order,
+        ),
+      );
+    //chat page
+    case AppRoutes.chatRoute:
+      return MaterialPageRoute(
+        settings: RouteSettings(name: AppRoutes.chatRoute),
+        builder: (context) => ChatPage(
+          chatEntity: settings.arguments,
+        ),
+      );
+
     //
-    // //Product details
-    // case AppRoutes.product:
-    //   return MaterialPageRoute(
-    //     settings: RouteSettings(name: AppRoutes.product),
-    //     builder: (context) => ProductDetailsPage(product: settings.arguments),
-    //   );
-    //
-    // //Vendor details
-    // case AppRoutes.vendorDetails:
-    //   return MaterialPageRoute(
-    //     settings: RouteSettings(name: AppRoutes.vendorDetails),
-    //     builder: (context) => VendorDetailsPage(vendor: settings.arguments),
-    //   );
-    //
-    //
-    // case AppRoutes.vendorDetails2:
-    //   return MaterialPageRoute(
-    //     settings: RouteSettings(name: AppRoutes.vendorDetails),
-    //     builder: (context) => VendorDetailsPage(vendor: settings.arguments),
-    //   );
-    //
-    // case AppRoutes.vendorDetails3:
-    //   return MaterialPageRoute(
-    //     settings: RouteSettings(name: AppRoutes.vendorDetails),
-    //     builder: (context) => VendorDetailsPage(vendor: settings.arguments),
-    //   );
-    //
-    // //Checkout page
-    // case AppRoutes.checkoutRoute:
-    //   return MaterialPageRoute(
-    //     settings: RouteSettings(name: AppRoutes.checkoutRoute),
-    //     builder: (context) => CheckoutPage(
-    //       checkout: settings.arguments,
-    //     ),
-    //   );
-    //
-    // //order details page
-    // case AppRoutes.orderDetailsRoute:
-    //   return MaterialPageRoute(
-    //     settings: RouteSettings(name: AppRoutes.orderDetailsRoute),
-    //     builder: (context) => OrderDetailsPage(
-    //       order: settings.arguments,
-    //     ),
-    //   );
-    // //order tracking page
-    // case AppRoutes.orderTrackingRoute:
-    //   return MaterialPageRoute(
-    //     settings: RouteSettings(name: AppRoutes.orderTrackingRoute),
-    //     builder: (context) => OrderTrackingPage(
-    //       order: settings.arguments,
-    //     ),
-    //   );
-    // //chat page
-    // case AppRoutes.chatRoute:
-    //   return MaterialPageRoute(
-    //     settings: RouteSettings(name: AppRoutes.chatRoute),
-    //     builder: (context) => ChatPage(
-    //       chatEntity: settings.arguments,
-    //     ),
-    //   );
-    //
-    // //
-    // case AppRoutes.editProfileRoute:
-    //   return MaterialPageRoute(
-    //     settings: RouteSettings(name: AppRoutes.editProfileRoute),
-    //     builder: (context) => EditProfilePage(),
-    //   );
+    case AppRoutes.editProfileRoute:
+      return MaterialPageRoute(
+        settings: RouteSettings(name: AppRoutes.editProfileRoute),
+        builder: (context) => EditProfilePage(),
+      );
 
     //change password
     case AppRoutes.changePasswordRoute:

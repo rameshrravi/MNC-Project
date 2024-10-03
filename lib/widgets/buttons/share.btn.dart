@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/utils/utils.dart';
 import 'package:midnightcity/view_models/product_details.vm.dart';
@@ -25,8 +26,8 @@ class ShareButton extends StatelessWidget {
               : model.shareService),
       color: Colors.transparent,
       child: Icon(
-        // FlutterIcons.share_alt_faw,
-        Icons.abc_sharp,
+        FlutterIcons.share_alt_faw,
+        //Icons.abc_sharp,
         color: AppColor.primaryColorDark,
       ),
       onPressed: () {

@@ -71,8 +71,10 @@ class _ProductStockStateState extends State<ProductStockState> {
 
   optionGroupRequirementCheck(BuildContext context) {
     //check if the option groups with required setting has an option selected
-    OptionGroup optionGroupRequired =
-        widget.product!.optionGroups!.firstWhere((e) => e.required == 1);
+    OptionGroup optionGroupRequired = widget.product!.optionGroups!
+        .firstWhere((e) => e.required == 1, orElse: () {
+      return OptionGroup();
+    });
     //
 
     if (optionGroupRequired == null) {
