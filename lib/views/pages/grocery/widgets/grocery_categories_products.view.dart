@@ -28,27 +28,29 @@ class GroceryCategoryProducts extends StatelessWidget {
       // onModelReady: (model) => model.initialise(),
       onViewModelReady: (model) => model.initialise(),
       builder: (context, model, child) {
-        return VStack(
-          [
-            //
-            ...(model.dvendor!.categories!.length < length
-                    ? model.dvendor!.categories!
-                    : model.dvendor!.categories!.sublist(0, length))
-                .map(
-              (category) {
-                //
+        return model.categories!.isNotEmpty && model.dvendor != null
+            ? VStack(
+                [
+                  //
+                  ...(model.dvendor!.categories!.length < length
+                          ? model.dvendor!.categories!
+                          : model.dvendor!.categories!.sublist(0, length))
+                      .map(
+                    (category) {
+                      //
 
-                return GroceryProductsSectionView(
-                  category.name!,
-                  model.dvendor!,
-                  model.vendorType!,
-                  showGrid: false,
-                  category: category,
-                );
-              },
-            ).toList(),
-          ],
-        );
+                      return GroceryProductsSectionView(
+                        category.name!,
+                        model.dvendor!,
+                        model.vendorType!,
+                        showGrid: false,
+                        category: category,
+                      );
+                    },
+                  ).toList(),
+                ],
+              )
+            : Container();
       },
     );
   }

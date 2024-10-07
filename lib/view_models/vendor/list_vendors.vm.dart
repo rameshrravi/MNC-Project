@@ -69,8 +69,11 @@ class ListVendorsViewModel extends MyBaseViewModel {
 
     // viewContext!.navigator
     //    .pushNamedAndRemoveUntil(AppRoutes.homeRoute, (route) => false);
-    pushNamedAndRemoveUntil(viewContext!, AppRoutes.homeRoute);
+
+    pushNamedAndRemoveUntil(
+        viewContext!, AppRoutes.homeRoute, (route) => false);
     setBusy(false);
+
     /*   if (vendor.name == "MidNight City Abuja") {
       VxDialog.showAlert(viewContext,
           title: "Opening Soon",

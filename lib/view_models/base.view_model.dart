@@ -488,7 +488,7 @@ class MyBaseViewModel extends BaseViewModel with UpdateService {
   }
 
   Future<T?> pushNamedAndRemoveUntil<T extends Object?, TO extends Object?>(
-      BuildContext context, String page) {
+      BuildContext context, String page, bool Function(dynamic route) param2) {
     return Navigator.pushNamedAndRemoveUntil(
         viewContext!, page, (route) => false);
   }

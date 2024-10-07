@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:midnightcity/models/vendor_type.dart';
 import 'package:midnightcity/constants/app_strings.dart';
@@ -28,6 +29,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:midnightcity/widgets/list_items/food_horizontal_product.list_item.dart';
 import 'package:midnightcity/widgets/list_items/product.list_item.dart';
+import 'package:midnightcity/widgets/states/loading.shimmer.dart';
 import 'package:stacked/stacked.dart';
 import 'package:upgrader/upgrader.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -73,226 +75,245 @@ class _HomePageState extends State<HomePage> {
       child: ViewModelBuilder<HomeViewModel>.reactive(
         viewModelBuilder: () => vm,
         builder: (context, model, child) {
-          return BasePage(
-            //showCart: true,
-            body: UpgradeAlert(
-              // upgrader: Upgrader(
-              //   showIgnore: !AppUpgradeSettings.forceUpgrade(),
-              //   shouldPopScope: () => !AppUpgradeSettings.forceUpgrade(),
-              //   dialogStyle: Platform.isIOS
-              //       ? UpgradeDialogStyle.cupertino
-              //       : UpgradeDialogStyle.material,
-              // ),
-              child: PageView(
-                controller: model.pageViewController,
-                onPageChanged: model.onPageChanged,
-                children: [
-                  model.homeView,
-                  Padding(
-                    padding: const EdgeInsets.only(top: 30.0),
-                    child: SafeArea(
-                      child: Container(
-                          height: MediaQuery.of(context).size.height * .9,
-                          child: VendorCategoryProductsPageNewHome(
-                            vendor: vm.dvendor,
-                            category: vm.dvendor.categories![0],
-                          )),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 30.0),
-                    child: SafeArea(
-                      child: Container(
-                          height: MediaQuery.of(context).size.height * .9,
-                          child: VendorCategoryProductsPageNewHome(
-                            vendor: vm.dvendor,
-                            category: vm.dvendor.categories![1],
-                          )),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 30.0),
-                    child: SafeArea(
-                      child: SingleChildScrollView(
-                          child: FlashSaleViewHome(vendorType)),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 30.0),
-                    child: SafeArea(
-                      child: OrdersPage(),
-                    ),
-                  ),
-                ],
-              ),
-            ),
+          //debugger();
+          return model.vendors.isEmpty && vm.dvendor.categories == null
+              ? LoadingShimmer().px20().h(200)
+              : vm.dvendor.categories!.length == 0
+                  ? LoadingShimmer().px20().h(200)
+                  : BasePage(
+                      //showCart: true,
+                      body: UpgradeAlert(
+                        upgrader: Upgrader(),
+                        // upgrader: Upgrader(
+                        //   showIgnore: !AppUpgradeSettings.forceUpgrade(),
+                        //   shouldPopScope: () => !AppUpgradeSettings.forceUpgrade(),
+                        //   dialogStyle: Platform.isIOS
+                        //       ? UpgradeDialogStyle.cupertino
+                        //       : UpgradeDialogStyle.material,
+                        // ),
+                        child: PageView(
+                          controller: model.pageViewController,
+                          onPageChanged: model.onPageChanged,
+                          children: [
+                            model.homeView,
+                            Padding(
+                              padding: const EdgeInsets.only(top: 30.0),
+                              child: SafeArea(
+                                child: Container(
+                                    height:
+                                        MediaQuery.of(context).size.height * .9,
+                                    child: VendorCategoryProductsPageNewHome(
+                                      vendor: vm.dvendor,
+                                      category: vm.dvendor.categories![0],
+                                    )),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 30.0),
+                              child: SafeArea(
+                                child: Container(
+                                    height:
+                                        MediaQuery.of(context).size.height * .9,
+                                    child: VendorCategoryProductsPageNewHome(
+                                      vendor: vm.dvendor,
+                                      category: vm.dvendor.categories![1],
+                                    )),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 30.0),
+                              child: SafeArea(
+                                child: SingleChildScrollView(
+                                    child: FlashSaleViewHome(vendorType)),
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 30.0),
+                              child: SafeArea(
+                                child: OrdersPage(),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
 
-            bottomNavigationBar: VxBox(
-              child: SafeArea(
-                child: Container(
-                    padding: EdgeInsets.only(top: 10),
-                    width: MediaQuery.of(context).size.width - 30,
-                    height: 70,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(1),
-                        color: Colors.white),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              vm.currentIndex = 0;
-                            });
-                            model.onTabChange(vm.currentIndex);
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Opacity(
-                              opacity: vm.currentIndex == 0 ? .99 : .4,
-                              child: Column(children: [
-                                Icon(
-                                  Icons.home,
-                                  size: vm.currentIndex == 0 ? 22 : 22,
-                                  color: vm.currentIndex == 0
-                                      ? AppColor.midnightCityYellow
-                                      : AppColor.midnightCityDarkBlue,
-                                ),
-                                Text("Home",
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.bold,
-                                        color: vm.currentIndex == 0
-                                            ? AppColor.midnightCityYellow
-                                            : Colors.black))
-                              ]),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              vm.currentIndex = 1;
-                            });
-                            model.onTabChange(vm.currentIndex);
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Opacity(
-                              opacity: vm.currentIndex == 1 ? .99 : .4,
-                              child: Column(children: [
-                                vm.currentIndex == 1
-                                    ? Image.asset(
-                                        "assets/images/restarunt_yellow.png",
-                                        width: 24)
-                                    : Image.asset(
-                                        "assets/images/restarunt_darkblue.png",
-                                        width: 24),
-                                Text("Restaurant",
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.bold,
-                                        color: vm.currentIndex == 1
-                                            ? AppColor.midnightCityYellow
-                                            : Colors.black))
-                              ]),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              vm.currentIndex = 2;
-                            });
-                            model.onTabChange(vm.currentIndex);
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Opacity(
-                              opacity: vm.currentIndex == 2 ? .99 : .4,
-                              child: Column(children: [
-                                vm.currentIndex == 2
-                                    ? Image.asset(
-                                        "assets/images/groceries_yellow.png",
-                                        width: 22)
-                                    : Image.asset(
-                                        "assets/images/groceries_blue.png",
-                                        width: 22),
-                                Text("Groceries",
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.bold,
-                                        color: vm.currentIndex == 2
-                                            ? AppColor.midnightCityYellow
-                                            : Colors.black))
-                              ]),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              vm.currentIndex = 3;
-                            });
-                            model.onTabChange(vm.currentIndex);
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(4.0),
-                            child: Opacity(
-                              opacity: vm.currentIndex == 3 ? .99 : .4,
-                              child: Column(children: [
-                                vm.currentIndex == 3
-                                    ? Image.asset(
-                                        "assets/images/offers_yellow.png",
-                                        width: 22)
-                                    : Image.asset(
-                                        "assets/images/offers_blue.png",
-                                        width: 22),
-                                Text("Offers",
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.bold,
-                                        color: vm.currentIndex == 3
-                                            ? AppColor.midnightCityYellow
-                                            : Colors.black))
-                              ]),
-                            ),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            setState(() {
-                              vm.currentIndex = 4;
-                            });
-                            model.onTabChange(vm.currentIndex);
-                          },
-                          child: Opacity(
-                            opacity: vm.currentIndex == 4 ? .99 : .4,
-                            child: Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: Column(children: [
-                                vm.currentIndex == 4
-                                    ? Image.asset(
-                                        "assets/images/orders_yellow.png",
-                                        width: 22)
-                                    : Image.asset(
-                                        "assets/images/orders_blue.png",
-                                        width: 22),
-                                Text("Orders",
-                                    style: TextStyle(
-                                        fontSize: 10,
-                                        fontWeight: FontWeight.bold,
-                                        color: vm.currentIndex == 4
-                                            ? AppColor.midnightCityYellow
-                                            : Colors.black))
-                              ]),
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
+                      bottomNavigationBar: VxBox(
+                        child: SafeArea(
+                          child: Container(
+                              padding: EdgeInsets.only(top: 10),
+                              width: MediaQuery.of(context).size.width - 30,
+                              height: 70,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(1),
+                                  color: Colors.white),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        vm.currentIndex = 0;
+                                      });
+                                      model.onTabChange(vm.currentIndex);
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Opacity(
+                                        opacity:
+                                            vm.currentIndex == 0 ? .99 : .4,
+                                        child: Column(children: [
+                                          Icon(
+                                            Icons.home,
+                                            size:
+                                                vm.currentIndex == 0 ? 22 : 22,
+                                            color: vm.currentIndex == 0
+                                                ? AppColor.midnightCityYellow
+                                                : AppColor.midnightCityDarkBlue,
+                                          ),
+                                          Text("Home",
+                                              style: TextStyle(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: vm.currentIndex == 0
+                                                      ? AppColor
+                                                          .midnightCityYellow
+                                                      : Colors.black))
+                                        ]),
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        vm.currentIndex = 1;
+                                      });
+                                      model.onTabChange(vm.currentIndex);
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Opacity(
+                                        opacity:
+                                            vm.currentIndex == 1 ? .99 : .4,
+                                        child: Column(children: [
+                                          vm.currentIndex == 1
+                                              ? Image.asset(
+                                                  "assets/images/restarunt_yellow.png",
+                                                  width: 24)
+                                              : Image.asset(
+                                                  "assets/images/restarunt_darkblue.png",
+                                                  width: 24),
+                                          Text("Restaurant",
+                                              style: TextStyle(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: vm.currentIndex == 1
+                                                      ? AppColor
+                                                          .midnightCityYellow
+                                                      : Colors.black))
+                                        ]),
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        vm.currentIndex = 2;
+                                      });
+                                      model.onTabChange(vm.currentIndex);
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Opacity(
+                                        opacity:
+                                            vm.currentIndex == 2 ? .99 : .4,
+                                        child: Column(children: [
+                                          vm.currentIndex == 2
+                                              ? Image.asset(
+                                                  "assets/images/groceries_yellow.png",
+                                                  width: 22)
+                                              : Image.asset(
+                                                  "assets/images/groceries_blue.png",
+                                                  width: 22),
+                                          Text("Groceries",
+                                              style: TextStyle(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: vm.currentIndex == 2
+                                                      ? AppColor
+                                                          .midnightCityYellow
+                                                      : Colors.black))
+                                        ]),
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        vm.currentIndex = 3;
+                                      });
+                                      model.onTabChange(vm.currentIndex);
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(4.0),
+                                      child: Opacity(
+                                        opacity:
+                                            vm.currentIndex == 3 ? .99 : .4,
+                                        child: Column(children: [
+                                          vm.currentIndex == 3
+                                              ? Image.asset(
+                                                  "assets/images/offers_yellow.png",
+                                                  width: 22)
+                                              : Image.asset(
+                                                  "assets/images/offers_blue.png",
+                                                  width: 22),
+                                          Text("Offers",
+                                              style: TextStyle(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: vm.currentIndex == 3
+                                                      ? AppColor
+                                                          .midnightCityYellow
+                                                      : Colors.black))
+                                        ]),
+                                      ),
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      setState(() {
+                                        vm.currentIndex = 4;
+                                      });
+                                      model.onTabChange(vm.currentIndex);
+                                    },
+                                    child: Opacity(
+                                      opacity: vm.currentIndex == 4 ? .99 : .4,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(4.0),
+                                        child: Column(children: [
+                                          vm.currentIndex == 4
+                                              ? Image.asset(
+                                                  "assets/images/orders_yellow.png",
+                                                  width: 22)
+                                              : Image.asset(
+                                                  "assets/images/orders_blue.png",
+                                                  width: 22),
+                                          Text("Orders",
+                                              style: TextStyle(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.bold,
+                                                  color: vm.currentIndex == 4
+                                                      ? AppColor
+                                                          .midnightCityYellow
+                                                      : Colors.black))
+                                        ]),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )
 
-                    /*   GNav(
+                              /*   GNav(
 
                     tabBorderRadius: 0,
                     // tabActiveBorder: Border.all(color: Colors.black, width: 1), // tab button border
@@ -419,10 +440,10 @@ class _HomePageState extends State<HomePage> {
                     onTabChange: model.onTabChange,
                   ), */
 
-                    ),
-              ),
-            ).shadow.color(AppColor.mainBackground).make(),
-          );
+                              ),
+                        ),
+                      ).shadow.color(AppColor.mainBackground).make(),
+                    );
         },
       ),
     );

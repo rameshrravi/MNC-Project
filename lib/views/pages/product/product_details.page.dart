@@ -42,7 +42,8 @@ class ProductDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ViewModelBuilder<ProductDetailsViewModel>.reactive(
       viewModelBuilder: () => ProductDetailsViewModel(context, product!),
-      onModelReady: (model) => model.getProductDetails(),
+      //onModelReady: (model) => model.getProductDetails(),
+      onViewModelReady: (model) => model.initialise(),
       builder: (context, model, child) {
         return BasePage(
           // title: model.product.name,

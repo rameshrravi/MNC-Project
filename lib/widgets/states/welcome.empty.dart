@@ -61,7 +61,7 @@ class EmptyWelcome extends StatelessWidget {
                   stream: AuthServices.listenToAuthState(),
                   builder: (ctx, snapshot) {
                     //
-                    String introText = "Welcome to Midnightcity";
+                    String introText = "";
 
                     String fullIntroText = introText;
                     //

@@ -54,42 +54,45 @@ class CategoriesVendor extends StatelessWidget {
               ],
             ).p12(),*/
             //categories list
-            Container(
-              height: 880,
-              child: ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                itemCount: model.dvendor?.categories!.length,
-                itemBuilder: (context, i) {
-                  return Padding(
-                    padding: const EdgeInsets.only(top: 10.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        /*  context.nextPage(
+            model.categories!.isNotEmpty
+                ? Container(
+                    height: 880,
+                    child: ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: model.dvendor?.categories!.length,
+                      itemBuilder: (context, i) {
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 10.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              /*  context.nextPage(
                          VendorCategoryProductsPage(
                            category: model.categories![i],
                            vendor: vendor,
                          ),
                        );*/
-                        // if( model.dvendor!.categories![i].name=="Restaurant" || model.dvendor!.categories![i].name=="Orange Bar" ) {
+                              // if( model.dvendor!.categories![i].name=="Restaurant" || model.dvendor!.categories![i].name=="Orange Bar" ) {
 
-                        if (model.dvendor!.name == "Midnightcity Abuja" &&
-                            (model.dvendor!.categories![i].name ==
-                                    "Groceries" ||
-                                model.dvendor!.categories![i].name ==
-                                    "Pharmacy")) {
-                          AlertService.info(
-                              title: "Will be available shortly!!!", text: "");
-                        } else {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      VendorCategoryProductsPageNew(
-                                        category: model.dvendor!.categories![i],
-                                        vendor: model.dvendor,
-                                      )));
-                        }
-                        /* }else if( model.dvendor!.categories![i].name=="Groceries" ) {
+                              if (model.dvendor!.name == "Midnightcity Abuja" &&
+                                  (model.dvendor!.categories![i].name ==
+                                          "Groceries" ||
+                                      model.dvendor!.categories![i].name ==
+                                          "Pharmacy")) {
+                                AlertService.info(
+                                    title: "Will be available shortly!!!",
+                                    text: "");
+                              } else {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            VendorCategoryProductsPageNew(
+                                              category:
+                                                  model.dvendor!.categories![i],
+                                              vendor: model.dvendor,
+                                            )));
+                              }
+                              /* }else if( model.dvendor!.categories![i].name=="Groceries" ) {
                        Navigator.push(
                                context, MaterialPageRoute(builder: (context) =>
 
@@ -112,149 +115,184 @@ class CategoriesVendor extends StatelessWidget {
                          arguments: vendor,
                        );
 */
-                      },
-                      child: Card(
-                        shape: RoundedRectangleBorder(
-                          side: BorderSide(color: Colors.white, width: 1),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        elevation: 2,
-                        child: Column(
-                          children: [
-                            Stack(alignment: Alignment.topLeft, children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(15),
-                                    topRight: Radius.circular(15)),
-                                child: Image.network(
-                                  model.dvendor!.categories![i].imageUrl!,
-                                  width: MediaQuery.of(context).size.width - 40,
-                                  height: 150,
-                                  fit: BoxFit.fitWidth,
-                                ),
+                            },
+                            child: Card(
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(color: Colors.white, width: 1),
+                                borderRadius: BorderRadius.circular(15),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 20.0),
-                                child: model.dvendor!.categories![i].name !=
-                                        "Orange Bar"
-                                    ? Container(
-                                        height: 25,
-                                        decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.only(
-                                              topRight: Radius.circular(10),
-                                              bottomRight: Radius.circular(10),
-                                            ),
-                                            color:
-                                                AppColor.midnightCityLightBlue),
-                                        width: model.dvendor!.categories![i]
-                                                    .name ==
-                                                "Restaurant"
-                                            ? 120
-                                            : model.dvendor!.categories![i]
-                                                        .name ==
-                                                    "Groceries"
-                                                ? 120
-                                                : model.dvendor!.categories![i]
-                                                            .name ==
-                                                        "Pharmacy"
-                                                    ? 140
-                                                    : model
-                                                                .dvendor!
-                                                                .categories![i]
-                                                                .name ==
-                                                            "Orange Bar"
-                                                        ? 180
-                                                        : 120,
-                                        child: Center(
-                                          child: Text(
+                              elevation: 2,
+                              child: Column(
+                                children: [
+                                  Stack(
+                                      alignment: Alignment.topLeft,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.only(
+                                              topLeft: Radius.circular(15),
+                                              topRight: Radius.circular(15)),
+                                          child: Image.network(
                                             model.dvendor!.categories![i]
-                                                        .name ==
-                                                    "Restaurant"
-                                                ? "Great food"
-                                                : model.dvendor!.categories![i]
-                                                            .name ==
-                                                        "Groceries"
-                                                    ? "Essentials"
-                                                    : model
-                                                                .dvendor!
-                                                                .categories![i]
-                                                                .name ==
-                                                            "Pharmacy"
-                                                        ? "Drugs and more"
-                                                        : model
-                                                                    .dvendor!
-                                                                    .categories![
-                                                                        i]
-                                                                    .name ==
-                                                                "Orange Bar"
-                                                            ? ""
-                                                            : "",
-                                            style:
-                                                TextStyle(color: Colors.white),
+                                                .imageUrl!,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width -
+                                                40,
+                                            height: 150,
+                                            fit: BoxFit.fitWidth,
                                           ),
                                         ),
-                                      )
-                                    : SizedBox(),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 20.0),
+                                          child: model.dvendor!.categories![i]
+                                                      .name !=
+                                                  "Orange Bar"
+                                              ? Container(
+                                                  height: 25,
+                                                  decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.only(
+                                                        topRight:
+                                                            Radius.circular(10),
+                                                        bottomRight:
+                                                            Radius.circular(10),
+                                                      ),
+                                                      color: AppColor
+                                                          .midnightCityLightBlue),
+                                                  width: model
+                                                              .dvendor!
+                                                              .categories![i]
+                                                              .name ==
+                                                          "Restaurant"
+                                                      ? 120
+                                                      : model
+                                                                  .dvendor!
+                                                                  .categories![
+                                                                      i]
+                                                                  .name ==
+                                                              "Groceries"
+                                                          ? 120
+                                                          : model
+                                                                      .dvendor!
+                                                                      .categories![
+                                                                          i]
+                                                                      .name ==
+                                                                  "Pharmacy"
+                                                              ? 140
+                                                              : model
+                                                                          .dvendor!
+                                                                          .categories![
+                                                                              i]
+                                                                          .name ==
+                                                                      "Orange Bar"
+                                                                  ? 180
+                                                                  : 120,
+                                                  child: Center(
+                                                    child: Text(
+                                                      model
+                                                                  .dvendor!
+                                                                  .categories![
+                                                                      i]
+                                                                  .name ==
+                                                              "Restaurant"
+                                                          ? "Great food"
+                                                          : model
+                                                                      .dvendor!
+                                                                      .categories![
+                                                                          i]
+                                                                      .name ==
+                                                                  "Groceries"
+                                                              ? "Essentials"
+                                                              : model
+                                                                          .dvendor!
+                                                                          .categories![
+                                                                              i]
+                                                                          .name ==
+                                                                      "Pharmacy"
+                                                                  ? "Drugs and more"
+                                                                  : model.dvendor!.categories![i]
+                                                                              .name ==
+                                                                          "Orange Bar"
+                                                                      ? ""
+                                                                      : "",
+                                                      style: TextStyle(
+                                                          color: Colors.white),
+                                                    ),
+                                                  ),
+                                                )
+                                              : SizedBox(),
+                                        ),
+                                      ]),
+                                  Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.only(
+                                            bottomRight: Radius.circular(15),
+                                            bottomLeft: Radius.circular(15)),
+                                        color: Colors.white,
+                                      ),
+                                      height: 50,
+                                      width: double.infinity,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              model.dvendor!.categories![i]
+                                                  .name!,
+                                              style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 18),
+                                            ),
+                                            Spacer(),
+                                            Icon(
+                                              Icons.av_timer_rounded,
+                                              color: Colors.grey,
+                                            ),
+                                            Text(
+                                              model.dvendor!.categories![i]
+                                                          .name ==
+                                                      "Restaurant"
+                                                  ? "40 - 50 mins"
+                                                  : model
+                                                              .dvendor!
+                                                              .categories![i]
+                                                              .name ==
+                                                          "Groceries"
+                                                      ? "20 - 40 mins"
+                                                      : model
+                                                                  .dvendor!
+                                                                  .categories![
+                                                                      i]
+                                                                  .name ==
+                                                              "Pharmacy"
+                                                          ? "15 - 30 mins"
+                                                          : model
+                                                                      .dvendor!
+                                                                      .categories![
+                                                                          i]
+                                                                      .name ==
+                                                                  "Orange Bar"
+                                                              ? "20 - 30 mins"
+                                                              : "30 - 40 mins",
+                                              style: TextStyle(
+                                                  color: Colors.grey,
+                                                  fontSize: 14),
+                                            ),
+                                          ],
+                                        ),
+                                      ))
+                                ],
                               ),
-                            ]),
-                            Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.only(
-                                      bottomRight: Radius.circular(15),
-                                      bottomLeft: Radius.circular(15)),
-                                  color: Colors.white,
-                                ),
-                                height: 50,
-                                width: double.infinity,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        model.dvendor!.categories![i].name!,
-                                        style: TextStyle(
-                                            color: Colors.black, fontSize: 18),
-                                      ),
-                                      Spacer(),
-                                      Icon(
-                                        Icons.av_timer_rounded,
-                                        color: Colors.grey,
-                                      ),
-                                      Text(
-                                        model.dvendor!.categories![i].name ==
-                                                "Restaurant"
-                                            ? "40 - 50 mins"
-                                            : model.dvendor!.categories![i]
-                                                        .name ==
-                                                    "Groceries"
-                                                ? "20 - 40 mins"
-                                                : model.dvendor!.categories![i]
-                                                            .name ==
-                                                        "Pharmacy"
-                                                    ? "15 - 30 mins"
-                                                    : model
-                                                                .dvendor!
-                                                                .categories![i]
-                                                                .name ==
-                                                            "Orange Bar"
-                                                        ? "20 - 30 mins"
-                                                        : "30 - 40 mins",
-                                        style: TextStyle(
-                                            color: Colors.grey, fontSize: 14),
-                                      ),
-                                    ],
-                                  ),
-                                ))
-                          ],
-                        ),
-                      ),
+                            ),
+                          ),
+                        );
+                      },
                     ),
-                  );
-                },
-              ),
-            ),
+                  )
+                : Container(),
 
             /*  CustomHorizontalListView(
               isLoading: model.isBusy,

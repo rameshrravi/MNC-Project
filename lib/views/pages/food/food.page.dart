@@ -76,90 +76,97 @@ class _FoodPageState extends State<FoodPage>
         // onModelReady: (model) => model.initialise(),
         onViewModelReady: (model) => model.initialise(),
         builder: (context, model, child) {
-          return SafeArea(
-            child: VStack(
-              [
-                //location section
-                VendorHeader(
-                  model: model,
-                  showSearch: false,
-                  vendorBusyState: model.dvendor.is_busy!,
-                ),
-                SmartRefresher(
-                  enablePullDown: true,
-                  enablePullUp: false,
-                  controller: model.refreshController,
-                  onRefresh: () {
-                    model.refreshController.refreshCompleted();
-                    setState(() {
-                      pageKey = GlobalKey<State>();
-                    });
-                  },
+          return model.vendors != null &&
+                  model.dvendor != null &&
+                  model.dvendor.is_busy != null
+              ? SafeArea(
                   child: VStack(
                     [
-                      //  search bar
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 10.0),
-                        child: Center(
-                          child: Text(
-                            "Welcome to " + model.dvendor.name!,
-                            style: const TextStyle(
-                                color: AppColor.midnightCityDarkBlue,
-                                fontWeight: FontWeight.w500,
-                                fontFamily: "Poppins",
-                                fontStyle: FontStyle.normal,
-                                fontSize: 20.0),
-                          ),
-                        ),
+                      //location section
+                      VendorHeader(
+                        model: model,
+                        showSearch: false,
+                        vendorBusyState: model.dvendor.is_busy!,
                       ),
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => SearchPage(
-                                  search: Search(viewType: SearchType.products),
-                                  showCancel: false,
-                                ),
-                              ));
+                      SmartRefresher(
+                        enablePullDown: true,
+                        enablePullUp: false,
+                        controller: model.refreshController,
+                        onRefresh: () {
+                          model.refreshController.refreshCompleted();
+                          setState(() {
+                            pageKey = GlobalKey<State>();
+                          });
                         },
-                        child: Center(
-                          child: Container(
-                              height: 50,
-                              width: context.screenWidth - 40,
-                              decoration: BoxDecoration(
-                                  color: Colors.grey.shade200,
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Center(
-                                  child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 25.0),
-                                    child: Icon(
-                                      Icons.search,
-                                      size: 25,
-                                      color: Colors.black54,
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10.0),
-                                    child: Container(
-                                      width: context.screenWidth - 120,
-                                      child: Text(
-                                        "Search for your desired foods or items",
-                                        style: TextStyle(
-                                            color: Colors.black54,
-                                            fontSize: 12),
-                                        overflow: TextOverflow.fade,
+                        child: VStack(
+                          [
+                            //  search bar
+                            // Padding(
+                            //   padding: const EdgeInsets.only(bottom: 10.0),
+                            //   child: Center(
+                            //     child: Text(
+                            //       "Welcome to " + model.dvendor.name!,
+                            //       style: const TextStyle(
+                            //           color: AppColor.midnightCityDarkBlue,
+                            //           fontWeight: FontWeight.w500,
+                            //           fontFamily: "Poppins",
+                            //           fontStyle: FontStyle.normal,
+                            //           fontSize: 20.0),
+                            //     ),
+                            //   ),
+                            // ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => SearchPage(
+                                        search: Search(
+                                            viewType: SearchType.products),
+                                        showCancel: false,
                                       ),
-                                    ),
-                                  ),
-                                ],
-                              ))),
-                        ),
-                      ),
+                                    ));
+                              },
+                              child: Center(
+                                child: Container(
+                                    height: 50,
+                                    width: context.screenWidth - 40,
+                                    decoration: BoxDecoration(
+                                        color: Colors.grey.shade200,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: Center(
+                                        child: Row(
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 25.0),
+                                          child: Icon(
+                                            Icons.search,
+                                            size: 25,
+                                            color: Colors.black54,
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 10.0),
+                                          child: Container(
+                                            width: context.screenWidth - 120,
+                                            child: Text(
+                                              "Search for your desired foods or items",
+                                              style: TextStyle(
+                                                  color: Colors.black54,
+                                                  fontSize: 12),
+                                              overflow: TextOverflow.fade,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ))),
+                              ),
+                            ),
 
-                      /*   SearchBarInput(
+                            /*   SearchBarInput(
                         hintText:
                             "Search for your desired foods or items".tr(),
                         readOnly: true,
@@ -168,14 +175,14 @@ class _FoodPageState extends State<FoodPage>
                          // viewType: SearchType.vendorProducts,
                         ),
                       ).px20(),*/
-                      UiSpacer.verticalSpace(),
-                      //banners
-                      Banners(
-                        widget.vendorType,
-                        viewportFraction: .9,
-                      ),
-                      // Popular Categories
-                      /*      Padding(
+                            UiSpacer.verticalSpace(),
+                            //banners
+                            Banners(
+                              widget.vendorType,
+                              viewportFraction: .9,
+                            ),
+                            // Popular Categories
+                            /*      Padding(
                         padding: const EdgeInsets.only(
                             top: 30.0, right: 15, left: 15),
                         child: Text("Popular Categories",
@@ -187,34 +194,35 @@ class _FoodPageState extends State<FoodPage>
                                 fontSize: 20.0),
                             textAlign: TextAlign.left),
                       ),*/
-                      // GroceryCategories(widget.vendorType),
-                      //categories
-                      Padding(
-                        padding: const EdgeInsets.only(right: 20, left: 20.0),
-                        child:
-                            CategoriesVendor(widget.vendorType, model.dvendor),
-                      ),
+                            // GroceryCategories(widget.vendorType),
+                            //categories
+                            Padding(
+                              padding:
+                                  const EdgeInsets.only(right: 20, left: 20.0),
+                              child: CategoriesVendor(
+                                  widget.vendorType, model.dvendor),
+                            ),
 
 /*
                       Container(
                           height: 500,
                           child: VendorDetailsWithSubcategoryPage(vendor:model.vendor)),
                         */
-                      /* Padding(
+                            /* Padding(
                         padding: const EdgeInsets.only(left: 15.0, top: 15),
                         child: Categories(
                           widget.vendorType,
                         ),
                       ),*/
-                      //flash sales products
-                      GroceryCategoryProducts(
-                        widget.vendorType,
-                        model.dvendor,
-                        length: 10,
-                      ),
-                      //VendorDetailsWithMenuPage(),
-                      //popular vendors
-                      /* SectionVendorsView(
+                            //flash sales products
+                            GroceryCategoryProducts(
+                              widget.vendorType,
+                              model.dvendor,
+                              length: 10,
+                            ),
+                            //VendorDetailsWithMenuPage(),
+                            //popular vendors
+                            /* SectionVendorsView(
                         widget.vendorType,
                         title: "Popular vendors".tr(),
                         scrollDirection: Axis.horizontal,
@@ -222,8 +230,8 @@ class _FoodPageState extends State<FoodPage>
                         itemWidth: context.percentWidth * 60,
                         byLocation: AppStrings.enableFatchByLocation,
                       ),*/
-                      //campain vendors
-                      /*    SectionProductsView(
+                            //campain vendors
+                            /*    SectionProductsView(
                         widget.vendorType,
                         title: "Campaigns".tr(),
                         scrollDirection: Axis.horizontal,
@@ -232,7 +240,7 @@ class _FoodPageState extends State<FoodPage>
                         viewType: GridViewProductListItem,
                         byLocation: false,//AppStrings.enableFatchByLocation,
                       ),*/
-                      /*  Padding(
+                            /*  Padding(
                         padding: const EdgeInsets.only(
                             top: 15.0, right: 15, left: 15),
                         child: Text("Must Try - Popular Foods",
@@ -256,8 +264,8 @@ class _FoodPageState extends State<FoodPage>
                                 fontSize: 14.0),
                             textAlign: TextAlign.left),
                       ),*/
-                      //popular foods
-                      /*   SectionProductsView(
+                            //popular foods
+                            /*   SectionProductsView(
                         widget.vendorType,
                         //  title: "Popular Foods".tr(),
                         scrollDirection: Axis.horizontal,
@@ -268,27 +276,27 @@ class _FoodPageState extends State<FoodPage>
                         listHeight: 115,
                         byLocation: AppStrings.enableFatchByLocation,
                       ),*/
-                      //new vendors
-                      CustomVisibilty(
-                        visible: false, // !AppStrings.enableSingleVendor,
-                        child: Center(
-                          child: SectionVendorsView(
-                            widget.vendorType,
-                            title:
-                                "Our Locations", //"New on".tr() + " ${AppStrings.appName}",
-                            scrollDirection: Axis.vertical,
-                            //   type: SearchFilterType.,
-                            itemWidth: context.percentWidth * 60,
-                            byLocation: AppStrings.enableFatchByLocation,
-                          ),
-                        ),
-                      ),
+                            //new vendors
+                            CustomVisibilty(
+                              visible: false, // !AppStrings.enableSingleVendor,
+                              child: Center(
+                                child: SectionVendorsView(
+                                  widget.vendorType,
+                                  title:
+                                      "Our Locations", //"New on".tr() + " ${AppStrings.appName}",
+                                  scrollDirection: Axis.vertical,
+                                  //   type: SearchFilterType.,
+                                  itemWidth: context.percentWidth * 60,
+                                  byLocation: AppStrings.enableFatchByLocation,
+                                ),
+                              ),
+                            ),
 
-                      //    Container(),
+                            //    Container(),
 
-                      //   VendorDetailsPage(vendor: model.dvendor),
-                      //all vendor
-                      /*    CustomVisibilty(
+                            //   VendorDetailsPage(vendor: model.dvendor),
+                            //all vendor
+                            /*    CustomVisibilty(
                         visible: !AppStrings.enableSingleVendor,
                         child: SectionVendorsView(
                           widget.vendorType,
@@ -299,8 +307,8 @@ class _FoodPageState extends State<FoodPage>
                           separator: UiSpacer.verticalSpace(space: 0),
                         ),
                       ),*/
-                      //all products
-                      /*  GroceryProductsSectionView(
+                            //all products
+                            /*  GroceryProductsSectionView(
                         "Best Selling".tr() ,
 
                         model.vendorType,
@@ -308,30 +316,30 @@ class _FoodPageState extends State<FoodPage>
                         type: ProductFetchDataType.BEST,
                         crossAxisCount: 2,
                       ),*/
-                      // BestSellingProducts(widget.vendorType),
-                      /*  Padding(
+                            // BestSellingProducts(widget.vendorType),
+                            /*  Padding(
                         padding: const EdgeInsets.only(right: 10),
                         child: FlashSaleView(widget.vendorType),
                       ),*/
-                      CustomVisibilty(
-                        visible: AppStrings.enableSingleVendor,
-                        child: SectionProductsView(
-                          widget.vendorType,
-                          title: "All Products".tr(),
-                          scrollDirection: Axis.vertical,
-                          type: ProductFetchDataType.BEST,
-                          viewType: HorizontalProductListItem,
-                          separator: UiSpacer.verticalSpace(space: 0),
-                          listHeight: 0.0,
-                        ),
-                      ),
-                      //view all vendors
-                      ViewAllVendorsView(
-                        vendorType: widget.vendorType,
-                        vendorID: model.dvendor.id,
-                      ),
-                      UiSpacer.verticalSpace(),
-                      /*  Container(
+                            CustomVisibilty(
+                              visible: AppStrings.enableSingleVendor,
+                              child: SectionProductsView(
+                                widget.vendorType,
+                                title: "All Products".tr(),
+                                scrollDirection: Axis.vertical,
+                                type: ProductFetchDataType.BEST,
+                                viewType: HorizontalProductListItem,
+                                separator: UiSpacer.verticalSpace(space: 0),
+                                listHeight: 0.0,
+                              ),
+                            ),
+                            //view all vendors
+                            ViewAllVendorsView(
+                              vendorType: widget.vendorType,
+                              vendorID: model.dvendor.id,
+                            ),
+                            UiSpacer.verticalSpace(),
+                            /*  Container(
                         height: 100,
                         child: ListView(
                           scrollDirection: Axis.horizontal,
@@ -408,13 +416,14 @@ class _FoodPageState extends State<FoodPage>
                           )
                         ],
                       )*/
+                          ],
+                          // key: model.pageKey,
+                        ).scrollVertical(),
+                      ).expand(),
                     ],
-                    // key: model.pageKey,
-                  ).scrollVertical(),
-                ).expand(),
-              ],
-            ),
-          );
+                  ),
+                )
+              : Container();
         },
       ),
     );
