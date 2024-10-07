@@ -52,7 +52,7 @@ class ProductDetailsViewModel extends MyBaseViewModel {
       product.heroTag = oldProductHeroTag;
 
       clearErrors();
-      //calculateTotal();
+      calculateTotal();
     } catch (error) {
       setError(error);
       toastError("$error");
@@ -73,47 +73,47 @@ class ProductDetailsViewModel extends MyBaseViewModel {
     return selectedProductOptionsIDs.contains(option.id);
   }
 
-  toggleOptionSelection(OptionGroup optionGroup, Option option) {
-    if (isOptionSelected(option)) {
-      selectedProductOptionsIDs.remove(option.id);
-      selectedProductOptions.remove(option);
-    } else {
-      selectedProductOptionsIDs.add(option.id!);
-      selectedProductOptions.add(option);
-    }
-  }
-
-  //
   // toggleOptionSelection(OptionGroup optionGroup, Option option) {
-  //   //
-  //   if (selectedProductOptionsIDs.contains(option.id)) {
+  //   if (isOptionSelected(option)) {
   //     selectedProductOptionsIDs.remove(option.id);
   //     selectedProductOptions.remove(option);
   //   } else {
-  //     //if it allows only one selection
-  //     if (optionGroup.multiple == 0) {
-  //       //
-  //       final foundOption = selectedProductOptions.firstWhere(
-  //           (option) => option.optionGroupId == optionGroup.id,
-  //           orElse: () => null);
-  //       if (foundOption != null) {
-  //         selectedProductOptionsIDs.remove(foundOption.id);
-  //         selectedProductOptions.remove(foundOption);
-  //       }
-  //     }
-  //
-  //     selectedProductOptionsIDs.add(option.id);
+  //     selectedProductOptionsIDs.add(option.id!);
   //     selectedProductOptions.add(option);
   //   }
-  //
-  //   //
-  //   //calculateTotal();
   // }
+
+  //
+  toggleOptionSelection(OptionGroup optionGroup, Option option) {
+    //
+    if (selectedProductOptionsIDs.contains(option.id)) {
+      selectedProductOptionsIDs.remove(option.id);
+      selectedProductOptions.remove(option);
+    } else {
+      //if it allows only one selection
+      if (optionGroup.multiple == 0) {
+        //
+        final foundOption = selectedProductOptions.firstWhere(
+          (option) => option.optionGroupId == optionGroup.id,
+        );
+        if (foundOption != null) {
+          selectedProductOptionsIDs.remove(foundOption.id);
+          selectedProductOptions.remove(foundOption);
+        }
+      }
+
+      selectedProductOptionsIDs.add(option.id!);
+      selectedProductOptions.add(option);
+    }
+
+    //
+    calculateTotal();
+  }
 
   //
   updatedSelectedQty(int qty) async {
     product.selectedQty = qty;
-    // calculateTotal();
+    calculateTotal();
   }
 
   //
@@ -268,9 +268,7 @@ class ProductDetailsViewModel extends MyBaseViewModel {
             onConfirmBtnTap: () async {
               //
               Navigator.pop(viewContext!);
-              debugger();
               viewContext!.nextPage(CartPage());
-              debugger();
             },
             cancelBtnText: "Keep Shopping".tr(),
             cancelBtnTextStyle:
@@ -313,6 +311,7 @@ class ProductDetailsViewModel extends MyBaseViewModel {
         );
       }
     } catch (error) {
+      debugger();
       print("Cart Error00 => $error");
       setError(error);
     }

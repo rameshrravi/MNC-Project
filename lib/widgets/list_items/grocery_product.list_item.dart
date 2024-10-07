@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
@@ -99,7 +101,6 @@ class _GroceryProductListItemState extends State<GroceryProductListItem> {
                                 widget.product!.selectedQty! < 1,
                             child: Icon(
                               FlutterIcons.plus_ant,
-                              //Icons.access_alarm_outlined,
                               size: 16,
                               color: Colors.white,
                             )
@@ -140,6 +141,7 @@ class _GroceryProductListItemState extends State<GroceryProductListItem> {
             CustomVisibilty(
               visible: widget.product!.showDiscount,
               child: "${AppStrings.currencySymbol} ${widget.product!.price}"
+                  //child: "${AppStrings.currencySymbol} ${widget.product!.price}"
                   .currencyFormat()
                   .text
                   .black
@@ -151,7 +153,7 @@ class _GroceryProductListItemState extends State<GroceryProductListItem> {
             ),
             //options
             CustomVisibilty(
-              visible: widget.showStepper! &&
+              visible: widget!.showStepper! &&
                   widget.product!.optionGroups!.firstOrNull() != null,
               child: DropdownInput(
                 options: widget.product!.optionGroups!.isNotEmpty
@@ -266,8 +268,8 @@ class _GroceryProductListItemState extends State<GroceryProductListItem> {
 
   //
   void updateProductQty({int value = 1}) {
-    bool required = widget!.product!.optionGroupRequirementCheck()!;
-    if (!required) {
+    bool? required = widget.product!.optionGroupRequirementCheck();
+    if (!required!) {
       //add to cart/update cart
       widget.qtyUpdated!(widget.product!, value);
       //

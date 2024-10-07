@@ -63,9 +63,9 @@ class ListVendorsViewModel extends MyBaseViewModel {
 
     await LocalStorageService.prefs!.setString('branch', vendor.id.toString());
 
-    ToastService.toastSuccessful("Thank you for choosing our " +
-        vendor.name! +
-        " branch. We are awaiting to serve you!!!");
+    // ToastService.toastSuccessful("Thank you for choosing our " +
+    //     vendor.name! +
+    //     " branch. We are awaiting to serve you!!!");
 
     // viewContext!.navigator
     //    .pushNamedAndRemoveUntil(AppRoutes.homeRoute, (route) => false);

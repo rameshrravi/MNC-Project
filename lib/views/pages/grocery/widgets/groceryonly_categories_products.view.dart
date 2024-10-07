@@ -19,7 +19,8 @@ class GroceryOnlyCategoryProducts extends StatelessWidget {
     return ViewModelBuilder<CategoriesViewModel>.reactive(
       viewModelBuilder: () =>
           CategoriesViewModel(context, vendorType: vendorType),
-      onModelReady: (model) => model.initialise(),
+      // onModelReady: (model) => model.initialise(),
+      onViewModelReady: (model) => model.initialise(),
       builder: (context, model, child) {
         return Scaffold(
           body: SingleChildScrollView(

@@ -102,8 +102,8 @@ class SearchViewModel extends MyBaseViewModel {
 
   //
   productSelected(Product product) async {
-    // final page = NavigationService().productDetailsPageWidget(product);
-    //viewContext!.nextPage(page);
+    final page = NavigationService().productDetailsPageWidget(product);
+    viewContext!.nextPage(page);
   }
 
   //

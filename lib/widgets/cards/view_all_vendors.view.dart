@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/constants/app_routes.dart';
 import 'package:midnightcity/constants/app_strings.dart';
@@ -66,8 +67,8 @@ class ViewAllVendorsView extends StatelessWidget {
                   .make()
                   .expand(),
               Icon(
-                Icons.import_contacts_rounded,
-                // FlutterIcons.arrow_right_evi,
+                // Icons.import_contacts_rounded,
+                FlutterIcons.arrow_right_evi,
                 color: Colors.white,
               )
             ],

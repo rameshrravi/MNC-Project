@@ -62,6 +62,7 @@ class EmptyWelcome extends StatelessWidget {
                   builder: (ctx, snapshot) {
                     //
                     String introText = "Welcome to Midnightcity";
+
                     String fullIntroText = introText;
                     //
                     if (snapshot.hasData) {

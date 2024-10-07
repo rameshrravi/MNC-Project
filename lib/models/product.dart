@@ -3,6 +3,7 @@
 //     final product = productFromJson(jsonString);
 
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:midnightcity/models/digital_file.dart';
 import 'package:midnightcity/models/option.dart';
@@ -226,14 +227,16 @@ class Product {
   //
   bool? optionGroupRequirementCheck() {
     //check if the option groups with required setting has an option selected
-    OptionGroup optionGroupRequired =
-        this.optionGroups!.firstWhere((e) => e.required == 1);
+    if (optionGroups!.isNotEmpty) {
+      OptionGroup optionGroupRequired =
+          optionGroups!.firstWhere((e) => e.required == 1);
 
-    if (optionGroupRequired == null ||
-        (optionGroupRequired != null && this.optionGroups!.length <= 1)) {
-      return false;
-    } else {
-      return true;
+      if (optionGroupRequired == null ||
+          (optionGroupRequired != null && this.optionGroups!.length <= 1)) {
+        return false;
+      } else {
+        return true;
+      }
     }
   }
 }
