@@ -33,7 +33,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_place_picker_mb/google_maps_place_picker.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:stacked/stacked.dart';
 import 'package:velocity_x/velocity_x.dart';
 

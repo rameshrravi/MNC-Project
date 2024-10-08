@@ -12,7 +12,7 @@ import 'package:midnightcity/widgets/bottomsheets/driver_rating.bottomsheet.dart
 import 'package:midnightcity/widgets/bottomsheets/order_cancellation.bottomsheet.dart';
 import 'package:midnightcity/widgets/bottomsheets/vendor_rating.bottomsheet.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
-import 'package:share/share.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:velocity_x/velocity_x.dart';
 //import 'package:qr_flutter/qr_flutter.dart';

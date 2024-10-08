@@ -7,6 +7,7 @@ class AppImages {
   static const registerImage = "assets/images/register_intro.jpg";
   static const otpImage = "assets/images/otp.png";
   static const splashImage = "assets/images/splash_screen.png";
+  static const gif = "assets/images/app_load.gif";
 
   //
   static const onboarding1 = "assets/images/onboard1.png";

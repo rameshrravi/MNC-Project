@@ -1,6 +1,6 @@
 import 'package:midnightcity/constants/api.dart';
 import 'package:midnightcity/constants/app_strings.dart';
-import 'package:package_info/package_info.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 
 class AppDynamicLink extends AppStrings {
   static String get dynamicLinkPrefix {

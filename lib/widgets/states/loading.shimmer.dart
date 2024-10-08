@@ -11,11 +11,9 @@ class LoadingShimmer extends StatelessWidget {
     final linerHeight = (context.percentHeight * 8) * 0.17;
     //
     return Container(
-
       child: VxBox(
         child: VStack(
           [
-
             Container(
               color: Colors.grey[400],
             ).h(linerHeight),
@@ -28,7 +26,7 @@ class LoadingShimmer extends StatelessWidget {
             Container(
               color: Colors.grey[400],
             ).h(linerHeight).py4(),
-           /*( Container(
+            /*( Container(
               color: Colors.grey[400],
             ).h(linerHeight), */
           ],
