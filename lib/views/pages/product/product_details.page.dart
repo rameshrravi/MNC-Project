@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/models/option_group.dart';
@@ -74,6 +76,7 @@ class ProductDetailsPage extends StatelessWidget {
                   tag: model.product.heroTag!,
                   child: BannerCarousel(
                     customizedBanners: model.product.photos!.map((photoPath) {
+                      debugger();
                       return Container(
                         child: CustomImage(
                           imageUrl: photoPath,

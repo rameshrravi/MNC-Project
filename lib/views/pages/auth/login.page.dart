@@ -10,6 +10,7 @@ import 'package:midnightcity/widgets/base.page.dart';
 import 'package:stacked/stacked.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../../../widgets/theme/app_style.dart';
 import 'login/scan_login.view.dart';
 import 'package:flutter_launcher_icons/abs/icon_generator.dart';
 import 'package:flutter_launcher_icons/android.dart';
@@ -106,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                                 style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w400,
-                                    fontFamily: "Poppins",
+                                    // fontFamily: "roboto",
                                     fontStyle: FontStyle.normal,
                                     fontSize: 22.0),
                                 textAlign: TextAlign.center),

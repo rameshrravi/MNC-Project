@@ -124,6 +124,8 @@ class AppStrings {
   static String appCurrency = "currency";
   static String appColors = "colors";
   static String appRemoteSettings = "appRemoteSettings";
+  static String fontFamily = "Poppins";
+
   //END DON'T TOUNCH
 
   //

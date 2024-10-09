@@ -158,11 +158,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       // validator: widget.validator!!,
       focusNode: widget.focusNode,
       onFieldSubmitted: (data) {
-        // if (widget.onFieldSubmitted != null) {
-        //   widget.onFieldSubmitted(data);
-        // } else {
-        //   FocusScope.of(context).requestFocus(widget.nextFocusNode);
-        // }
+        if (widget.onFieldSubmitted != null) {
+          widget.onFieldSubmitted!(data);
+        } else {
+          FocusScope.of(context).requestFocus(widget.nextFocusNode);
+        }
       },
       style: TextStyle(color: widget.textColor ?? Colors.black),
       //onChanged: widget.onChanged!,

@@ -2,6 +2,7 @@ import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:midnightcity/constants/app_theme.dart';
 import 'package:midnightcity/services/app.service.dart';
+import 'package:midnightcity/views/pages/category/categorey_list.dart';
 import 'package:midnightcity/views/pages/splash.page.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'constants/app_strings.dart';
@@ -31,7 +32,7 @@ class MyApp extends StatelessWidget {
           localizationsDelegates: translator.delegates,
           locale: translator.activeLocale,
           supportedLocales: translator.locals(),
-          home: SplashPage(),
+          home: CategoreyList(),
           theme: theme,
           darkTheme: darkTheme,
         );

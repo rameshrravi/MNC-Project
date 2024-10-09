@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:midnightcity/constants/app_routes.dart';
 import 'package:midnightcity/models/category.dart';
@@ -35,7 +37,9 @@ class SearchViewModel extends MyBaseViewModel {
     this.viewContext = context;
     this.vendorType = this.search.vendorType;
     //
-    setSlectedTag(search.showType!);
+    if (search.showType != null) {
+      setSlectedTag(search.showType!);
+    }
   }
 
   //

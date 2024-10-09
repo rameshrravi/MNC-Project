@@ -262,8 +262,8 @@ class SearchBarInput extends StatelessWidget {
               ),
               border: InputBorder.none,
               prefixIcon: Icon(
-                // FlutterIcons.search_fea,
-                Icons.abc_sharp,
+                FlutterIcons.search_fea,
+                //Icons.abc_sharp,
                 size: 20,
                 color: Colors.grey,
               ),
@@ -289,7 +289,6 @@ class SearchBarInput extends StatelessWidget {
                 color: context.backgroundColor,
                 icon: Icon(
                   FlutterIcons.sliders_faw,
-                  //Icons.slideshow_rounded,
                   color: context.primaryColor,
                   size: 20,
                 ),

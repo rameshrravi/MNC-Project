@@ -34,59 +34,57 @@ class OPSMapPage extends StatelessWidget {
           return SafeArea(
             child: VStack(
               [
-                HStack(
-                  [
-                    //close btn
-                    Icon(
-                      //Icons.access_alarm_outlined,
-                      FlutterIcons.arrow_back_mdi,
-                    ).p2().onInkTap(() {
-                      // context.pop();
-                    }),
-                    UiSpacer.horizontalSpace(),
-                    //auto complete
-                    // TypeAheadFormField<Address>(
-                    //   textFieldConfiguration: TextFieldConfiguration(
-                    //     controller: vm.searchTEC,
-                    //     decoration: InputDecoration(
-                    //       hintText: 'Search address'.tr(),
-                    //     ),
-                    //   ),
-                    //   minCharsForSuggestions: 3,
-                    //   //0.9 seconds
-                    //   debounceDuration: Duration(milliseconds: 900),
-                    //   suggestionsCallback: (keyword) async {
-                    //     return await vm.fetchPlaces(keyword);
-                    //   },
-                    //   itemBuilder: (context, suggestion) {
-                    //     return ListTile(
-                    //       title:
-                    //           suggestion.addressLine.text.base.semiBold.make(),
-                    //       subtitle: suggestion.adminArea.text.sm.make(),
-                    //     );
-                    //   },
-                    //
-                    //   onSuggestionSelected: vm.addressSelected,
-                    // ).expand(),
-                  ],
-                ).px20().py4(),
+                HStack([
+                  //close btn
+                  Icon(
+                    //Icons.access_alarm_outlined,
+                    FlutterIcons.arrow_back_mdi,
+                  ).p2().onInkTap(() {
+                    // context.pop();
+                  }),
+                  UiSpacer.horizontalSpace(),
+                  //auto complete
+
+                  TypeAheadField<Address>(
+                      suggestionsCallback: (search) => vm.fetchPlaces(search),
+                      builder: (context, controller, focusNode) {
+                        return TextField(
+                            controller: controller,
+                            focusNode: focusNode,
+                            autofocus: true,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: "Search address".tr(),
+                            ));
+                      },
+                      itemBuilder: (context, suggestion) {
+                        return ListTile(
+                          title:
+                              suggestion.addressLine!.text.base.semiBold.make(),
+                          subtitle: suggestion.adminArea!.text.sm.make(),
+                        );
+                      },
+                      onSelected: (address) async {
+                        vm.addressSelected(address);
+                      })
+                ]).px20().py4(),
 
                 //google map body
                 Stack(
                   children: [
                     //
-                    // GoogleMap(
-                    //   myLocationEnabled: useCurrentLocation,
-                    //   myLocationButtonEnabled: useCurrentLocation,
-                    //   initialCameraPosition: CameraPosition(
-                    //     target: initialPosition ?? LatLng(0.00, 0.00),
-                    //     zoom: initialPosition != null ? 16 : 10,
-                    //   ),
-                    //   padding: vm.googleMapPadding,
-                    //   onMapCreated: vm.onMapCreated,
-                    //   onCameraMove: vm.mapCameraMove,
-                    //   markers: Set<Marker>.of(vm.gMarkers.values),
-                    // ),
+                    GoogleMap(
+                      myLocationEnabled: useCurrentLocation!,
+                      myLocationButtonEnabled: useCurrentLocation!,
+                      initialCameraPosition: CameraPosition(
+                        target: initialPosition ?? LatLng(0.00, 0.00),
+                        zoom: initialPosition != null ? 16 : 10,
+                      ),
+                      padding: vm.googleMapPadding!,
+                      onMapCreated: vm.onMapCreated,
+                      onCameraMove: vm.mapCameraMove,
+                      markers: Set<Marker>.of(vm.gMarkers.values),
+                    ),
 
                     // //center marker
                     // Padding(
