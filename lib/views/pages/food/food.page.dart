@@ -32,6 +32,7 @@ import 'package:midnightcity/views/pages/grocery/widgets/grocery_categories_prod
 import 'package:midnightcity/views/pages/grocery/widgets/grocery_picks.view.dart';
 import 'package:midnightcity/constants/app_routes.dart';
 import '../../../services/auth.service.dart';
+import '../category/categorey_list.dart';
 import '../search/search.page.dart';
 import '../vendor/widgets/categories_vendors.view.dart';
 import '../vendor_details/vendor_category_products.page.dart';
@@ -120,12 +121,20 @@ class _FoodPageState extends State<FoodPage>
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                      builder: (context) => SearchPage(
-                                        search: Search(
-                                            viewType: SearchType.products),
-                                        showCancel: false,
+                                      builder: (context) => CategoreyList(
+                                        vendorType: widget.vendorType,
                                       ),
                                     ));
+
+                                // Navigator.push(
+                                //     context,
+                                //     MaterialPageRoute(
+                                //       builder: (context) => SearchPage(
+                                //         search: Search(
+                                //             viewType: SearchType.products),
+                                //         showCancel: false,
+                                //       ),
+                                //     ));
                               },
                               child: Center(
                                 child: Container(

@@ -28,11 +28,13 @@ import '../../../widgets/custom_text_form_field.dart';
 import '../../../widgets/inputs/search_bar.input.dart';
 
 class VendorCategoryProductsPageNew extends StatefulWidget {
-  VendorCategoryProductsPageNew({this.category, this.vendor, Key? key})
+  VendorCategoryProductsPageNew(
+      {this.category, this.vendor, this.index, Key? key})
       : super(key: key);
 
   final Category? category;
   final Vendor? vendor;
+  int? index = 0;
 
   @override
   _VendorCategoryProductsPageNewState createState() =>
@@ -63,6 +65,8 @@ class _VendorCategoryProductsPageNewState
   void initState() {
     category = widget.category;
 
+    int index = widget.index ?? 0;
+
     super.initState();
 
     category!.subcategories!.sort((a, b) {
@@ -85,6 +89,7 @@ class _VendorCategoryProductsPageNewState
     tabBarController = TabController(
       length: widget.category!.subcategories!.length,
       vsync: this,
+      initialIndex: index,
     );
   }
 
@@ -150,7 +155,8 @@ class _VendorCategoryProductsPageNewState
         widget.category,
         widget.vendor!,
       ),
-      onModelReady: (vm) => vm.initialise(),
+      //onModelReady: (vm) => vm.initialise(),
+      onViewModelReady: (vm) => vm.initialise(),
       //
       builder: (context, model, child) {
         return BasePage(
@@ -213,6 +219,11 @@ class _VendorCategoryProductsPageNewState
                         searchProduct = txtECSearch.text;
                       });
                       print(searchProduct);
+                    },
+                    onSaved: (value) {
+                      setState(() {
+                        searchProduct = txtECSearch.text;
+                      });
                     },
                   ),
                 ),

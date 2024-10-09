@@ -12,7 +12,7 @@ class AppTheme {
       // fontFamily: GoogleFonts.montserrat().fontFamily,
       // fontFamily: GoogleFonts.poppins().fontFamily,
       // fontFamily: GoogleFonts.roboto().fontFamily,
-      fontFamily: GoogleFonts.dmSans().fontFamily,
+      fontFamily: GoogleFonts.poppins().fontFamily,
       // fontFamily: GoogleFonts.oswald().fontFamily,
       primarySwatch: AppColor.primaryMaterialColor,
       primaryColor: AppColor.primaryColor,
@@ -53,7 +53,7 @@ class AppTheme {
       // fontFamily: GoogleFonts.ibmPlexSerif().fontFamily,
       // fontFamily: GoogleFonts.krub().fontFamily,
       // fontFamily: GoogleFonts.montserrat().fontFamily,
-      fontFamily: GoogleFonts.raleway().fontFamily,
+      fontFamily: GoogleFonts.poppins().fontFamily,
       primaryColor: AppColor.primaryColor,
       primaryColorDark: AppColor.primaryColorDark,
       textSelectionTheme: TextSelectionThemeData(

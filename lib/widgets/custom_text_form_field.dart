@@ -33,6 +33,7 @@ class CustomTextFormField extends StatefulWidget {
       this.borderRadius = 90,
       this.labelColor,
       this.textColor,
+      this.onSaved,
       this.cursorColor})
       : super(key: key);
 
@@ -53,6 +54,7 @@ class CustomTextFormField extends StatefulWidget {
   final String? errorText;
 
   final VoidCallback? onChanged;
+  final ValueChanged<String>? onSaved;
   final Function? onFieldSubmitted;
   final Function(String)? validator;
   final FocusNode? focusNode;
@@ -153,6 +155,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
       cursorColor: widget.cursorColor ?? AppColor.white,
       obscureText: (widget.obscureText!) ? !makePasswordVisible : false,
       onTap: () {},
+      onChanged: widget.onSaved,
       readOnly: widget.isReadOnly!,
       controller: widget.textEditingController,
       // validator: widget.validator!!,

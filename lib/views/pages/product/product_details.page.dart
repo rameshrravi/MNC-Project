@@ -76,7 +76,7 @@ class ProductDetailsPage extends StatelessWidget {
                   tag: model.product.heroTag!,
                   child: BannerCarousel(
                     customizedBanners: model.product.photos!.map((photoPath) {
-                      debugger();
+                      //debugger();
                       return Container(
                         child: CustomImage(
                           imageUrl: photoPath,
@@ -112,8 +112,8 @@ class ProductDetailsPage extends StatelessWidget {
                         [
                           product!.name!.text
                               .color(Colors.black)
-                              .fontWeight(FontWeight.w500)
-                              .fontFamily("Poppins")
+                              .fontWeight(FontWeight.w600)
+                              // .fontFamily("Poppins")
                               .size(20)
                               .make(),
                           Spacer(),
@@ -150,13 +150,13 @@ class ProductDetailsPage extends StatelessWidget {
                                   .text
                                   .lineThrough
                                   .color(Colors.black)
-                                  .fontFamily("Poppins")
+                                  //  .fontFamily("Poppins")
                                   .fontWeight(FontWeight.w600)
                                   .size(18)
                                   .make(),
                               currencySymbol.text
                                   .color(Colors.black)
-                                  .fontFamily("Poppins")
+                                  //.fontFamily("Poppins")
                                   .fontWeight(FontWeight.w600)
                                   .size(18)
                                   .make(),

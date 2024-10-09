@@ -47,6 +47,7 @@ class CategoriesViewModel extends MyBaseViewModel {
 
   List<Vendor>? vendors = [];
   Vendor? dvendor;
+  Vendor? dvendorDummy;
 
   TickerProvider? tickerProvider;
   TabController? tabBarController;
@@ -81,6 +82,7 @@ class CategoriesViewModel extends MyBaseViewModel {
       }
 
       dvendor = await vendors?[v_id];
+      dvendorDummy = await vendors?[v_id];
       //print(dvendor.name)
 
       clearErrors();
@@ -117,6 +119,13 @@ class CategoriesViewModel extends MyBaseViewModel {
           "type": "small",
         },
       );
+      dvendorDummy = await _vendorRequest?.vendorDetails(
+        dvendor!.id!,
+        params: {
+          "type": "small",
+        },
+      );
+
       // print(dvendor.);
       //empty menu
       dvendor!.menus!.insert(
@@ -352,5 +361,15 @@ class CategoriesViewModel extends MyBaseViewModel {
     // viewContext!.push(
     //   (context) => VendorSearchPage(dvendor),
     // );
+  }
+
+  void searchMethod(String value) {
+    if (value.isEmpty) {
+      dvendor!.categories = dvendorDummy!.categories;
+    } else {
+      dvendor!.categories = dvendorDummy!.categories!.where((element) {
+        return element.name!.toLowerCase().contains(value.toLowerCase());
+      }).toList();
+    }
   }
 }

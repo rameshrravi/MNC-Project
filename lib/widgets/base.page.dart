@@ -95,6 +95,7 @@ class _BasePageState extends State<BasePage> {
                 title: widget.title!.text.black
                     .maxLines(1)
                     .overflow(TextOverflow.ellipsis)
+
                     //.color(widget.appBarItemColor ?? Colors.white)
                     .make(),
                 actions: widget.actions ??
