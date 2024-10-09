@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
           localizationsDelegates: translator.delegates,
           locale: translator.activeLocale,
           supportedLocales: translator.locals(),
-          home: CategoreyList(),
+          home: SplashPage(),
           theme: theme,
           darkTheme: darkTheme,
         );
