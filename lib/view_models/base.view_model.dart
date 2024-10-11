@@ -492,5 +492,14 @@ class MyBaseViewModel extends BaseViewModel with UpdateService {
     return Navigator.pushNamedAndRemoveUntil(
         viewContext!, page, (route) => false);
   }
-  // Method to pop the current screen
+
+  Future<T?> pushNamedMethod<T extends Object?>(
+    BuildContext context,
+    String routeName, {
+    Object? arguments,
+  }) {
+    return Navigator.pushNamed(context, routeName);
+  }
+
+// Method to pop the current screen
 }

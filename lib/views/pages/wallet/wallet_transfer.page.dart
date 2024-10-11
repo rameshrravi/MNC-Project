@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_icons/flutter_icons.dart';
@@ -56,36 +58,46 @@ class WalletTransferPage extends StatelessWidget {
                 Row(
                   children: [
                     // Ramesh Code
-                    // TypeAheadField(
-                    //   debounceDuration: const Duration(seconds: 1),
-                    //   textFieldConfiguration: TextFieldConfiguration(
-                    //     autofocus: false,
-                    //     decoration: InputDecoration(
-                    //       border: OutlineInputBorder(
-                    //         borderSide: BorderSide(
-                    //           color: AppColor.primaryColor,
-                    //         ),
-                    //       ),
-                    //       hintText: "Email/Phone".tr(),
-                    //       focusedBorder: OutlineInputBorder(
-                    //         borderSide: BorderSide(
-                    //           color: AppColor.primaryColor,
-                    //         ),
-                    //       ),
-                    //       enabledBorder: OutlineInputBorder(
-                    //         borderSide: BorderSide(
-                    //           color: AppColor.primaryColor,
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    //   suggestionsCallback: vm.searchUsers,
-                    //   itemBuilder: (context, User suggestion) {
-                    //     return "${suggestion.name}".text.medium.lg.make().p12();
-                    //   },
-                    //   onSuggestionSelected: vm.userSelected,
-                    // ).expand(),
-                    //
+
+                    TypeAheadField<User>(
+                        suggestionsCallback: (search) => vm.searchUsers(search),
+                        builder: (context, controller, focusNode) {
+                          return TextField(
+                            controller: controller,
+                            focusNode: focusNode,
+                            autofocus: true,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: AppColor.primaryColor!,
+                                ),
+                              ),
+                              hintText: "Email/Phone".tr(),
+                              focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: AppColor.primaryColor!,
+                                ),
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                  color: AppColor.primaryColor!,
+                                ),
+                              ),
+                            ),
+                          );
+                        },
+                        itemBuilder: (context, suggestion) {
+                          return "${suggestion.name}"
+                              .text
+                              .medium
+                              .lg
+                              .make()
+                              .p12();
+                        },
+                        onSelected: (address) async {
+                          vm.userSelected(address);
+                        }).expand(),
+
                     UiSpacer.horizontalSpace(),
                     //scan qrcode
                     Icon(
@@ -102,7 +114,9 @@ class WalletTransferPage extends StatelessWidget {
                   ],
                 ),
                 //selected user view
-                SelectedWalletUser(vm.selectedUser!),
+                vm.selectedUser == null
+                    ? UiSpacer.verticalSpace()
+                    : SelectedWalletUser(vm.selectedUser!),
 
                 UiSpacer.formVerticalSpace(),
                 //account password

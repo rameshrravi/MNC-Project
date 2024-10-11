@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/constants/app_images.dart';
 import 'package:midnightcity/utils/ui_spacer.dart';
@@ -60,7 +61,7 @@ class MenuItem extends StatelessWidget {
           //
           suffix ??
               Icon(
-                Icons.import_contacts_sharp,
+                FlutterIcons.right_ant,
                 size: 16,
               ),
         ],

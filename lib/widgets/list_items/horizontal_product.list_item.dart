@@ -42,7 +42,7 @@ class HorizontalProductListItem extends StatelessWidget {
                 .maxLines(2)
                 .black
                 .fontWeight(FontWeight.w700)
-                .fontFamily("Poppins")
+                // .fontFamily("Poppins")
                 .size(14)
                 .overflow(TextOverflow.ellipsis)
                 .make(),
@@ -53,7 +53,7 @@ class HorizontalProductListItem extends StatelessWidget {
                   .maxLines(3)
                   .black
                   .fontWeight(FontWeight.w500)
-                  .fontFamily("Poppins")
+                  //  .fontFamily("Poppins")
                   .size(11)
                   .overflow(TextOverflow.ellipsis)
                   .make(),
@@ -70,7 +70,7 @@ class HorizontalProductListItem extends StatelessWidget {
                       .text
                       .black
                       .fontWeight(FontWeight.w400)
-                      .fontFamily("Poppins")
+                      //.fontFamily("Poppins")
                       .size(14)
                       .lg
                       //.semiBold

@@ -55,17 +55,19 @@ class ProfileViewModel extends PaymentViewModel {
    */
 
   openEditProfile() async {
+    final result =
+        await Navigator.pushNamed(viewContext!, AppRoutes.editProfileRoute);
     // final result = await viewContext!.navigator.pushNamed(
     //   AppRoutes.editProfileRoute,
     // );
-    //
-    // if (result != null && result) {
-    //   initialise();
-    // }
+
+    if (result != null) {
+      initialise();
+    }
   }
 
   openProfileInner() {
-    //viewContext!.nextPage(ProfileInnerPage());
+    viewContext!.nextPage(ProfileInnerPage());
   }
 
   openHelpCenter() {
@@ -77,6 +79,7 @@ class ProfileViewModel extends PaymentViewModel {
    */
 
   openChangePassword() async {
+    Navigator.pushNamed(viewContext!, AppRoutes.changePasswordRoute);
     // viewContext!.navigator.pushNamed(
     //   AppRoutes.changePasswordRoute,
     // );
@@ -94,6 +97,7 @@ class ProfileViewModel extends PaymentViewModel {
 
   //
   openWallet() {
+    Navigator.pushNamed(viewContext!, AppRoutes.walletRoute);
     // viewContext!.navigator.pushNamed(
     //   AppRoutes.walletRoute,
     // );
@@ -103,6 +107,7 @@ class ProfileViewModel extends PaymentViewModel {
    * Delivery addresses
    */
   openDeliveryAddresses() {
+    Navigator.pushNamed(viewContext!, AppRoutes.deliveryAddressesRoute);
     // viewContext!.navigator.pushNamed(
     //   AppRoutes.deliveryAddressesRoute,
     // );
@@ -110,6 +115,7 @@ class ProfileViewModel extends PaymentViewModel {
 
   //
   openFavourites() {
+    Navigator.pushNamed(viewContext!, AppRoutes.favouritesRoute);
     // viewContext!.navigator.pushNamed(
     //   AppRoutes.favouritesRoute,
     // );
@@ -163,6 +169,12 @@ class ProfileViewModel extends PaymentViewModel {
     } else {
       //
       await AuthServices.logout();
+
+      Navigator.pushAndRemoveUntil(
+        viewContext!,
+        MaterialPageRoute(builder: (context) => SplashPage()),
+        (route) => false,
+      );
       // viewContext!.navigator.pushAndRemoveUntil(
       //   MaterialPageRoute(builder: (context) => SplashPage()),
       //   (route) => false,
@@ -171,9 +183,10 @@ class ProfileViewModel extends PaymentViewModel {
   }
 
   openNotification() async {
-    // viewContext!.navigator.pushNamed(
-    //   AppRoutes.notificationsRoute,
-    // );
+    pushNamedMethod(
+      viewContext!,
+      AppRoutes.notificationsRoute,
+    );
   }
 
   /**
@@ -208,7 +221,7 @@ class ProfileViewModel extends PaymentViewModel {
   }
 
   opeCustomerSupport() async {
-    // viewContext!.nextPage(CustomerSupportPage());
+    viewContext!.nextPage(CustomerSupportPage());
   }
 
   openLivesupport() async {
@@ -227,9 +240,10 @@ class ProfileViewModel extends PaymentViewModel {
   }
 
   openLogin() async {
-    // await viewContext!.navigator.pushNamed(
-    //   AppRoutes.loginRoute,
-    // );
+    Navigator.pushNamed(
+      viewContext!,
+      AppRoutes.loginRoute,
+    );
     // //
     initialise();
   }
@@ -253,6 +267,6 @@ class ProfileViewModel extends PaymentViewModel {
 
   //
   deleteAccount() {
-    // viewContext!.nextPage(AccountDeletePage());
+    viewContext!.nextPage(AccountDeletePage());
   }
 }

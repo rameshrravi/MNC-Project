@@ -28,6 +28,7 @@ import 'package:velocity_x/velocity_x.dart';
 import '../../../widgets/custom_grid_view.dart';
 import '../../../widgets/custom_text_form_field.dart';
 import '../../../widgets/inputs/search_bar.input.dart';
+import '../search/search.page.dart';
 import '../vendor_details/vendor_category_products.page_new.dart';
 import 'categorey_list.dart';
 
@@ -172,11 +173,22 @@ class _CategoryProductsPage extends State<CategoryProductsPage>
                     child: CustomTextFormField(
                       // hintText: "Search here",
                       // labelText: "Search here",
+                      isReadOnly: true,
                       prefixIcon: Icon(Icons.search),
                       textColor: Colors.black,
                       labelColor: Colors.black,
                       cursorColor: Colors.black,
                       textEditingController: txtECSearch,
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => SearchPage(
+                                search: Search(viewType: SearchType.products),
+                                showCancel: false,
+                              ),
+                            ));
+                      },
 
                       onChanged: () {
                         setState(() {

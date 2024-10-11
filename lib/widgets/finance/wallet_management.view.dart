@@ -90,11 +90,12 @@ class _WalletManagementViewState extends State<WalletManagementView>
                 UiSpacer.verticalSpace(),
                 //buttons
                 Visibility(
-                  visible: !vm.isBusy,
+                  visible: false,
                   child: HStack(
                     [
                       //topup button
                       CustomButton(
+                        color: Colors.amberAccent,
                         onPressed: vm.showAmountEntry,
                         child: FittedBox(
                           child: VStack(
@@ -120,13 +121,13 @@ class _WalletManagementViewState extends State<WalletManagementView>
                       Visibility(
                         visible: AppUISettings.allowWalletTransfer,
                         child: CustomButton(
+                          color: Colors.amberAccent,
                           onPressed: vm.showWalletTransferEntry,
                           child: FittedBox(
                             child: VStack(
                               [
                                 Icon(
-                                  // FlutterIcons.upload_fea,
-                                  Icons.upload_outlined,
+                                  FlutterIcons.upload_fea,
                                 ),
                                 UiSpacer.verticalSpace(space: 5),
                                 //
@@ -145,6 +146,7 @@ class _WalletManagementViewState extends State<WalletManagementView>
                       Visibility(
                         visible: AppUISettings.allowWalletTransfer,
                         child: CustomButton(
+                          color: Colors.amberAccent,
                           onPressed: vm.showMyWalletAddress,
                           loading: vm.busy(vm.showMyWalletAddress),
                           child: FittedBox(
@@ -152,7 +154,6 @@ class _WalletManagementViewState extends State<WalletManagementView>
                               [
                                 Icon(
                                   FlutterIcons.download_fea,
-                                  //Icons.abc_outlined,
                                 ),
                                 UiSpacer.verticalSpace(space: 5),
                                 //

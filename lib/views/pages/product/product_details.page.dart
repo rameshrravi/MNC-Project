@@ -110,13 +110,15 @@ class ProductDetailsPage extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 5.0),
                       child: HStack(
                         [
-                          product!.name!.text
-                              .color(Colors.black)
-                              .fontWeight(FontWeight.w600)
-                              // .fontFamily("Poppins")
-                              .size(20)
-                              .make(),
-                          Spacer(),
+                          Expanded(
+                            child: product!.name!.text
+                                .color(Colors.black)
+                                .fontWeight(FontWeight.w600)
+                                // .fontFamily("Poppins")
+                                .size(20)
+                                .make(),
+                          ),
+                          //Spacer(),
                           CustomButton(
                             elevation: 0,
                             color: AppColor.mainBackground,

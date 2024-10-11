@@ -17,7 +17,7 @@ class WalletPage extends StatefulWidget {
 
 class _WalletPageState extends State<WalletPage> with WidgetsBindingObserver {
   //
-  late WalletViewModel vm;
+  WalletViewModel? vm;
   @override
   void initState() {
     super.initState();
@@ -33,7 +33,7 @@ class _WalletPageState extends State<WalletPage> with WidgetsBindingObserver {
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed && vm != null) {
-      vm.initialise();
+      vm!.initialise();
     }
   }
 
@@ -50,7 +50,7 @@ class _WalletPageState extends State<WalletPage> with WidgetsBindingObserver {
       showLeadingAction: true,
       showAppBar: true,
       body: ViewModelBuilder<WalletViewModel>.reactive(
-        viewModelBuilder: () => vm,
+        viewModelBuilder: () => vm!,
         onModelReady: (vm) => vm.initialise(),
         builder: (context, vm, child) {
           return VStack(

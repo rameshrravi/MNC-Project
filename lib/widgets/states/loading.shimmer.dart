@@ -142,7 +142,7 @@ class _DissolveLogoState extends State<LoadingShimmer>
     );
 
     // Start the dissolve animation.
-    _startDissolve();
+    //_startDissolve();
   }
 
   // A function to trigger the dissolve effect.
@@ -167,11 +167,10 @@ class _DissolveLogoState extends State<LoadingShimmer>
 
   @override
   Widget build(BuildContext context) {
-    return AnimatedOpacity(
-      opacity: _opacity, // Use the updated opacity for the dissolve effect.
-      duration: Duration(seconds: 2), // Set the dissolve duration to 2 seconds.
+    return Align(
+      alignment: Alignment.center,
       child: Image.asset(
-        AppImages.gif, // Path to the app logo.
+        'assets/images/gif3.gif', // Path to the app logo.
         width: 100, // Customize size as needed.
         height: 100, // Customize size as needed.
       ),

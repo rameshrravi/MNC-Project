@@ -3,12 +3,14 @@ import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:stacked/stacked.dart';
 
 import '../../../constants/app_strings.dart';
+import '../../../models/search.dart';
 import '../../../models/vendor_type.dart';
 import '../../../view_models/vendor/categories.vm.dart';
 import '../../../widgets/base.page.dart';
 import '../../../widgets/custom_dynamic_grid_view.dart';
 import '../../../widgets/custom_text_form_field.dart';
 import '../../../widgets/list_items/category.list_item.dart';
+import '../search/search.page.dart';
 import '../search/widget/search.header.dart';
 import 'category_product_page.dart';
 
@@ -46,22 +48,40 @@ class _CategoreyListState extends State<CategoreyList> {
                         child: CustomTextFormField(
                           // hintText: "Search here",
                           // labelText: "Search here",
+                          isReadOnly: true,
                           prefixIcon: Icon(Icons.search),
                           textColor: Colors.black,
                           labelColor: Colors.black,
                           cursorColor: Colors.black,
                           textEditingController: txtECSearch,
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => SearchPage(
+                                    search:
+                                        Search(viewType: SearchType.products),
+                                    showCancel: false,
+                                  ),
+                                ));
+                          },
 
                           onChanged: () {
-                            setState(() {
-                              //searchProduct = txtECSearch!.text;
-                            });
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //       builder: (context) => SearchPage(
+                            //         search:
+                            //             Search(viewType: SearchType.products),
+                            //         showCancel: false,
+                            //       ),
+                            //     ));
                             //   print(searchProduct);
                           },
                           onSaved: (value) {
-                            setState(() {
-                              vm.searchMethod(value!);
-                            });
+                            // setState(() {
+                            //   vm.searchMethod(value!);
+                            // });
                           },
                         ),
                       ),
@@ -138,20 +158,26 @@ class CategoryCard extends StatelessWidget {
               ),
             ),
             Container(
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.black45,
-              ),
-              child: Text(
-                name,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  color: Colors.black45,
                 ),
-              ),
-            ),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Center(
+                    child: Text(
+                      textAlign: TextAlign.center,
+                      name,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                )),
           ],
         ),
       ),

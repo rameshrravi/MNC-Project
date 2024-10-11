@@ -123,15 +123,14 @@ class WalletViewModel extends PaymentViewModel {
 
   //Wallet transfer
   showWalletTransferEntry() async {
-    //Ramesh hide
-    // final result = await viewContext!.push(
-    //   (context) => WalletTransferPage(wallet),
-    // );
+    final result = await Navigator.push(
+      viewContext!,
+      MaterialPageRoute(builder: (context) => WalletTransferPage(wallet!)),
+    );
 
-    //
-    // if (result == null) {
-    //   return;
-    // }
+    if (result == null) {
+      return;
+    }
     //
     getWalletBalance();
     getWalletTransactions();
@@ -153,5 +152,16 @@ class WalletViewModel extends PaymentViewModel {
       toastError(apiResponse.message!);
     }
     setBusyForObject(showMyWalletAddress, false);
+  }
+
+  String formatAmount(int amount) {
+    if (amount >= 1000000) {
+      return (amount / 1000000).toStringAsFixed(1) + 'M'; // Millions format
+    } else if (amount >= 1000) {
+      return (amount / 1000).toStringAsFixed(1) + 'K'; // Thousands format
+    } else {
+      return amount.toString() +
+          ".00"; // Show the number as is if less than 1000
+    }
   }
 }

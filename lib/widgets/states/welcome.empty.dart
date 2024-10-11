@@ -122,14 +122,12 @@ class EmptyWelcome extends StatelessWidget {
                       //  debugger();
                       final vendorType = vm!.vendorTypes![index];
 
-                      if (index != 2) {
+                      if (vendorType.id != 2) {
                         return SizedBox();
                       } else {
-                        return vendorType!.id == null
-                            ? SizedBox()
-                            : ListVendorsView(
-                                vendorType!,
-                              );
+                        return ListVendorsView(
+                          vendorType!,
+                        );
                       } //vm.vendorTypes[index];
                     },
                     separatorBuilder: (context, index) => UiSpacer.emptySpace(),

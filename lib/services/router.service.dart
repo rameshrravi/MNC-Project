@@ -27,6 +27,8 @@ import 'package:midnightcity/views/pages/profile/edit_profile.page.dart';
 import 'package:midnightcity/views/pages/search/search.page.dart';
 import 'package:midnightcity/views/pages/wallet/wallet.page.dart';
 
+import '../models/delivery_address.dart';
+import '../models/notification.dart';
 import '../views/pages/vendor/choose_vendor.dart';
 import '../views/pages/welcome/welcome.page.dart';
 
@@ -153,20 +155,20 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         settings: RouteSettings(name: AppRoutes.newDeliveryAddressesRoute),
         builder: (context) => NewDeliveryAddressesPage(),
       );
-    // case AppRoutes.editDeliveryAddressesRoute:
-    //   return MaterialPageRoute(
-    //     settings: RouteSettings(name: AppRoutes.editDeliveryAddressesRoute),
-    //     builder: (context) => EditDeliveryAddressesPage(
-    //       deliveryAddress: settings.arguments,
-    //     ),
-    //   );
-    //
+    case AppRoutes.editDeliveryAddressesRoute:
+      return MaterialPageRoute(
+        settings: RouteSettings(name: AppRoutes.editDeliveryAddressesRoute),
+        builder: (context) => EditDeliveryAddressesPage(
+          deliveryAddress: settings.arguments as DeliveryAddress,
+        ),
+      );
+
     // //wallets
-    // case AppRoutes.walletRoute:
-    //   return MaterialPageRoute(
-    //     settings: RouteSettings(name: AppRoutes.walletRoute),
-    //     builder: (context) => WalletPage(),
-    //   );
+    case AppRoutes.walletRoute:
+      return MaterialPageRoute(
+        settings: RouteSettings(name: AppRoutes.walletRoute),
+        builder: (context) => WalletPage(),
+      );
 
     //favourites
     case AppRoutes.favouritesRoute:
@@ -184,14 +186,14 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
 
     //
-    // case AppRoutes.notificationDetailsRoute:
-    //   return MaterialPageRoute(
-    //     settings: RouteSettings(
-    //         name: AppRoutes.notificationDetailsRoute, arguments: Map()),
-    //     builder: (context) => NotificationDetailsPage(
-    //       notification: settings.arguments,
-    //     ),
-    //   );
+    case AppRoutes.notificationDetailsRoute:
+      return MaterialPageRoute(
+        settings: RouteSettings(
+            name: AppRoutes.notificationDetailsRoute, arguments: Map()),
+        builder: (context) => NotificationDetailsPage(
+          notification: settings.arguments as NotificationModel,
+        ),
+      );
 
     default:
       return MaterialPageRoute(builder: (context) => OnboardingPage());

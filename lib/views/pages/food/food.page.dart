@@ -31,7 +31,10 @@ import 'package:midnightcity/views/pages/grocery/widgets/grocery_categories.view
 import 'package:midnightcity/views/pages/grocery/widgets/grocery_categories_products.view.dart';
 import 'package:midnightcity/views/pages/grocery/widgets/grocery_picks.view.dart';
 import 'package:midnightcity/constants/app_routes.dart';
+import '../../../constants/home_screen.config.dart';
 import '../../../services/auth.service.dart';
+import '../../../widgets/finance/wallet_management.view.dart';
+import '../../../widgets/finance/wallet_management.view_display_homedashboard.dart';
 import '../category/categorey_list.dart';
 import '../search/search.page.dart';
 import '../vendor/widgets/categories_vendors.view.dart';
@@ -137,41 +140,51 @@ class _FoodPageState extends State<FoodPage>
                                 //     ));
                               },
                               child: Center(
-                                child: Container(
-                                    height: 50,
-                                    width: context.screenWidth - 40,
-                                    decoration: BoxDecoration(
-                                        color: Colors.grey.shade200,
-                                        borderRadius:
-                                            BorderRadius.circular(10)),
-                                    child: Center(
-                                        child: Row(
-                                      children: [
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 25.0),
-                                          child: Icon(
-                                            Icons.search,
-                                            size: 25,
-                                            color: Colors.black54,
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 10.0),
-                                          child: Container(
-                                            width: context.screenWidth - 120,
-                                            child: Text(
-                                              "Search for your desired foods or items",
-                                              style: TextStyle(
-                                                  color: Colors.black54,
-                                                  fontSize: 12),
-                                              overflow: TextOverflow.fade,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Container(
+                                        height: 50,
+                                        width: context.screenWidth - 140,
+                                        decoration: BoxDecoration(
+                                            color: Colors.grey.shade200,
+                                            borderRadius:
+                                                BorderRadius.circular(10)),
+                                        child: Center(
+                                            child: Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 25.0),
+                                              child: Icon(
+                                                Icons.search,
+                                                size: 25,
+                                                color: Colors.black54,
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                      ],
-                                    ))),
+                                            Padding(
+                                              padding: const EdgeInsets.only(
+                                                  left: 10.0),
+                                              child: Text(
+                                                "Search for your desired foods or items  ",
+                                                style: TextStyle(
+                                                    color: Colors.black54,
+                                                    fontSize: 10),
+                                                overflow: TextOverflow.fade,
+                                              ),
+                                            ),
+                                          ],
+                                        ))),
+                                    CustomVisibilty(
+                                      visible: HomeScreenConfig
+                                              .showWalletOnHomeScreen ??
+                                          true,
+                                      child: WalletManagementViewHomeDashboard()
+                                          .px20(),
+                                    ),
+                                  ],
+                                ),
                               ),
                             ),
 
@@ -186,10 +199,16 @@ class _FoodPageState extends State<FoodPage>
                       ).px20(),*/
                             UiSpacer.verticalSpace(),
                             //banners
-                            Banners(
-                              widget.vendorType,
-                              viewportFraction: .9,
+
+                            Stack(
+                              children: [
+                                Banners(
+                                  widget.vendorType,
+                                  viewportFraction: .9,
+                                ),
+                              ],
                             ),
+
                             // Popular Categories
                             /*      Padding(
                         padding: const EdgeInsets.only(

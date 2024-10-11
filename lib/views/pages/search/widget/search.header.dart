@@ -36,14 +36,14 @@ class SearchHeader extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    GestureDetector(
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                        child: Icon(
-                          Icons.arrow_back_ios_new,
-                          color: Colors.black,
-                        )),
+                    // GestureDetector(
+                    //     onTap: () {
+                    //       Navigator.pop(context);
+                    //     },
+                    //     child: Icon(
+                    //       Icons.arrow_back_ios_new,
+                    //       color: Colors.black,
+                    //     )),
                     Container(
                       //  width: 400,
                       alignment: Alignment.center,

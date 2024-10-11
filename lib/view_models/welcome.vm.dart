@@ -38,7 +38,6 @@ class WelcomeViewModel extends MyBaseViewModel {
     setBusy(true);
     try {
       vendorTypes = await vendorTypeRequest!.index();
-
       clearErrors();
     } catch (error) {
       setError(error);

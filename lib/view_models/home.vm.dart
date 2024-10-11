@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_branch_sdk/flutter_branch_sdk.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:midnightcity/constants/api.dart';
 import 'package:midnightcity/constants/app_strings.dart';
@@ -84,6 +85,7 @@ class HomeViewModel extends MyBaseViewModel {
   @override
   void initialise() async {
     //
+
     handleAppLink();
 
     //determine if homeview should be multiple vendor types or single vendor page
@@ -328,7 +330,8 @@ class HomeViewModel extends MyBaseViewModel {
 
   //
   handleAppLink() async {
-    // Get any initial links
+    //Get any initial links
+
     // final PendingDynamicLinkData initialLink =
     //     await FirebaseDynamicLinks.instance.getInitialLink();
     // if (initialLink != null) {
@@ -348,6 +351,18 @@ class HomeViewModel extends MyBaseViewModel {
     //     print("error opening link ==> $error");
     //   },
     // );
+    // await FlutterBranchSdk.init(enableLogging: false, disableTracking: false);
+    // FlutterBranchSdk.listSession().listen((data) {
+    //   debugger();
+    //   if (data.containsKey('+clicked_branch_link') &&
+    //       data['+clicked_branch_link'] == true) {
+    //     final Uri? deepLink = Uri.parse(data['~referring_link']);
+    //     if (deepLink != null) {
+    //       debugger();
+    //       openPageByLink(deepLink);
+    //     }
+    //   }
+    // });
   }
 
   //
