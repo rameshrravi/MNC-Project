@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:midnightcity/constants/api.dart';
 import 'package:midnightcity/models/api_response.dart';
 import 'package:midnightcity/models/category.dart';
@@ -16,6 +18,7 @@ class ProductRequest extends HttpService {
       "page": "$page",
     };
 
+    print(params.toString());
     final apiResult = await get(
       Api.products,
       queryParameters: params,

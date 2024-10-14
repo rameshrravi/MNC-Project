@@ -15,7 +15,7 @@ import 'package:midnightcity/widgets/bottomsheets/search_filter.bottomsheet.dart
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class SearchViewModel extends MyBaseViewModel {
+class SearchViewModelCategory extends MyBaseViewModel {
   //
   SearchRequest _searchRequest = SearchRequest();
   ScrollController scrollController = ScrollController();
@@ -34,7 +34,8 @@ class SearchViewModel extends MyBaseViewModel {
   late SearchFilterViewModel searchFilterVM;
   int? currentIndex = 0;
 
-  SearchViewModel(BuildContext context, this.search, {this.currentIndex}) {
+  SearchViewModelCategory(BuildContext context, this.search,
+      {this.currentIndex}) {
     this.viewContext = context;
     this.vendorType = this.search.vendorType;
     this.currentIndex = this.currentIndex;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:midnightcity/models/product.dart';
 import 'package:midnightcity/models/search.dart';
+import 'package:midnightcity/models/service.dart';
 import 'package:midnightcity/utils/ui_spacer.dart';
 import 'package:midnightcity/view_models/search.vm.dart';
 import 'package:midnightcity/views/pages/search/widget/search.header.dart';
@@ -10,54 +11,60 @@ import 'package:midnightcity/widgets/cards/custom.visibility.dart';
 import 'package:midnightcity/widgets/custom_dynamic_grid_view.dart';
 import 'package:midnightcity/widgets/custom_list_view.dart';
 import 'package:midnightcity/widgets/list_items/commerce_product.list_item.dart';
+import 'package:midnightcity/widgets/list_items/grid_view_service.list_item.dart';
 import 'package:midnightcity/widgets/list_items/grocery_product.list_item.dart';
 import 'package:midnightcity/widgets/list_items/horizontal_product.list_item.dart';
 import 'package:midnightcity/widgets/list_items/vendor.list_item.dart';
 import 'package:midnightcity/widgets/states/search.empty.dart';
 import 'package:stacked/stacked.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
-import '../../../constants/app_colors.dart';
-
-class ProductSearchPage extends StatelessWidget {
-  const ProductSearchPage(
-      {Key? key, @required this.search, this.showCancel = true})
+class SearchCategoreyPage extends StatefulWidget {
+  SearchCategoreyPage(
+      {Key? key,
+      @required this.search,
+      this.showCancel = true,
+      this.currentIndex})
       : super(key: key);
 
   //
   final Search? search;
   final bool? showCancel;
+  int? currentIndex;
+
+  @override
+  State<SearchCategoreyPage> createState() => _SearchPageState();
+}
+
+class _SearchPageState extends State<SearchCategoreyPage> {
+  int? currentItem;
 
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SearchViewModel>.reactive(
       viewModelBuilder: () =>
-          SearchViewModel(context, search!, currentIndex: 1),
+          SearchViewModel(context, widget.search!, currentIndex: 1),
       disposeViewModel: false,
       builder: (context, model, child) {
         return BasePage(
-          showCartView: showCancel,
+          title: "Search here",
+          elevation: 0,
+          showAppBar: true,
+          showCart: true,
+          showLeadingAction: true,
+          showCartView: widget.showCancel,
           body: SafeArea(
-            bottom: true,
+            bottom: false,
             child: VStack(
               [
                 //header
 
-                SearchHeader(
-                  model,
-                  showCancel: showCancel!,
-                  subtitle:
-                      search!.category!.name.toString().isNotEmptyAndNotNull
-                          ? search!.category!.name.toString()
-                          : "Search Product",
-                ),
+                //   UiSpacer.verticalSpace(),
+                SearchHeader(model, showCancel: widget.showCancel!),
 
                 //tags
-                VendorSearchHeaderview(
-                  model,
-                  showProducts: false,
-                  showVendors: false,
-                ),
+                VendorSearchHeaderview(model),
 
                 //vendors listview
                 CustomVisibilty(
@@ -77,10 +84,20 @@ class ProductSearchPage extends StatelessWidget {
                         //grocery product list item
                         if (searchResult?.vendor?.vendorType?.isGrocery ??
                             false) {
-                          return GroceryProductListItem(
-                            product: searchResult,
-                            onPressed: model.productSelected,
-                            qtyUpdated: model.addToCartDirectly,
+                          return VisibilityDetector(
+                            key: Key(index.toString()),
+                            child: GroceryProductListItem(
+                              product: searchResult,
+                              onPressed: model.productSelected,
+                              qtyUpdated: model.addToCartDirectly,
+                            ),
+                            onVisibilityChanged: (VisibilityInfo info) {
+                              if (info.visibleFraction == 1)
+                                setState(() {
+                                  currentItem = index;
+                                  print(currentItem);
+                                });
+                            },
                           );
                         } else if (searchResult
                                 ?.vendor?.vendorType?.isCommerce ??
@@ -91,23 +108,22 @@ class ProductSearchPage extends StatelessWidget {
                           );
                         } else {
                           //regular views
-                          return Column(
-                            children: [
-                              HorizontalProductListItem(
-                                searchResult,
-                                onPressed: model.productSelected,
-                                qtyUpdated: model.addToCartDirectly,
-                              ),
-                              Divider()
-                            ],
+                          return HorizontalProductListItem(
+                            searchResult,
+                            onPressed: model.productSelected,
+                            qtyUpdated: model.addToCartDirectly,
                           );
                         }
+                      } else if (searchResult is Service) {
+                        return GridViewServiceListItem(
+                          service: searchResult,
+                          onPressed: model.servicePressed,
+                        );
                       } else {
                         return VendorListItem(
-                            vendor: searchResult,
-                            onPressed: () => model.vendorSelected
-                            //onPressed: model.vendorSelected,
-                            );
+                          vendor: searchResult,
+                          onPressed: () => model.vendorSelected,
+                        );
                       }
                     },
                     separatorBuilder: (context, index) =>
@@ -123,7 +139,7 @@ class ProductSearchPage extends StatelessWidget {
                     [
                       //result listview
                       CustomVisibilty(
-                        visible: true,
+                        visible: !model.showGrid,
                         child: CustomListView(
                           refreshController: model.refreshController,
                           canRefresh: true,
@@ -140,38 +156,61 @@ class ProductSearchPage extends StatelessWidget {
                               //grocery product list item
                               if (searchResult?.vendor?.vendorType?.isGrocery ??
                                   false) {
-                                return GroceryProductListItem(
-                                  product: searchResult,
-                                  onPressed: model.productSelected,
-                                  qtyUpdated: model.addToCartDirectly,
+                                VisibilityDetector(
+                                  key: Key(index.toString()),
+                                  child: GroceryProductListItem(
+                                    product: searchResult,
+                                    onPressed: model.productSelected,
+                                    qtyUpdated: model.addToCartDirectly,
+                                  ),
+                                  onVisibilityChanged: (VisibilityInfo info) {
+                                    if (info.visibleFraction == 1)
+                                      setState(() {
+                                        currentItem = index;
+                                        print(currentItem);
+                                      });
+                                  },
                                 );
                               } else if (searchResult
                                       ?.vendor?.vendorType?.isCommerce ??
                                   false) {
-                                return CommerceProductListItem(searchResult,
-                                    height: 80,
-                                    qtyUpdated: model.addToCartDirectly);
+                                return CommerceProductListItem(
+                                  searchResult,
+                                  height: 80,
+                                );
                               } else {
                                 //regular views
-                                return Column(
-                                  children: [
-                                    HorizontalProductListItem(
-                                      searchResult,
-                                      onPressed: model.productSelected,
-                                      qtyUpdated: model.addToCartDirectly,
-                                    ),
-                                    Divider(
-                                      color: AppColor.midnightCityDarkBlue,
-                                    )
-                                  ],
+                                return VisibilityDetector(
+                                  key: Key(index.toString()),
+                                  child: HorizontalProductListItem(
+                                    searchResult,
+                                    onPressed: model.productSelected,
+                                    qtyUpdated: model.addToCartDirectly,
+                                  ),
+                                  onVisibilityChanged: (VisibilityInfo info) {
+                                    if (info.visibleFraction == 1)
+                                      setState(() {
+                                        currentItem = index;
+                                        print(searchResult);
+                                      });
+                                  },
+                                );
+
+                                HorizontalProductListItem(
+                                  searchResult,
+                                  onPressed: model.productSelected,
+                                  qtyUpdated: model.addToCartDirectly,
                                 );
                               }
+                            } else if (searchResult is Service) {
+                              return GridViewServiceListItem(
+                                service: searchResult,
+                                onPressed: model.servicePressed,
+                              );
                             } else {
                               return VendorListItem(
                                   vendor: searchResult,
-                                  onPressed: () => model.vendorSelected
-                                  // onPressed: model.vendorSelected,
-                                  );
+                                  onPressed: () => model.vendorSelected);
                             }
                           },
                           separatorBuilder: (context, index) =>
@@ -182,9 +221,8 @@ class ProductSearchPage extends StatelessWidget {
 
                       //result gridview
                       CustomVisibilty(
-                        visible: false, //model.showGrid,
+                        visible: model.showGrid,
                         child: CustomDynamicHeightGridView(
-                          title: Text("Title"),
                           noScrollPhysics: true,
                           refreshController: model.refreshController,
                           canRefresh: true,
@@ -201,17 +239,19 @@ class ProductSearchPage extends StatelessWidget {
                             final searchResult = model.searchResults[index];
                             if (searchResult is Product) {
                               //regular views
-
                               return CommerceProductListItem(
                                 searchResult,
-                                height: 240,
+                                height: 80,
+                              );
+                            } else if (searchResult is Service) {
+                              return GridViewServiceListItem(
+                                service: searchResult,
+                                onPressed: model.servicePressed,
                               );
                             } else {
                               return VendorListItem(
                                   vendor: searchResult,
-                                  onPressed: () => model.vendorSelected
-                                  // onPressed: model.vendorSelected,
-                                  );
+                                  onPressed: () => model.vendorSelected);
                             }
                           },
                           separatorBuilder: (context, index) =>

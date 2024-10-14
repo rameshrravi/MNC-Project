@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:midnightcity/constants/api.dart';
 import 'package:midnightcity/models/api_response.dart';
 import 'package:midnightcity/models/search.dart';
@@ -64,7 +66,6 @@ class SearchRequest extends HttpService {
       "sort": search?.sort,
       "tags": search?.tags!.map((e) => e.id).toList(),
     };
-
     //
     if (search!.byLocation!) {
       params = {

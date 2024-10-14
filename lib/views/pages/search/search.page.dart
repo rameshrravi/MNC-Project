@@ -21,12 +21,17 @@ import 'package:velocity_x/velocity_x.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
 class SearchPage extends StatefulWidget {
-  SearchPage({Key? key, @required this.search, this.showCancel = true})
+  SearchPage(
+      {Key? key,
+      @required this.search,
+      this.showCancel = true,
+      this.currentIndex})
       : super(key: key);
 
   //
   final Search? search;
   final bool? showCancel;
+  int? currentIndex;
 
   @override
   State<SearchPage> createState() => _SearchPageState();
@@ -38,7 +43,8 @@ class _SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return ViewModelBuilder<SearchViewModel>.reactive(
-      viewModelBuilder: () => SearchViewModel(context, widget.search!),
+      viewModelBuilder: () =>
+          SearchViewModel(context, widget.search!, currentIndex: 1),
       disposeViewModel: false,
       builder: (context, model, child) {
         return BasePage(

@@ -31,7 +31,6 @@ class _CategoreyListState extends State<CategoreyList> {
     return ViewModelBuilder<CategoriesViewModel>.reactive(
       viewModelBuilder: () =>
           CategoriesViewModel(context, vendorType: widget.vendorType!),
-      //onModelReady: (vm) => vm.initialise(all: true),
       onViewModelReady: (vm) => vm.initialise(all: true),
       builder: (context, vm, child) {
         return BasePage(
@@ -46,8 +45,8 @@ class _CategoreyListState extends State<CategoreyList> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: CustomTextFormField(
-                          // hintText: "Search here",
-                          // labelText: "Search here",
+                          hintText: "Search here",
+                          labelText: "Search here",
                           isReadOnly: true,
                           prefixIcon: Icon(Icons.search),
                           textColor: Colors.black,
@@ -62,27 +61,12 @@ class _CategoreyListState extends State<CategoreyList> {
                                     search:
                                         Search(viewType: SearchType.products),
                                     showCancel: false,
+                                    currentIndex: 0,
                                   ),
                                 ));
                           },
-
-                          onChanged: () {
-                            // Navigator.push(
-                            //     context,
-                            //     MaterialPageRoute(
-                            //       builder: (context) => SearchPage(
-                            //         search:
-                            //             Search(viewType: SearchType.products),
-                            //         showCancel: false,
-                            //       ),
-                            //     ));
-                            //   print(searchProduct);
-                          },
-                          onSaved: (value) {
-                            // setState(() {
-                            //   vm.searchMethod(value!);
-                            // });
-                          },
+                          onChanged: () {},
+                          onSaved: (value) {},
                         ),
                       ),
                       Expanded(

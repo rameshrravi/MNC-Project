@@ -172,7 +172,7 @@ class _CategoryProductsPage extends State<CategoryProductsPage>
                     padding: const EdgeInsets.all(8.0),
                     child: CustomTextFormField(
                       // hintText: "Search here",
-                      // labelText: "Search here",
+                      labelText: "Search here",
                       isReadOnly: true,
                       prefixIcon: Icon(Icons.search),
                       textColor: Colors.black,
