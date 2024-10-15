@@ -213,7 +213,6 @@ class LoginViewModel extends MyBaseViewModel with QrcodeScannerTrait {
     //
     setBusy(true);
     // Sign the user in (or link) with the credential
-    debugger();
     try {
       final apiResponse = await authRequest.verifyOTP(
         accountPhoneNumber,

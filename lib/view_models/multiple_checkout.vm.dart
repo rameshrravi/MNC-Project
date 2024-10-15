@@ -224,7 +224,7 @@ class MultipleCheckoutViewModel extends CheckoutBaseViewModel {
     }).toList();
 
     //set the total with discount as the new total
-    checkout!.total = checkout!.totalWithTip;
+    checkout!.total = checkout!.totalWithTip!;
     //
     final apiResponse = await checkoutRequest.newMultipleVendorOrder(
       checkout!,

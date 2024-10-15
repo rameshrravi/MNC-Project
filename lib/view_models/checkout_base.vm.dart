@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cool_alert/cool_alert.dart';
 import 'package:flutter/material.dart';
 import 'package:midnightcity/constants/app_routes.dart';
@@ -264,7 +266,7 @@ class CheckoutBaseViewModel extends PaymentViewModel {
           );
 
           //adding base fee
-          checkout!.deliveryFee = orderDeliveryFee;
+          checkout!.deliveryFee = orderDeliveryFee!;
 
           if (checkout!.deliveryFee! <= 750.00) {
             checkout!.deliveryFee = 750.00;
@@ -294,11 +296,11 @@ class CheckoutBaseViewModel extends PaymentViewModel {
             checkout!.deliveryFee =
                 vendor.deliveryFee! * deliveryAddress!.distance!;
           } else {
-            checkout!.deliveryFee = vendor.deliveryFee;
+            checkout!.deliveryFee = vendor.deliveryFee!;
           }
 
           //adding base fee
-          // checkout!.deliveryFee += vendor!.baseDeliveryFee!;
+          checkout!.deliveryFee += vendor!.baseDeliveryFee!;
           print("dddd");
 //          print(checkout!.deliveryFee.toString());
 
@@ -343,9 +345,9 @@ class CheckoutBaseViewModel extends PaymentViewModel {
     for (var fee in vendor.fees!) {
       double calFee = 0;
       if (fee.isPercentage) {
-        // checkout!.total += calFee = fee.getRate(checkout!.subTotal!);
+        checkout!.total += calFee = fee.getRate(checkout!.subTotal!);
       } else {
-        // checkout!.total += calFee = fee.value;
+        checkout!.total += calFee = fee.value!;
       }
 
       calFees.add({
@@ -372,8 +374,8 @@ class CheckoutBaseViewModel extends PaymentViewModel {
 
   //
   updateCheckoutTotalAmount() {
-    //checkout!.totalWithTip =
-    //  checkout!.total + (driverTipTEC.text.toDouble() ?? 0);
+    checkout!.totalWithTip =
+        checkout!.total + (driverTipTEC.text.toDouble() ?? 0);
   }
 
   //
@@ -444,7 +446,7 @@ class CheckoutBaseViewModel extends PaymentViewModel {
     //set the total with discount as the new total
     //updateTotalOrderSummary();
 
-    checkout!.total = checkout!.totalWithTip;
+    checkout!.total = checkout!.totalWithTip!;
     //
     final apiResponse = await checkoutRequest.newOrder(
       checkout!,
@@ -476,9 +478,15 @@ class CheckoutBaseViewModel extends PaymentViewModel {
             text: apiResponse.message,
             barrierDismissible: false,
             onConfirmBtnTap: () {
-              // showOrdersTab(context: viewContext!);
-              // if (viewContext!!.navigator.canPop()) {
-              //   viewContext!!.navigator.popUntil(
+              showOrdersTab(context: viewContext!);
+
+              if (Navigator.canPop(viewContext!)) {
+                Navigator.popUntil(viewContext!,
+                    ModalRoute.withName(AppRoutes.orderTrackingRoute));
+              }
+
+              // if (viewContext!.navigator.canPop()) {
+              //   viewContext!.navigator.popUntil(
               //       ModalRoute.withName(AppRoutes.orderTrackingRoute));
               // }
             });
@@ -495,21 +503,28 @@ class CheckoutBaseViewModel extends PaymentViewModel {
   }
 
   //
-  // showOrdersTab({BuildContext context}) {
-  //   //clear cart items
-  //   CartServices.clearCart();
-  //   //switch tab to orders
-  //   AppService().changeHomePageIndex(index: 4);
-  //
-  //   //pop until home page
-  //   if (context != null) {
-  //     context.navigator.popUntil(
-  //           (route) {
-  //         return route == AppRoutes.orderTrackingRoute || route.isFirst;
-  //       },
-  //     );
-  //   }
-  // }
+  showOrdersTab({BuildContext? context}) {
+    //clear cart items
+    CartServices.clearCart();
+    //switch tab to orders
+    AppService().changeHomePageIndex(index: 4);
+
+    //pop until home page
+    if (context != null) {
+      Navigator.popUntil(
+        context,
+        (route) {
+          return route == AppRoutes.orderTrackingRoute || route.isFirst;
+        },
+      );
+
+      // context.navigator.popUntil(
+      //   (route) {
+      //     return route == AppRoutes.orderTrackingRoute || route.isFirst;
+      //   },
+      // );
+    }
+  }
 
   //
   bool verifyVendorOrderAmountCheck() {

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cool_alert/cool_alert.dart';
 import '../views/pages/profile/profile.page.dart';
 import 'package:flutter/material.dart';
@@ -251,8 +253,8 @@ class MyBaseViewModel extends BaseViewModel with UpdateService {
       vendorType: vendorType,
       showType: showType,
     );
-    // final page = NavigationService().searchPageWidget(search);
-    // viewContext!.nextPage(page);
+    final page = NavigationService().searchPageWidget(search);
+    viewContext!.nextPage(page);
   }
 
   openCart() async {
@@ -277,16 +279,16 @@ class MyBaseViewModel extends BaseViewModel with UpdateService {
     // viewContext!.push(
     //   (context) => ServiceDetailsPage(service),
     // );
-    //   Navigator.push(viewContext!,
-    //     MaterialPageRoute(builder: (context) => ServiceDetailsPage(service)));
+    Navigator.push(viewContext!,
+        MaterialPageRoute(builder: (context) => ServiceDetailsPage(service)));
   }
 
   openVendorReviews() {
     // viewContext!.push(
     //   (context) => VendorReviewsPage(vendor),
     // );
-    // Navigator.push(viewContext!,
-    //   MaterialPageRoute(builder: (context) => VendorReviewsPage(vendor!)));
+    Navigator.push(viewContext!,
+        MaterialPageRoute(builder: (context) => VendorReviewsPage(vendor!)));
   }
 
   //show toast
@@ -333,27 +335,31 @@ class MyBaseViewModel extends BaseViewModel with UpdateService {
   // NEW LOCATION PICKER
   Future<dynamic> newPlacePicker() async {
     //
-    // if (!AppMapSettings.useGoogleOnApp) {
-    //   return await viewContext!.push(
-    //     (context) => OPSMapPage(
-    //       // apiKey: AppStrings.googleMapApiKey,
-    //       // autocompleteLanguage: I18n.language,
-    //       region: AppStrings.countryCode.trim().split(",").firstWhere(
-    //         (e) => !e.toLowerCase().contains("auto"),
-    //         orElse: () {
-    //           return "";
-    //         },
-    //       ),
-    //       initialPosition: LocationService.currenctAddress != null
-    //           ? LatLng(
-    //               LocationService.currenctAddress?.coordinates?.latitude,
-    //               LocationService.currenctAddress?.coordinates?.longitude,
-    //             )
-    //           : null,
-    //       useCurrentLocation: true,
-    //     ),
-    //   );
-    // }
+    debugger();
+    if (!AppMapSettings.useGoogleOnApp) {
+      return await Navigator.push(
+          viewContext!,
+          MaterialPageRoute(
+            builder: (context) => OPSMapPage(
+              //= apiKey: AppStrings.googleMapApiKey,
+              // autocompleteLanguage: I18n.language,
+
+              region: AppStrings.countryCode.trim().split(",").firstWhere(
+                (e) => !e.toLowerCase().contains("auto"),
+                orElse: () {
+                  return "";
+                },
+              ),
+              initialPosition: LocationService.currenctAddress != null
+                  ? LatLng(
+                      LocationService.currenctAddress!.coordinates!.latitude,
+                      LocationService.currenctAddress!.coordinates!.longitude,
+                    )
+                  : null,
+              useCurrentLocation: true,
+            ),
+          ));
+    }
     //google maps
     return await Navigator.push(
       viewContext!,

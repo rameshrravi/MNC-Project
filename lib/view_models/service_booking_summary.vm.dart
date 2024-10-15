@@ -148,7 +148,7 @@ class ServiceBookingSummaryViewModel extends CheckoutBaseViewModel {
     //process the order placement
     setBusy(true);
     //set the total with discount as the new total
-    checkout!.total = checkout!.totalWithTip;
+    checkout!.total = checkout!.totalWithTip!;
     //
     final apiResponse = await checkoutRequest.newServiceOrder(
       checkout!,

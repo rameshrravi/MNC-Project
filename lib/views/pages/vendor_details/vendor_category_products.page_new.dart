@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/models/category.dart';
@@ -91,6 +93,7 @@ class _VendorCategoryProductsPageNewState
       vsync: this,
       initialIndex: index,
     );
+    //debugger();
   }
 
   void productSelected(Product product) async {
@@ -178,14 +181,14 @@ class _VendorCategoryProductsPageNewState
                   automaticallyImplyLeading: false,
                   flexibleSpace: TabBar(
                     // dragStartBehavior: DragStartDetails(),
-                    indicator: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        color: AppColor.midnightCityLightBlue),
+                    // indicator: BoxDecoration(
+                    //     borderRadius: BorderRadius.circular(15),
+                    //     color: AppColor.midnightCityLightBlue),
                     unselectedLabelColor: Colors.black,
                     splashBorderRadius: BorderRadius.circular(10),
                     isScrollable: true,
-                    labelColor: Colors.white,
-                    indicatorColor: AppColor.midnightCityDarkBlue,
+                    labelColor: AppColor.midnightCityLightBlue,
+                    indicatorColor: AppColor.accentColor,
 
                     indicatorWeight: 2,
                     controller: tabBarController,
@@ -372,5 +375,11 @@ class _VendorCategoryProductsPageNewState
       vendorType: widget.vendor!.vendorType,
     );
     //
+  }
+
+  @override
+  void dispose() {
+    tabBarController?.dispose();
+    super.dispose();
   }
 }

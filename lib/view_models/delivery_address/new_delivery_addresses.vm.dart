@@ -78,8 +78,8 @@ class NewDeliveryAddressesViewModel extends BaseDeliveryAddressesViewModel {
         title: "New Delivery Address".tr(),
         text: apiRespose.message,
         onConfirmBtnTap: () {
-          // viewContext!.pop();
-          // viewContext!.pop(true);
+          Navigator.pop(viewContext!);
+          Navigator.pop(viewContext!);
         },
       );
       //

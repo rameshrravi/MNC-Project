@@ -103,7 +103,6 @@ class VendorRequest extends HttpService {
     bool byLocation = false,
     Map? params,
   }) async {
-    debugger();
     final apiResult = await get(
       Api.vendors,
       queryParameters: {
@@ -155,7 +154,6 @@ class VendorRequest extends HttpService {
     @required int? vendorTypeId,
     DeliveryAddress? deliveryAddress,
   }) async {
-    debugger();
     final apiResult = await get(
       Api.vendors,
       queryParameters: {
@@ -163,7 +161,6 @@ class VendorRequest extends HttpService {
         "package_type_id": "$packageTypeId"
       },
     );
-    debugger();
     final apiResponse = ApiResponse.fromResponse(apiResult);
     if (apiResponse.allGood) {
       List<Vendor> vendors = apiResponse.data

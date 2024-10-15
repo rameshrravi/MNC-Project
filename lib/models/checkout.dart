@@ -8,9 +8,9 @@ import 'package:midnightcity/models/payment_method.dart';
 class CheckOut {
   double? subTotal;
   double? discount;
-  double? deliveryFee;
+  double deliveryFee;
   double? tax;
-  double? total;
+  double total;
   double? totalWithTip;
   String? pickupTime;
   String? pickupDate;

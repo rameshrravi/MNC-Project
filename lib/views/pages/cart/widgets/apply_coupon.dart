@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/utils/ui_spacer.dart';
@@ -25,9 +27,10 @@ class ApplyCoupon extends StatelessWidget {
                 borderRadius: 10,
                 hintText: "Enter Coupon Code".tr(),
                 textEditingController: vm.couponTEC,
-                errorText: vm.hasErrorForKey(vm.coupon!)
-                    ? vm.error(vm.coupon!).toString()
-                    : null,
+                errorText:
+                    vm.hasErrorForKey(vm.coupon != null ? vm.coupon! : false)
+                        ? vm.error(vm.coupon!).toString()
+                        : null,
                 onChanged: () {
                   vm.couponCodeChange;
                 },
@@ -37,7 +40,7 @@ class ApplyCoupon extends StatelessWidget {
                     FlutterIcons.check_ant,
                   ),
                   isFixedHeight: true,
-                  loading: vm.busy(vm.coupon),
+                  loading: vm.coupon != null ? vm.busy(vm.coupon) : false,
                   onPressed: vm.canApplyCoupon! ? vm.applyCoupon : null,
                 ).w(62).p8(),
               )

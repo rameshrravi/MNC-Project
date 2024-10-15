@@ -202,10 +202,8 @@ class ProductDetailsViewModel extends MyBaseViewModel {
       //
       optionGroupRequired = optionGroup;
       //
-      debugger();
       final selectedOptionInOptionGroup = selectedProductOptions
           .firstWhere((e) => e.optionGroupId == optionGroup.id);
-      debugger();
       //check if there is an option group that is required but customer is yet to select an option
       if (optionGroup.required == 1 && selectedOptionInOptionGroup == null) {
         optionGroupRequiredFail = true;

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_typeahead/flutter_typeahead.dart';
@@ -46,27 +48,33 @@ class OPSMapPage extends StatelessWidget {
                   //auto complete
 
                   TypeAheadField<Address>(
-                      suggestionsCallback: (search) => vm.fetchPlaces(search),
-                      builder: (context, controller, focusNode) {
-                        return TextField(
-                            controller: controller,
-                            focusNode: focusNode,
-                            autofocus: true,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "Search address".tr(),
-                            ));
-                      },
-                      itemBuilder: (context, suggestion) {
-                        return ListTile(
-                          title:
-                              suggestion.addressLine!.text.base.semiBold.make(),
-                          subtitle: suggestion.adminArea!.text.sm.make(),
-                        );
-                      },
-                      onSelected: (address) async {
-                        vm.addressSelected(address);
-                      })
+                    suggestionsCallback: (keyword) async {
+                      return await vm.fetchPlaces(keyword);
+                    },
+
+                    //   suggestionsCallback: (search) => vm.fetchPlaces(search),
+                    builder: (context, controller, focusNode) {
+                      debugger();
+                      return TextField(
+                          controller: controller,
+                          focusNode: focusNode,
+                          autofocus: true,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: "Search address".tr(),
+                          ));
+                    },
+                    itemBuilder: (context, suggestion) {
+                      return ListTile(
+                        title:
+                            suggestion.addressLine!.text.base.semiBold.make(),
+                        subtitle: suggestion.adminArea!.text.sm.make(),
+                      );
+                    },
+                    onSelected: (address) async {
+                      vm.addressSelected(address);
+                    },
+                  )
                 ]).px20().py4(),
 
                 //google map body
@@ -120,6 +128,13 @@ class OPSMapPage extends StatelessWidget {
                           onChange: vm.updateMapPadding,
                           child: VStack(
                             [
+                              Text(
+                                '${vm.selectedAddress?.featureName}',
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
                               //address full
                               // vm.selectedAddress?.featureName?.text?.semiBold
                               //     ?.center?.xl
@@ -132,6 +147,14 @@ class OPSMapPage extends StatelessWidget {
                               //     ?.maxLines(2)
                               //     ?.overflow(TextOverflow.ellipsis)
                               //     ?.make(),
+                              UiSpacer.verticalSpace(space: 5),
+                              Text(
+                                '${vm.selectedAddress?.addressLine?.text}',
+                                maxLines: 3,
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              ),
                               UiSpacer.verticalSpace(),
                               //submit
                               CustomButton(

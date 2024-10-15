@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:midnightcity/constants/app_routes.dart';
 import 'package:midnightcity/constants/app_strings.dart';
@@ -64,15 +66,18 @@ class DeliveryAddressPickerViewModel extends MyBaseViewModel {
     // await viewContext!.navigator.pushNamed(
     //   AppRoutes.newDeliveryAddressesRoute,
     // );
+
+    Navigator.pushNamed(viewContext!, AppRoutes.newDeliveryAddressesRoute);
     fetchDeliveryAddresses();
   }
 
   //
   void pickFromMap() async {
     //
+    debugger();
     dynamic result = await newPlacePicker();
     DeliveryAddress deliveryAddress = DeliveryAddress();
-
+    debugger();
     if (result is PickResult) {
       PickResult locationResult = result;
       deliveryAddress.address = locationResult.formattedAddress;

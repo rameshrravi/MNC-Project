@@ -12,9 +12,9 @@ import 'package:midnightcity/view_models/base.view_model.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:velocity_x/velocity_x.dart';
 
-class VendorCategoryProductsViewModel extends MyBaseViewModel {
+class CategoryProductsViewModel extends MyBaseViewModel {
   //
-  VendorCategoryProductsViewModel(
+  CategoryProductsViewModel(
     BuildContext context,
     this.category,
     this.vendor,
@@ -46,19 +46,10 @@ class VendorCategoryProductsViewModel extends MyBaseViewModel {
       category!.subcategories!.length,
       (index) => category!.subcategories![index].id!,
     );
-    getSubCategoryProducts();
-  }
-
-  Future<void> getSubCategoryProducts() async {
-    for (int i = 0; i < category!.subcategories!.length; i++) {
-      await loadMoreProducts(category!.subcategories![i].id!);
-      categoriesProductsQueryPages![category!.subcategories![i].id!] = 1;
-    }
-
-    // category!.subcategories!.forEach((element) async {
-    //   await loadMoreProducts(element.id!);
-    //   categoriesProductsQueryPages![element.id!] = 1;
-    // });
+    category!.subcategories!.forEach((element) {
+      loadMoreProducts(element.id!);
+      categoriesProductsQueryPages![element.id!] = 1;
+    });
   }
 
   void productSelected(Product product) async {
@@ -82,7 +73,7 @@ class VendorCategoryProductsViewModel extends MyBaseViewModel {
     return refreshContollers![index];
   }
 
-  Future<void> loadMoreProducts(int id, {bool initialLoad = true}) async {
+  loadMoreProducts(int id, {bool initialLoad = true}) async {
     int queryPage = categoriesProductsQueryPages![id] ?? 1;
     if (initialLoad) {
       queryPage = 1;
@@ -117,56 +108,6 @@ class VendorCategoryProductsViewModel extends MyBaseViewModel {
         // print(categoriesProducts.toString());
       }
     } catch (error) {
-      //  initialise();
-      print("load more error ==> $error");
-      getSubCategoryProducts();
-    }
-    //
-    if (initialLoad) {
-      setBusyForObject(id, false);
-    } else {
-      getRefreshController(id).loadComplete();
-    }
-    //
-    notifyListeners();
-  }
-
-  loadMoreProductss(int id, {bool initialLoad = true}) async {
-    int queryPage = categoriesProductsQueryPages![id] ?? 1;
-    if (initialLoad) {
-      queryPage = 1;
-      categoriesProductsQueryPages![id] = queryPage;
-      getRefreshController(id).refreshCompleted();
-      setBusyForObject(id, true);
-    } else {
-      categoriesProductsQueryPages![id] = ++queryPage;
-    }
-    //load the products by subcategory id
-    try {
-      final mProducts = await _productRequest.getProdcuts(
-        page: queryPage,
-        queryParams: {
-          "sub_category_id": id,
-          "vendor_id": vendor?.id,
-        },
-      );
-      //
-
-      if (initialLoad) {
-        categoriesProducts![id] = mProducts;
-        print(categoriesProducts.toString());
-      } else {
-        print(mProducts.length);
-        if (mProducts.length == 0) {
-          subcategorynext = true;
-        } else {
-          categoriesProducts![id]!.addAll(mProducts);
-        }
-
-        // print(categoriesProducts.toString());
-      }
-    } catch (error) {
-      //  initialise();
       print("load more error ==> $error");
     }
     //

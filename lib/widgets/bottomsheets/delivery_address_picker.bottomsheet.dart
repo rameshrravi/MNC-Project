@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/models/delivery_address.dart';
@@ -63,6 +65,9 @@ class DeliveryAddressPicker extends StatelessWidget {
               ),
               onChanged: () {
                 vm.filterResult!;
+              },
+              onSaved: (value) {
+                vm.filterResult(value);
               },
             ).p20().color(AppColor.mainBackground),
             //result list

@@ -25,6 +25,7 @@ import 'package:midnightcity/view_models/base.view_model.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import '../../../view_models/category_products_Grid.vm.dart';
 import '../../../widgets/custom_grid_view.dart';
 import '../../../widgets/custom_text_form_field.dart';
 import '../../../widgets/inputs/search_bar.input.dart';
@@ -148,8 +149,8 @@ class _CategoryProductsPage extends State<CategoryProductsPage>
   }
 
   Widget build(BuildContext context) {
-    return ViewModelBuilder<VendorCategoryProductsViewModel>.reactive(
-      viewModelBuilder: () => VendorCategoryProductsViewModel(
+    return ViewModelBuilder<CategoryProductsViewModel>.reactive(
+      viewModelBuilder: () => CategoryProductsViewModel(
         context,
         widget.category,
         widget.vendor!,

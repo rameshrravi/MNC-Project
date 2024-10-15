@@ -39,7 +39,6 @@ class _CartPageState extends State<CartPage> {
       body: SafeArea(
         child: ViewModelBuilder<CartViewModel>.reactive(
           viewModelBuilder: () => CartViewModel(context),
-         
           onViewModelReady: (model) => model.initialise(),
           builder: (context, model, child) {
             return VStack(

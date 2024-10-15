@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:midnightcity/constants/api.dart';
 import 'package:midnightcity/constants/app_map_settings.dart';
 import 'package:midnightcity/constants/app_strings.dart';
@@ -47,6 +49,7 @@ class GeocoderService extends HttpService {
     final apiResult = await getExternal(
       "https://maps.googleapis.com/maps/api/geocode/json?latlng=${coordinates.toString()}&key=$apiKey",
     );
+    debugger();
     //
     if (apiResult.statusCode == 200) {
       //
