@@ -265,10 +265,16 @@ class ProductDetailsViewModel extends MyBaseViewModel {
             ),
             onConfirmBtnTap: () async {
               //
-              Navigator.pop(viewContext!);
+              // debugger();
+              Navigator.of(viewContext!).pop(true);
               viewContext!.nextPage(CartPage());
+              // Navigator.push(viewContext!,
+              //     MaterialPageRoute(builder: (context) => CartPage()));
             },
             cancelBtnText: "Keep Shopping".tr(),
+            onCancelBtnTap: () {
+              Navigator.of(viewContext!).pop(true);
+            },
             cancelBtnTextStyle:
                 viewContext!.textTheme.bodyLarge!.copyWith(fontSize: Vx.dp12),
           );

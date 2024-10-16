@@ -27,12 +27,14 @@ class _CartPageState extends State<CartPage> {
   Widget build(BuildContext context) {
     return BasePage(
       elevation: 0,
-      /* leading: GestureDetector(
-          onTap: (){
-
-           context.pop();
+      leading: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
           },
-          child: Icon(Icons.arrow_back_ios,color: Colors.black,)),*/
+          child: Icon(
+            Icons.arrow_back_ios,
+            color: Colors.black,
+          )),
       showAppBar: true,
       showLeadingAction: true,
       title: "My Cart".tr(),

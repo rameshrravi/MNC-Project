@@ -76,9 +76,9 @@ class CheckoutBaseViewModel extends PaymentViewModel {
   }
 
   setVendorRequirement() {
-    if (vendor!.allowOnlyDelivery!) {
+    if (vendor.allowOnlyDelivery) {
       isPickup = false;
-    } else if (vendor!.allowOnlyPickup!) {
+    } else if (vendor.allowOnlyPickup) {
       isPickup = true;
     }
   }
@@ -365,9 +365,13 @@ class CheckoutBaseViewModel extends PaymentViewModel {
   //
   bool pickupOnlyProduct() {
     //
-    final product = CartServices.productsInCart.firstWhere(
-      (e) => !e.product!.canBeDelivered,
-    );
+
+    // final product = CartServices.productsInCart.firstWhere(
+    //   (e) => !e.product!.canBeDelivered,
+    // );
+    final product = !CartServices.productsInCart[0].product!.canBeDelivered;
+
+    // return product != null;
 
     return product != null;
   }
@@ -465,7 +469,7 @@ class CheckoutBaseViewModel extends PaymentViewModel {
       final paymentLink = apiResponse.body["link"].toString();
       if (!paymentLink.isEmptyOrNull) {
         Navigator.pop(viewContext!);
-        // showOrdersTab(context: viewContext!);
+        showOrdersTab(context: viewContext!);
         final result = await openExternalWebpageLink(paymentLink);
         print("Result from payment ==> $result");
       }

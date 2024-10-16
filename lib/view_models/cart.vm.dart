@@ -112,8 +112,8 @@ class CartViewModel extends MyBaseViewModel {
         //close dialog
         // viewContext!.pop();
         Navigator.pop(viewContext!);
-        Navigator.pushReplacement(viewContext!,
-            MaterialPageRoute(builder: (viewcontext) => CartPage()));
+        Navigator.pushReplacement(
+            viewContext!, MaterialPageRoute(builder: (context) => CartPage()));
       },
     );
   }

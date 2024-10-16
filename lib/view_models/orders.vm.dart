@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:midnightcity/constants/app_routes.dart';
@@ -64,7 +65,7 @@ class OrdersViewModel extends PaymentViewModel {
     } else {
       queryPage++;
     }
-
+    debugger();
     try {
       final mOrders = await orderRequest.getOrders(page: queryPage);
       if (!initialLoading) {

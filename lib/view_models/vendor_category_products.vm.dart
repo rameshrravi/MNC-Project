@@ -118,8 +118,8 @@ class VendorCategoryProductsViewModel extends MyBaseViewModel {
       }
     } catch (error) {
       //  initialise();
-      print("load more error ==> $error");
-      getSubCategoryProducts();
+      print("load more error00 ==> $error");
+      //getSubCategoryProducts();
     }
     //
     if (initialLoad) {

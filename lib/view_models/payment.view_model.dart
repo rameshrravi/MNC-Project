@@ -67,15 +67,15 @@ class PaymentViewModel extends MyBaseViewModel {
     //   ),
     // );
     //
-    // final result = await Navigator.push(
-    //     viewContext!,
-    //     MaterialPageRoute(
-    //         builder: (context) => CustomWebviewPage(
-    //               selectedUrl: url,
-    //             )));
+    final result = await Navigator.push(
+        viewContext!,
+        MaterialPageRoute(
+            builder: (context) => CustomWebviewPage(
+                  selectedUrl: url,
+                )));
 
     refreshDataSet();
-    return null;
+    return result;
     // return result;
   }
 
