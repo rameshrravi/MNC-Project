@@ -93,11 +93,20 @@ class ProductDetailsViewModel extends MyBaseViewModel {
       //if it allows only one selection
       if (optionGroup.multiple == 0) {
         //
-        final foundOption = selectedProductOptions.firstWhere(
-          (option) => option.optionGroupId == optionGroup.id,
-        );
+        // final foundOption = selectedProductOptions.firstWhere(
+        //   (option) => option.optionGroupId == optionGroup.id,
+        // );
+        Option? foundOption;
+        selectedProductOptions.forEach((option) {
+          if (option.optionGroupId == optionGroup.id) {
+            foundOption = option;
+            // selectedProductOptionsIDs.remove(option.id);
+            // selectedProductOptions.remove(option);
+          }
+        });
+
         if (foundOption != null) {
-          selectedProductOptionsIDs.remove(foundOption.id);
+          selectedProductOptionsIDs.remove(foundOption!.id);
           selectedProductOptions.remove(foundOption);
         }
       }
@@ -202,8 +211,16 @@ class ProductDetailsViewModel extends MyBaseViewModel {
       //
       optionGroupRequired = optionGroup;
       //
-      final selectedOptionInOptionGroup = selectedProductOptions
-          .firstWhere((e) => e.optionGroupId == optionGroup.id);
+      // final selectedOptionInOptionGroup = selectedProductOptions
+      //     .firstWhere((e) => e.optionGroupId == optionGroup.id);
+      Option? selectedOptionInOptionGroup;
+      selectedProductOptions.forEach((e) {
+        if (e.optionGroupId == optionGroup.id) {
+          /// optionGroupRequiredFail = true;
+          selectedOptionInOptionGroup = e;
+        }
+      });
+
       //check if there is an option group that is required but customer is yet to select an option
       if (optionGroup.required == 1 && selectedOptionInOptionGroup == null) {
         optionGroupRequiredFail = true;
@@ -225,6 +242,42 @@ class ProductDetailsViewModel extends MyBaseViewModel {
       throw "Option required".tr();
     }
   }
+
+  // optionGroupRequirementCheck() {
+  //   //check if the option groups with required setting has an option selected
+  //   bool optionGroupRequiredFail = false;
+  //   OptionGroup optionGroupRequired;
+  //   //
+  //   for (var optionGroup in product.optionGroups) {
+  //     //
+  //     optionGroupRequired = optionGroup;
+  //     //
+  //     final selectedOptionInOptionGroup = selectedProductOptions.firstWhere(
+  //           (e) => e.optionGroupId == optionGroup.id,
+  //       orElse: () => null,
+  //     );
+  //
+  //     //check if there is an option group that is required but customer is yet to select an option
+  //     if (optionGroup.required == 1 && selectedOptionInOptionGroup == null) {
+  //       optionGroupRequiredFail = true;
+  //       break;
+  //     }
+  //   }
+  //
+  //   //
+  //   if (optionGroupRequiredFail) {
+  //     //
+  //     CoolAlert.show(
+  //       context: viewContext,
+  //       title: "Option required".tr(),
+  //       text: "You are required to select at least one option of".tr() +
+  //           " ${optionGroupRequired.name}",
+  //       type: CoolAlertType.error,
+  //     );
+  //
+  //     throw "Option required".tr();
+  //   }
+  // }
 
   //
   Future<bool> addToCart({bool force = false, bool skip = false}) async {
@@ -291,7 +344,8 @@ class ProductDetailsViewModel extends MyBaseViewModel {
           onConfirmBtnTap: () async {
             //
             // viewContext!.pop();
-            Navigator.pop(viewContext!);
+            Navigator.of(viewContext!).pop(true);
+            //  Navigator.pop(viewContext!);
             await CartServices.clearCart();
             addToCart(force: true);
           },
@@ -315,7 +369,7 @@ class ProductDetailsViewModel extends MyBaseViewModel {
         );
       }
     } catch (error) {
-      debugger();
+      //debugger();
       print("Cart Error00 => $error");
       setError(error);
     }

@@ -67,8 +67,8 @@ class _CustomStepperState extends State<CustomStepper> {
         Padding(
           padding: const EdgeInsets.only(right: 10.0),
           child: Icon(
-            //  FlutterIcons.plus_ant,
-            Icons.minimize,
+            FlutterIcons.plus_ant,
+            //Icons.minimize,
             size: 14,
             color: Colors.white,
           ).onInkTap(() {
