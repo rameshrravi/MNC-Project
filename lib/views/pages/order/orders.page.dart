@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:midnightcity/utils/ui_spacer.dart';
 import 'package:midnightcity/view_models/orders.vm.dart';
@@ -27,12 +29,13 @@ class OrdersPage extends StatefulWidget {
 class _OrdersPageState extends State<OrdersPage>
     with AutomaticKeepAliveClientMixin<OrdersPage>, WidgetsBindingObserver {
   //
-  WhatsApp whatsapp = WhatsApp("", "");
+  // WhatsApp whatsapp = WhatsApp("", "");
 
   OrdersViewModel? vm;
   @override
   void initState() {
     super.initState();
+
     WidgetsBinding.instance.addObserver(this);
   }
 
@@ -51,13 +54,15 @@ class _OrdersPageState extends State<OrdersPage>
 
   @override
   Widget build(BuildContext context) {
-    vm = OrdersViewModel(context);
+    // vm = OrdersViewModel(context);
+
     super.build(context);
     return BasePage(
       body: SafeArea(
         child: ViewModelBuilder<OrdersViewModel>.reactive(
-          viewModelBuilder: () => vm!,
-          onModelReady: (vm) => vm.initialise(),
+          viewModelBuilder: () => OrdersViewModel(context),
+          //onModelReady: (vm) => vm.initialise(),
+          onViewModelReady: (vm) => vm.initialise(),
           builder: (context, vm, child) {
             return VStack(
               [

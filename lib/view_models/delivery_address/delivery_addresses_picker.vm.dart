@@ -74,10 +74,10 @@ class DeliveryAddressPickerViewModel extends MyBaseViewModel {
   //
   void pickFromMap() async {
     //
-    debugger();
+
     dynamic result = await newPlacePicker();
     DeliveryAddress deliveryAddress = DeliveryAddress();
-    debugger();
+
     if (result is PickResult) {
       PickResult locationResult = result;
       deliveryAddress.address = locationResult.formattedAddress;

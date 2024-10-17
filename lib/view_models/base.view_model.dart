@@ -265,6 +265,12 @@ class MyBaseViewModel extends BaseViewModel with UpdateService {
     viewContext!.nextPage(ProfilePage());
   }
 
+  openDashboard() async {
+    //viewContext!.nextPage(ProfilePage());
+    Navigator.pushNamedAndRemoveUntil(
+        viewContext!, AppRoutes.chooseVendorRoute, (route) => false);
+  }
+
   //
   //
   productSelected(Product product) async {
@@ -335,7 +341,7 @@ class MyBaseViewModel extends BaseViewModel with UpdateService {
   // NEW LOCATION PICKER
   Future<dynamic> newPlacePicker() async {
     //
-    debugger();
+
     if (!AppMapSettings.useGoogleOnApp) {
       return await Navigator.push(
           viewContext!,

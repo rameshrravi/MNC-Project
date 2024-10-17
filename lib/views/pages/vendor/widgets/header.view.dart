@@ -51,6 +51,21 @@ class _VendorHeaderState extends State<VendorHeader> {
               ),
               child: GestureDetector(
                 onTap: () {
+                  widget.model.openDashboard();
+                },
+                child: Icon(
+                  Icons.arrow_back_ios,
+                  color: AppColor.midnightCityDarkBlue,
+                  size: 32.0,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 10.0,
+              ),
+              child: GestureDetector(
+                onTap: () {
                   widget.model.openProfile();
                 },
                 child: Icon(

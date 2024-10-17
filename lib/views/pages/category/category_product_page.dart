@@ -34,11 +34,13 @@ import '../vendor_details/vendor_category_products.page_new.dart';
 import 'categorey_list.dart';
 
 class CategoryProductsPage extends StatefulWidget {
-  CategoryProductsPage({this.category, this.vendor, Key? key})
+  CategoryProductsPage({this.category, this.vendor, this.screens, Key? key})
       : super(key: key);
 
   final Category? category;
   final Vendor? vendor;
+  String? screens;
+  int _highlightedIndex = -1;
 
   @override
   _CategoryProductsPage createState() => _CategoryProductsPage();
@@ -161,10 +163,11 @@ class _CategoryProductsPage extends State<CategoryProductsPage>
       //
       builder: (context, model, child) {
         return BasePage(
+            //leading: (widget.screens == "home") ? null : BackButton(),
             elevation: 0,
             title: model.category!.name,
             showAppBar: true,
-            showLeadingAction: true,
+            showLeadingAction: (widget.screens == "home") ? false : true,
             showCart: true,
             body: SafeArea(
               child: Column(
@@ -224,20 +227,32 @@ class _CategoryProductsPage extends State<CategoryProductsPage>
 
                         return GestureDetector(
                             onTap: () {},
-                            child: CategoryCard(
-                                name: category.name!,
-                                imageUrl: category.imageUrl!,
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              VendorCategoryProductsPageNew(
-                                                category: model.category!,
-                                                vendor: model.vendor,
-                                                index: index,
-                                              )));
-                                }));
+                            child: Container(
+                              decoration: BoxDecoration(
+                                border: widget._highlightedIndex == index
+                                    ? Border.all(
+                                        color: AppColor.midnightCityYellow!,
+                                        width: 4)
+                                    : null,
+                              ),
+                              child: CategoryCard(
+                                  name: category.name!,
+                                  imageUrl: category.imageUrl!,
+                                  onTap: () {
+                                    setState(() {
+                                      widget._highlightedIndex = index;
+                                    });
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                VendorCategoryProductsPageNew(
+                                                  category: model.category!,
+                                                  vendor: model.vendor,
+                                                  index: index,
+                                                )));
+                                  }),
+                            ));
                       },
                     ),
                   ),

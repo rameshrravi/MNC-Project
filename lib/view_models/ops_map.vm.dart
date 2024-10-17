@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:midnightcity/services/geocoder.service.dart';
 import 'package:midnightcity/view_models/base.view_model.dart';
@@ -40,7 +41,7 @@ class OPSMapViewModel extends MyBaseViewModel {
     notifyListeners();
   }
 
-  addressSelected(Address address) async {
+  addressSelected(Address address, int index) async {
     setBusyForObject(selectedAddress, true);
     selectedAddress = address;
     //fecth place details from google if its google map
@@ -51,17 +52,19 @@ class OPSMapViewModel extends MyBaseViewModel {
     //
     searchTEC.clear();
     if (gMapController != null) {
-      gMapController!.moveCamera(
-        CameraUpdate.newCameraPosition(
-          CameraPosition(
-            zoom: 16,
-            target: LatLng(
-              address.coordinates!.latitude,
-              address.coordinates!.longitude,
+      if (index == 1) {
+        gMapController!.moveCamera(
+          CameraUpdate.newCameraPosition(
+            CameraPosition(
+              zoom: 16,
+              target: LatLng(
+                address.coordinates!.latitude,
+                address.coordinates!.longitude,
+              ),
             ),
           ),
-        ),
-      );
+        );
+      }
     }
     setBusyForObject(selectedAddress, false);
   }
@@ -78,6 +81,7 @@ class OPSMapViewModel extends MyBaseViewModel {
         draggable: true,
       );
     } else {
+      // debugger();
       centerMarker = centerMarker!.copyWith(
         positionParam: position.target,
       );
@@ -103,7 +107,7 @@ class OPSMapViewModel extends MyBaseViewModel {
         ))
             .first;
 
-        addressSelected(address);
+        addressSelected(address, 0);
       } catch (error) {
         toastError("$error");
       }

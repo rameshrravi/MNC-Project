@@ -168,4 +168,8 @@ class VendorViewModel extends MyBaseViewModel {
     super.dispose();
     currentLocationChangeStream!.cancel();
   }
+
+  void onPressWallet() {
+    Navigator.pushNamed(viewContext!, AppRoutes.walletRoute);
+  }
 }

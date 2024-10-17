@@ -35,7 +35,7 @@ class VendorCategoryProductsViewModel extends MyBaseViewModel {
   final currencySymbol = AppStrings.currencySymbol;
   bool subcategorynext = true;
 
-  initialise() {
+  initialise() async {
     //
 
     refreshContollers = List.generate(
@@ -46,7 +46,7 @@ class VendorCategoryProductsViewModel extends MyBaseViewModel {
       category!.subcategories!.length,
       (index) => category!.subcategories![index].id!,
     );
-    getSubCategoryProducts();
+    await getSubCategoryProducts();
   }
 
   Future<void> getSubCategoryProducts() async {
@@ -118,7 +118,7 @@ class VendorCategoryProductsViewModel extends MyBaseViewModel {
       }
     } catch (error) {
       //  initialise();
-      print("load more error00 ==> $error");
+      print("load more error001 ==> $error");
       //getSubCategoryProducts();
     }
     //
@@ -167,7 +167,7 @@ class VendorCategoryProductsViewModel extends MyBaseViewModel {
       }
     } catch (error) {
       //  initialise();
-      print("load more error ==> $error");
+      print("load more errordummy ==> $error");
     }
     //
     if (initialLoad) {

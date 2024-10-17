@@ -141,42 +141,30 @@ class Order {
       status: json["status"] == null ? null : json["status"],
       paymentStatus:
           json["payment_status"] == null ? null : json["payment_status"],
-      subTotal: json["sub_total"] == null
-          ? null
-          : double.parse(json["sub_total"].toString()),
-      discount: json["discount"] == null
-          ? null
-          : double.parse(json["discount"].toString()),
+      subTotal:
+          json["sub_total"] == null ? null : double.parse(json["sub_total"]),
+      discount:
+          json["discount"] == null ? null : double.parse(json["discount"]),
       deliveryFee: json["delivery_fee"] == null
           ? null
-          : double.parse(json["delivery_fee"].toString()),
-      comission: json["comission"] == null
-          ? null
-          : double.parse(json["comission"].toString()),
+          : double.parse(json["delivery_fee"]),
+      comission:
+          json["comission"] == null ? null : double.parse(json["comission"]),
 
-      tax: json["tax"] == null ? null : double.parse(json["tax"].toString()),
-      taxRate: json["tax_rate"] == null
-          ? null
-          : double.parse(json["tax_rate"].toString()),
-      tip: json["tip"] == null ? null : double.parse(json["tip"].toString()),
-      total:
-          json["total"] == null ? null : double.parse(json["total"].toString()),
+      tax: json["tax"] == null ? null : double.parse(json["tax"]),
+      taxRate: json["tax_rate"] == null ? null : double.parse(json["tax_rate"]),
+      tip: json["tip"] == null ? null : double.parse(json["tip"]),
+      total: json["total"] == null ? null : double.parse(json["total"]),
       deliveryAddressId: json["delivery_address_id"] == null
           ? null
-          : int.parse(json["delivery_address_id"].toString()),
+          : int.parse(json["delivery_address_id"]),
       //
       paymentMethodId: json["payment_method_id"] == null
           ? null
-          : int.parse(json["payment_method_id"].toString()),
-      vendorId: json["vendor_id"] == null
-          ? null
-          : int.parse(json["vendor_id"].toString()),
-      userId: json["user_id"] == null
-          ? null
-          : int.parse(json["user_id"].toString()),
-      driverId: json["driver_id"] == null
-          ? null
-          : int.parse(json["driver_id"].toString()),
+          : int.parse(json["payment_method_id"]),
+      vendorId: json["vendor_id"] == null ? null : int.parse(json["vendor_id"]),
+      userId: json["user_id"] == null ? null : int.parse(json["user_id"]),
+      driverId: json["driver_id"] == null ? null : int.parse(json["driver_id"]),
       createdAt: json["created_at"] == null
           ? null
           : DateTime.parse(json["created_at"]),
@@ -257,7 +245,7 @@ class Order {
     );
   }
 
-  Map<String, dynamic> toJson() => {
+  Map<String?, dynamic> toJson() => {
         "id": id,
         "code": code,
         "photo": photo,

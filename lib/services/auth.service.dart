@@ -112,7 +112,7 @@ class AuthServices {
   ///
   //
   static Future<void> logout() async {
-    //await HttpService().getCacheManager().clearAll();
+    /// await HttpService().clearAll();
     await LocalStorageService.prefs!.clear();
     await LocalStorageService.rxPrefs!.clear();
     await LocalStorageService.prefs!.setBool(AppStrings.firstTimeOnApp, false);

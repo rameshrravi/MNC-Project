@@ -42,38 +42,39 @@ class OPSMapPage extends StatelessWidget {
                     //Icons.access_alarm_outlined,
                     FlutterIcons.arrow_back_mdi,
                   ).p2().onInkTap(() {
-                    // context.pop();
+                    Navigator.pop(context);
                   }),
                   UiSpacer.horizontalSpace(),
                   //auto complete
 
-                  TypeAheadField<Address>(
-                    suggestionsCallback: (keyword) async {
-                      return await vm.fetchPlaces(keyword);
-                    },
+                  Expanded(
+                    child: TypeAheadField<Address>(
+                      suggestionsCallback: (keyword) async {
+                        return await vm.fetchPlaces(keyword);
+                      },
 
-                    //   suggestionsCallback: (search) => vm.fetchPlaces(search),
-                    builder: (context, controller, focusNode) {
-                      debugger();
-                      return TextField(
-                          controller: controller,
-                          focusNode: focusNode,
-                          autofocus: true,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText: "Search address".tr(),
-                          ));
-                    },
-                    itemBuilder: (context, suggestion) {
-                      return ListTile(
-                        title:
-                            suggestion.addressLine!.text.base.semiBold.make(),
-                        subtitle: suggestion.adminArea!.text.sm.make(),
-                      );
-                    },
-                    onSelected: (address) async {
-                      vm.addressSelected(address);
-                    },
+                      //   suggestionsCallback: (search) => vm.fetchPlaces(search),
+                      builder: (context, controller, focusNode) {
+                        return TextField(
+                            controller: controller,
+                            focusNode: focusNode,
+                            autofocus: true,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: "Search address".tr(),
+                            ));
+                      },
+                      itemBuilder: (context, suggestion) {
+                        return ListTile(
+                          title:
+                              suggestion.addressLine!.text.base.semiBold.make(),
+                          subtitle: suggestion.adminArea!.text.sm.make(),
+                        );
+                      },
+                      onSelected: (address) async {
+                        vm.addressSelected(address, 1);
+                      },
+                    ),
                   )
                 ]).px20().py4(),
 
@@ -147,14 +148,14 @@ class OPSMapPage extends StatelessWidget {
                               //     ?.maxLines(2)
                               //     ?.overflow(TextOverflow.ellipsis)
                               //     ?.make(),
-                              UiSpacer.verticalSpace(space: 5),
-                              Text(
-                                '${vm.selectedAddress?.addressLine?.text}',
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              ),
+                              // UiSpacer.verticalSpace(space: 5),
+                              // Text(
+                              //   '${vm.selectedAddress?.addressLine!.text.light.center.xl}',
+                              //   maxLines: 3,
+                              //   overflow: TextOverflow.ellipsis,
+                              //   style: TextStyle(
+                              //       fontSize: 16, fontWeight: FontWeight.bold),
+                              // ),
                               UiSpacer.verticalSpace(),
                               //submit
                               CustomButton(

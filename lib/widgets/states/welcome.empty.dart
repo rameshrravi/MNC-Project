@@ -150,7 +150,7 @@ class EmptyWelcome extends StatelessWidget {
                               border: Border.all(color: Colors.white)),
                           child: CustomButton(
                             onPressed: () async {
-                              await processLogout;
+                              //await processLogout;
 
                               CoolAlert.show(
                                 context: context,
@@ -175,14 +175,16 @@ class EmptyWelcome extends StatelessWidget {
                                 );
                               } else {
                                 //
-                                //await AuthServices.logout();
+
+                                await AuthServices.logout();
                               }
 
-                              // context.navigator.pushAndRemoveUntil(
-                              //   MaterialPageRoute(
-                              //       builder: (context) => SplashPage()),
-                              //   (route) => false,
-                              // );
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SplashPage()),
+                                (route) => false,
+                              );
                             },
                             height: 30,
                             //   color: AppColor.white,

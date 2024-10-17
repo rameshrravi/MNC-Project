@@ -5,11 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:midnightcity/constants/app_routes.dart';
 import 'package:midnightcity/constants/app_strings.dart';
 import 'package:midnightcity/extensions/string.dart';
-import 'package:midnightcity/models/checkout.dart';
 import 'package:midnightcity/models/delivery_address.dart';
 import 'package:midnightcity/models/vendor.dart';
 import 'package:midnightcity/models/payment_method.dart';
-import 'package:midnightcity/requests/checkout.request.dart';
 import 'package:midnightcity/requests/delivery_address.request.dart';
 import 'package:midnightcity/requests/vendor.request.dart';
 import 'package:midnightcity/requests/payment_method.request.dart';
@@ -22,6 +20,8 @@ import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:supercharged/supercharged.dart';
 import '../constants/app_colors.dart';
+import '../models/checkout.dart';
+import '../requests/checkout.request.dart';
 
 class CheckoutBaseViewModel extends PaymentViewModel {
   //
@@ -63,7 +63,7 @@ class CheckoutBaseViewModel extends PaymentViewModel {
     setBusy(true);
     try {
       vendor = await vendorRequest.vendorDetails(
-        vendor.id!,
+        vendor!.id!,
         params: {
           "type": "brief",
         },
@@ -149,17 +149,15 @@ class CheckoutBaseViewModel extends PaymentViewModel {
   }
 
   updatePaymentOptionSelection() {
-    if (checkout != null && checkout!.total <= 0.00) {
+    if (checkout != null && checkout!.total! <= 0.00) {
       canSelectPaymentOption = false;
     } else {
       canSelectPaymentOption = true;
     }
     //
     if (!canSelectPaymentOption) {
-      final selectedPaymentMethod = paymentMethods.firstWhere(
-        (e) => e.isCash == 1,
-        // orElse: () => null,
-      );
+      final selectedPaymentMethod =
+          paymentMethods.firstWhere((e) => e.isCash == 1);
       if (selectedPaymentMethod != null) {
         changeSelectedPaymentMethod(selectedPaymentMethod, callTotal: false);
       }
@@ -183,12 +181,11 @@ class CheckoutBaseViewModel extends PaymentViewModel {
             updateTotalOrderSummary();
             //
             notifyListeners();
-            navigatiorPop();
+            Navigator.pop(context);
           },
         );
       },
     );
-    //  return null;
   }
 
   //
@@ -222,13 +219,14 @@ class CheckoutBaseViewModel extends PaymentViewModel {
     checkout!.deliverySlotTime = "";
 
     await Jiffy.setLocale(translator.activeLocale.languageCode);
+
     notifyListeners();
   }
 
   //
   void checkDeliveryRange() {
     delievryAddressOutOfRange =
-        vendor.deliveryRange! < (deliveryAddress!.distance ?? 0);
+        vendor.deliveryRange! < (deliveryAddress!.distance! ?? 0);
     if (deliveryAddress!.can_deliver != null) {
       delievryAddressOutOfRange = !deliveryAddress!.can_deliver!;
     }
@@ -263,25 +261,25 @@ class CheckoutBaseViewModel extends PaymentViewModel {
         setBusy(true);
         try {
           double? orderDeliveryFee = await checkoutRequest.orderSummary(
-            deliveryAddressId: deliveryAddress!.id,
+            deliveryAddressId: deliveryAddress!.id!,
             vendorId: vendor.id,
           );
 
           //adding base fee
           checkout!.deliveryFee = orderDeliveryFee!;
 
-          if (checkout!.deliveryFee <= 750.00) {
+          if (checkout!.deliveryFee! <= 750.00) {
             checkout!.deliveryFee = 750.00;
           }
-          if (checkout!.deliveryFee >= 751.00 &&
-              checkout!.deliveryFee <= 1000.00) {
-            checkout!.deliveryFee = 1000.00;
+          if (checkout!.deliveryFee! >= 751.00 &&
+              checkout!.deliveryFee! <= 1000.00) {
+            checkout!.deliveryFee != 1000.00;
           }
-          if (checkout!.deliveryFee >= 1001.00 &&
-              checkout!.deliveryFee <= 1500.00) {
+          if (checkout!.deliveryFee! >= 1001.00 &&
+              checkout!.deliveryFee! <= 1500.00) {
             checkout!.deliveryFee = 1500.00;
           }
-          if (checkout!.deliveryFee >= 1501.00) {
+          if (checkout!.deliveryFee! >= 1501.00) {
             checkout!.deliveryFee = 2000.00;
           }
           print(checkout!.deliveryAddress!.address);
@@ -302,22 +300,22 @@ class CheckoutBaseViewModel extends PaymentViewModel {
           }
 
           //adding base fee
-          checkout!.deliveryFee += vendor.baseDeliveryFee!;
+          checkout!.deliveryFee += vendor!.baseDeliveryFee!;
           print("dddd");
-//          print(checkout.deliveryFee.toString());
+//          print(checkout!.deliveryFee.toString());
 
-          if (checkout!.deliveryFee <= 750.00) {
+          if (checkout!.deliveryFee! <= 750.00) {
             checkout!.deliveryFee = 750.00;
           }
-          if (checkout!.deliveryFee >= 751.00 &&
-              checkout!.deliveryFee <= 1000.00) {
+          if (checkout!.deliveryFee! >= 751.00 &&
+              checkout!.deliveryFee! <= 1000.00) {
             checkout!.deliveryFee = 1000.00;
           }
-          if (checkout!.deliveryFee >= 1001.00 &&
-              checkout!.deliveryFee <= 1500.00) {
+          if (checkout!.deliveryFee! >= 1001.00 &&
+              checkout!.deliveryFee! <= 1500.00) {
             checkout!.deliveryFee = 1500.00;
           }
-          if (checkout!.deliveryFee >= 1501.00) {
+          if (checkout!.deliveryFee! >= 1501.00) {
             checkout!.deliveryFee = 2000.00;
           }
 
@@ -340,7 +338,7 @@ class CheckoutBaseViewModel extends PaymentViewModel {
     checkout!.tax =
         (double.parse(vendor.tax ?? "0") / 100) * checkout!.subTotal!;
     checkout!.total = (checkout!.subTotal! - checkout!.discount!) +
-        checkout!.deliveryFee +
+        checkout!.deliveryFee! +
         checkout!.tax!;
     //vendor fees
     calFees = [];
@@ -367,36 +365,15 @@ class CheckoutBaseViewModel extends PaymentViewModel {
   //
   bool pickupOnlyProduct() {
     //
-    bool hasUndeliverableProduct = CartServices.productsInCart.any(
-      (e) => !e.product!.canBeDelivered,
-    );
-    //   debugger();
-    if (hasUndeliverableProduct) {
-      final product = CartServices.productsInCart.firstWhere(
-        (e) => !e.product!.canBeDelivered,
-      );
-      return product != null;
-      print('Undeliverable product: ${product.product!.name}');
-    } else {
-      print('All products can be delivered.');
-    }
-    // for (var product in CartServices.productsInCart) {
-    //   if (!product.product!.canBeDelivered) {
-    //     return false;
-    //   }
-    // }
+
     // final product = CartServices.productsInCart.firstWhere(
     //   (e) => !e.product!.canBeDelivered,
-    //   //orElse: () => null,
     // );
+    final product = !CartServices.productsInCart[0].product!.canBeDelivered;
 
-    // return pr;
-    // final product = CartServices.productsInCart.firstWhere(
-    //   (e) => !e.product!.canBeDelivered,
-    //   orElse: () => error("Undeliverable product"),
-    // );
+    // return product != null;
 
-    return hasUndeliverableProduct;
+    return product != null;
   }
 
   //
@@ -491,8 +468,7 @@ class CheckoutBaseViewModel extends PaymentViewModel {
 
       final paymentLink = apiResponse.body["link"].toString();
       if (!paymentLink.isEmptyOrNull) {
-        //viewContext.pop();
-        navigatiorPop();
+        Navigator.pop(viewContext!);
         showOrdersTab(context: viewContext!);
         final result = await openExternalWebpageLink(paymentLink);
         print("Result from payment ==> $result");
@@ -506,13 +482,13 @@ class CheckoutBaseViewModel extends PaymentViewModel {
             text: apiResponse.message,
             barrierDismissible: false,
             onConfirmBtnTap: () {
-              navigatiorPop();
-
               showOrdersTab(context: viewContext!);
+
               if (Navigator.canPop(viewContext!)) {
                 Navigator.popUntil(viewContext!,
                     ModalRoute.withName(AppRoutes.orderTrackingRoute));
               }
+
               // if (viewContext!.navigator.canPop()) {
               //   viewContext!.navigator.popUntil(
               //       ModalRoute.withName(AppRoutes.orderTrackingRoute));
@@ -561,7 +537,7 @@ class CheckoutBaseViewModel extends PaymentViewModel {
     //if order is less than the min allowed order by this vendor
     //if vendor is currently open for accepting orders
 
-    if (!vendor.isOpen! &&
+    if (!vendor!.isOpen! &&
         !(checkout!.isScheduled ?? false) &&
         !(checkout!.isPickup ?? false)) {
       //vendor is closed
@@ -577,35 +553,31 @@ class CheckoutBaseViewModel extends PaymentViewModel {
         orderVendor.minOrder! > checkout!.subTotal!) {
       ///
       CoolAlert.show(
-        context: viewContext!,
+        context: viewContext!!,
         type: CoolAlertType.error,
         title: "Minimum Order Value".tr(),
         text: "Order value/amount is less than vendor accepted minimum order"
                 .tr() +
-            "${AppStrings.currencySymbol} ${orderVendor.minOrder}"
+            "${AppStrings.currencySymbol} ${orderVendor?.minOrder}"
                 .currencyFormat(),
       );
       return false;
     }
     //if order is more than the max allowed order by this vendor
-    else if (orderVendor.maxOrder != null &&
-        orderVendor.maxOrder! < checkout!.subTotal!) {
+    else if (orderVendor!.maxOrder != null &&
+        orderVendor!.maxOrder! < checkout!.subTotal!) {
       //
       CoolAlert.show(
-        context: viewContext!,
+        context: viewContext!!,
         type: CoolAlertType.error,
         title: "Maximum Order Value".tr(),
         text: "Order value/amount is more than vendor accepted maximum order"
                 .tr() +
-            "${AppStrings.currencySymbol} ${orderVendor.maxOrder}"
+            "${AppStrings.currencySymbol} ${orderVendor?.maxOrder}"
                 .currencyFormat(),
       );
       return false;
     }
     return true;
-  }
-
-  void navigatiorPop() {
-    Navigator.pop(viewContext!);
   }
 }

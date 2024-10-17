@@ -26,6 +26,7 @@ class BasePage extends StatefulWidget {
   final Color? appBarItemColor;
   final Color? backgroundColor;
   final bool? showCartView;
+  final bool? isShowBackArrow;
 
   BasePage({
     this.showAppBar = false,
@@ -46,6 +47,7 @@ class BasePage extends StatefulWidget {
     this.elevation,
     this.extendBodyBehindAppBar,
     this.showCartView = false,
+    this.isShowBackArrow = false,
     Key? key,
   }) : super(key: key);
 

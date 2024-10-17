@@ -176,12 +176,16 @@ class _FoodPageState extends State<FoodPage>
                                             ),
                                           ],
                                         ))),
-                                    CustomVisibilty(
-                                      visible: HomeScreenConfig
-                                              .showWalletOnHomeScreen ??
-                                          true,
-                                      child: WalletManagementViewHomeDashboard()
-                                          .px20(),
+                                    InkWell(
+                                      onTap: () => model.onPressWallet(),
+                                      child: CustomVisibilty(
+                                        visible: HomeScreenConfig
+                                                .showWalletOnHomeScreen ??
+                                            true,
+                                        child:
+                                            WalletManagementViewHomeDashboard()
+                                                .px20(),
+                                      ),
                                     ),
                                   ],
                                 ),

@@ -34,6 +34,7 @@ import 'package:stacked/stacked.dart';
 import 'package:upgrader/upgrader.dart';
 import 'package:velocity_x/velocity_x.dart';
 
+import 'category/category_product_page.dart';
 import 'grocery/widgets/baronly_categories_products.view.dart';
 import 'grocery/widgets/foodonly_categories_products.view.dart';
 import 'grocery/widgets/grocery_categories_products.view.dart';
@@ -102,10 +103,17 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                     height:
                                         MediaQuery.of(context).size.height * .9,
-                                    child: VendorCategoryProductsPageNewHome(
+                                    child: CategoryProductsPage(
+                                      category: vm.dvendor!.categories![0],
                                       vendor: vm.dvendor,
-                                      category: vm.dvendor.categories![0],
+                                      screens: "home",
                                     )),
+
+                                // VendorCategoryProductsPageNewHome(
+                                //   vendor: vm.dvendor,
+                                //   category: vm.dvendor.categories![0],
+                                // )
+                                //,
                               ),
                             ),
                             Padding(
@@ -114,10 +122,18 @@ class _HomePageState extends State<HomePage> {
                                 child: Container(
                                     height:
                                         MediaQuery.of(context).size.height * .9,
-                                    child: VendorCategoryProductsPageNewHome(
+                                    child: CategoryProductsPage(
+                                      category: vm.dvendor!.categories![1],
                                       vendor: vm.dvendor,
-                                      category: vm.dvendor.categories![1],
-                                    )),
+                                      screens: "home",
+                                    )
+
+                                    // VendorCategoryProductsPageNewHome(
+                                    //   vendor: vm.dvendor,
+                                    //   category: vm.dvendor.categories![1],
+                                    // )
+
+                                    ),
                               ),
                             ),
                             Padding(

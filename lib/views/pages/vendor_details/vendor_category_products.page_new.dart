@@ -83,8 +83,8 @@ class _VendorCategoryProductsPageNewState
       category!.subcategories!.length,
       (index) => category!.subcategories![index].id!,
     );
-    category!.subcategories!.forEach((element) {
-      loadMoreProducts(element.id!);
+    category!.subcategories!.forEach((element) async {
+      //await loadMoreProducts(element.id!);
       categoriesProductsQueryPages[element.id!] = 1;
     });
 
@@ -111,7 +111,7 @@ class _VendorCategoryProductsPageNewState
     return refreshContollers[index];
   }
 
-  loadMoreProducts(int id, {bool initialLoad = true}) async {
+  Future<void> loadMoreProducts(int id, {bool initialLoad = true}) async {
     int queryPage = categoriesProductsQueryPages[id] ?? 1;
     if (initialLoad) {
       queryPage = 1;

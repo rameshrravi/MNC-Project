@@ -56,7 +56,7 @@ class _OrdersPageProfileState extends State<OrdersPageProfile>
     return BasePage(
       body: SafeArea(
         child: ViewModelBuilder<OrdersViewModel>.reactive(
-          viewModelBuilder: () => vm!,
+          viewModelBuilder: () => OrdersViewModel(context),
           onModelReady: (vm) => vm.initialise(),
           builder: (context, vm, child) {
             return VStack(

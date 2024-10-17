@@ -26,12 +26,13 @@ class OrdersViewModel extends PaymentViewModel {
   late StreamSubscription homePageChangeStream;
   late StreamSubscription refreshOrderStream;
 
+  @override
   void initialise() async {
     await fetchMyOrders();
-
     homePageChangeStream = AppService().homePageIndex.stream.listen(
       (index) {
         //
+
         fetchMyOrders();
       },
     );
@@ -65,7 +66,7 @@ class OrdersViewModel extends PaymentViewModel {
     } else {
       queryPage++;
     }
-    debugger();
+
     try {
       final mOrders = await orderRequest.getOrders(page: queryPage);
       if (!initialLoading) {
