@@ -112,7 +112,7 @@ class ProductDetailsCartBottomSheet extends StatelessWidget {
         ),
 
         Visibility(
-          visible: model!.product.hasStock,
+          visible: !model!.product.hasStock,
           child: "Back soon"
               .tr()
               .text

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:midnightcity/models/option_group.dart';
 import 'package:midnightcity/models/product.dart';
@@ -69,12 +71,38 @@ class _ProductStockStateState extends State<ProductStockState> {
                 : UiSpacer.emptySpace();
   }
 
+  // optionGroupRequirementCheck(BuildContext context) {
+  //   //check if the option groups with required setting has an option selected
+  //   OptionGroup optionGroupRequired = widget.product!.optionGroups!
+  //       .firstWhere((e) => e.required == 1, orElse: () {
+  //     return OptionGroup();
+  //   });
+  //   //
+  //
+  //   if (optionGroupRequired == null) {
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // }
+
   optionGroupRequirementCheck(BuildContext context) {
     //check if the option groups with required setting has an option selected
-    OptionGroup optionGroupRequired = widget.product!.optionGroups!
-        .firstWhere((e) => e.required == 1, orElse: () {
-      return OptionGroup();
+    OptionGroup? optionGroupRequired;
+    widget.product!.optionGroups!.forEach((element) {
+      if (element.required == 1) {
+        optionGroupRequired = element;
+      }
     });
+    //debugger();
+
+    // OptionGroup optionGroupRequired = widget.product!.optionGroups!
+    //     .firstWhere((e) => e.required == 1, orElse: () {
+    //   return OptionGroup();
+    // }
+    //
+    //
+    // );
     //
 
     if (optionGroupRequired == null) {
