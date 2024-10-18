@@ -28,8 +28,8 @@ class CustomListView extends StatelessWidget {
   //
   final bool? canRefresh;
   final RefreshController? refreshController;
-  final Function? onRefresh;
-  final Function? onLoading;
+  final VoidCallback? onRefresh;
+  final VoidCallback? onLoading;
   final bool? canPullUp;
 
   const CustomListView({
@@ -90,8 +90,8 @@ class CustomListView extends StatelessWidget {
             enablePullDown: true,
             enablePullUp: canPullUp!,
             controller: refreshController!,
-            onRefresh: () {},
-            onLoading: () {},
+            onRefresh: onRefresh!,
+            onLoading: onLoading!,
             child: contentBody,
           )
         : contentBody;

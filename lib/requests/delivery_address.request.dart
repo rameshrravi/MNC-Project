@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:midnightcity/constants/api.dart';
 import 'package:midnightcity/models/api_response.dart';
@@ -44,7 +45,7 @@ class DeliveryAddressRequest extends HttpService {
     final apiResult = await get(
       Api.deliveryAddresses,
       queryParameters: {
-        "action": "default",
+        //"action": "default",
         "vendor_id": vendorId,
       },
     );
@@ -52,7 +53,43 @@ class DeliveryAddressRequest extends HttpService {
     //
     final apiResponse = ApiResponse.fromResponse(apiResult);
     if (apiResponse.allGood) {
-      return apiResponse.body.toString().isNotEmpty
+      if (apiResponse.body.isNotEmpty) {
+        List<DeliveryAddress> addresses = apiResponse.data.map((jsonObject) {
+          return DeliveryAddress.fromJson(jsonObject);
+        }).toList();
+
+        return addresses.firstWhere(
+          (e) => e.isDefault == 1,
+        );
+
+        for (var element in addresses) {
+          if (element.isDefault == 1) {
+            return element;
+          }
+        }
+
+        return apiResponse.body.isNotEmpty
+            ? DeliveryAddress.fromJson(apiResponse.body)
+            : null;
+      }
+    } else {
+      throw apiResponse.message!;
+    }
+  }
+
+  Future<DeliveryAddress?> preselectedDeliveryAddress2({int? vendorId}) async {
+    final apiResult = await get(
+      Api.deliveryAddresses,
+      queryParameters: {
+        //"action": "default",
+        "vendor_id": vendorId,
+      },
+    );
+
+    //
+    final apiResponse = ApiResponse.fromResponse(apiResult);
+    if (apiResponse.allGood) {
+      return apiResponse.body.isNotEmpty
           ? DeliveryAddress.fromJson(apiResponse.body)
           : null;
     } else {

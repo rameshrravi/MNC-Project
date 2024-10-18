@@ -7,28 +7,28 @@ import 'package:velocity_x/velocity_x.dart';
 
 class CustomListView extends StatelessWidget {
   //
-  final ScrollController? scrollController;
-  final Widget? title;
-  final Widget? loadingWidget;
-  final Widget? errorWidget;
-  final Widget? emptyWidget;
-  final List<dynamic>? dataSet;
-  final bool? isLoading;
-  final bool? hasError;
-  final bool? justList;
-  final bool? reversed;
-  final bool? noScrollPhysics;
-  final Axis? scrollDirection;
-  final EdgeInsets? padding;
-  final Function(BuildContext, int)? itemBuilder;
-  final Function(BuildContext, int)? separatorBuilder;
+  final ScrollController scrollController;
+  final Widget title;
+  final Widget loadingWidget;
+  final Widget errorWidget;
+  final Widget emptyWidget;
+  final List<dynamic> dataSet;
+  final bool isLoading;
+  final bool hasError;
+  final bool justList;
+  final bool reversed;
+  final bool noScrollPhysics;
+  final Axis scrollDirection;
+  final EdgeInsets padding;
+  final Function(BuildContext, int) itemBuilder;
+  final Function(BuildContext, int) separatorBuilder;
 
   //
-  final bool? canRefresh;
-  final RefreshController? refreshController;
-  final Function? onRefresh;
-  final Function? onLoading;
-  final bool? canPullUp;
+  final bool canRefresh;
+  final RefreshController refreshController;
+  final Function onRefresh;
+  final Function onLoading;
+  final bool canPullUp;
 
   const CustomListView({
     @required this.dataSet,
@@ -53,45 +53,45 @@ class CustomListView extends StatelessWidget {
     this.onRefresh,
     this.onLoading,
     this.canPullUp = false,
-    Key? key,
+    Key key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return this.justList!
+    return this.justList
         ? _getBody()
         : VStack(
-            [
-              this.title ?? UiSpacer.emptySpace(),
-              _getBody(),
-            ],
-            crossAlignment: CrossAxisAlignment.start,
-          );
+      [
+        this.title ?? UiSpacer.emptySpace(),
+        _getBody(),
+      ],
+      crossAlignment: CrossAxisAlignment.start,
+    );
   }
 
   Widget _getBody() {
-    final contentBody = this.isLoading!
+    final contentBody = this.isLoading
         ? this.loadingWidget ?? LoadingShimmer()
-        : this.hasError!
-            ? this.errorWidget ?? EmptyState(description: "There is an error")
-            : this.dataSet!.isEmpty
-                ? this.emptyWidget ?? UiSpacer.emptySpace()
-                : this.justList!
-                    ? _getListView()
-                    : Expanded(
-                        child: _getListView(),
-                      );
+        : this.hasError
+        ? this.errorWidget ?? EmptyState(description: "There is an error")
+        : this.dataSet.isEmpty
+        ? this.emptyWidget ?? UiSpacer.emptySpace()
+        : this.justList
+        ? _getListView()
+        : Expanded(
+      child: _getListView(),
+    );
 
-    return this.canRefresh!
+    return this.canRefresh
         ? SmartRefresher(
-            scrollDirection: this.scrollDirection,
-            enablePullDown: true,
-            enablePullUp: canPullUp,
-            controller: this.refreshController,
-            onRefresh: this.onRefresh,
-            onLoading: this.onLoading,
-            child: contentBody,
-          )
+      scrollDirection: this.scrollDirection,
+      enablePullDown: true,
+      enablePullUp: canPullUp,
+      controller: this.refreshController,
+      onRefresh: this.onRefresh,
+      onLoading: this.onLoading,
+      child: contentBody,
+    )
         : contentBody;
   }
 
@@ -107,7 +107,7 @@ class CustomListView extends StatelessWidget {
       itemBuilder: this.itemBuilder,
       itemCount: this.dataSet.length,
       separatorBuilder: this.separatorBuilder ??
-          (context, index) => this.scrollDirection == Axis.vertical
+              (context, index) => this.scrollDirection == Axis.vertical
               ? UiSpacer.verticalSpace()
               : UiSpacer.horizontalSpace(),
     );

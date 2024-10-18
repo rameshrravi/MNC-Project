@@ -90,12 +90,19 @@ class _OrdersPageState extends State<OrdersPage>
                         canRefresh: true,
                         canPullUp: true,
                         refreshController: vm.refreshController,
-                        onRefresh: vm.fetchMyOrders,
-                        onLoading: () =>
-                            vm.fetchMyOrders(initialLoading: false),
+
+                        onRefresh: () {
+                          print("sasassasa");
+                          vm.fetchMyOrders;
+                        },
+                        onLoading: () {
+                          vm.fetchMyOrders(initialLoading: false);
+                        },
+
                         isLoading: vm.isBusy,
                         dataSet: vm.orders,
                         hasError: vm.hasError,
+
                         errorWidget: LoadingError(
                           onrefresh: vm.fetchMyOrders,
                         ),

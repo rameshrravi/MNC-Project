@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/models/delivery_address.dart';
 import 'package:midnightcity/utils/ui_spacer.dart';
 import 'package:midnightcity/widgets/cards/custom.visibility.dart';
@@ -59,15 +60,15 @@ class DeliveryAddressListItem extends StatelessWidget {
                     [
                       //delete icon
                       Icon(
-                        //  FlutterIcons.delete_ant,
-                        Icons.access_alarm_outlined,
+                        FlutterIcons.delete_ant,
+                        //Icons.access_alarm_outlined,
                         size: 16,
                         color: Colors.black,
                       ).wFull(context).onInkTap(this.onDeletePressed!).py12(),
                       //edit icon
                       Icon(
-                        // FlutterIcons.edit_ent,
-                        Icons.access_alarm_outlined,
+                        FlutterIcons.edit_ent,
+                        // Icons.access_alarm_outlined,
                         size: 16,
                         color: Colors.black,
                       ).wFull(context).onInkTap(this.onEditPressed!).py12(),

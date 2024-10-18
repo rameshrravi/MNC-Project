@@ -103,10 +103,10 @@ class _VendorCategoryProductsPageState extends State<VendorCategoryProductsPage>
                       padding: EdgeInsets.symmetric(vertical: 10),
                       dataSet: model.categoriesProducts![subcategory.id] ?? [],
                       isLoading: model.busy(subcategory.id),
-                      // onLoading: () => model.loadMoreProducts(
-                      //   subcategory.id!,
-                      //   initialLoad: false,
-                      // ),
+                      onLoading: () => model.loadMoreProducts(
+                        subcategory.id!,
+                        initialLoad: false,
+                      ),
                       onRefresh: () => model.loadMoreProducts(subcategory.id!),
                       itemBuilder: (context, index) {
                         //

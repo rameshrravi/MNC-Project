@@ -24,8 +24,8 @@ class CustomMasonryGridView extends StatelessWidget {
   //
   final bool? canRefresh;
   final RefreshController? refreshController;
-  final Function? onRefresh;
-  final Function? onLoading;
+  final VoidCallback? onRefresh;
+  final VoidCallback? onLoading;
   final bool? canPullUp;
 
   const CustomMasonryGridView({
@@ -85,8 +85,8 @@ class CustomMasonryGridView extends StatelessWidget {
             enablePullDown: true,
             enablePullUp: canPullUp!,
             controller: this.refreshController!,
-            onRefresh: () {},
-            onLoading: () {},
+            onRefresh: onRefresh,
+            onLoading: onLoading,
             child: _getListView(),
           )
         : _getListView();

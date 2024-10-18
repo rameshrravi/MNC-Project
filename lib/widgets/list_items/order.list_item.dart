@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/constants/app_colors.dart';
 import 'package:midnightcity/extensions/dynamic.dart';
 import 'package:midnightcity/extensions/string.dart';
@@ -95,7 +98,11 @@ class OrderListItem extends StatelessWidget {
 
         //
         //payment is pending
-        order!.isPaymentPending!
+        order!.isPaymentPending! &&
+                order!
+                        .removeSpace(order!.paymentMethod!.name!)!
+                        .lowerCamelCase ==
+                    "banktransfer"
             ? Container(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -119,8 +126,8 @@ class OrderListItem extends StatelessWidget {
                           titleStyle: context.textTheme.bodyLarge?.copyWith(
                             color: Colors.white,
                           ),
-                          //icon: FlutterIcons.payment_mdi,
-                          icon: Icons.ac_unit_sharp,
+                          icon: FlutterIcons.payment_mdi,
+                          //icon: Icons.ac_unit_sharp,
                           iconColor: Colors.white,
                           iconSize: 18,
                           onPressed: onPayPressed,

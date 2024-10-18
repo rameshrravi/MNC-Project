@@ -393,4 +393,8 @@ class Order {
   String? get Taxistatus {
     return status!.contains("deliver") ? "completed" : status;
   }
+
+  String? removeSpace(String text) {
+    return text.replaceAll(" ", "");
+  }
 }

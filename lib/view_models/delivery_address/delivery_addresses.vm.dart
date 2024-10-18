@@ -41,15 +41,19 @@ class DeliveryAddressesViewModel extends MyBaseViewModel {
     // await viewContext!.navigator.pushNamed(
     //   AppRoutes.newDeliveryAddressesRoute,
     // );
+
+    pushNamedMethod(viewContext!, AppRoutes.newDeliveryAddressesRoute);
     fetchDeliveryAddresses();
   }
 
   //
   editDeliveryAddress(DeliveryAddress deliveryAddress) async {
-    // await viewContext!.navigator.pushNamed(
-    //   AppRoutes.editDeliveryAddressesRoute,
-    //   arguments: deliveryAddress,
-    // );
+    await Navigator.pushNamed(
+      viewContext!,
+      AppRoutes.editDeliveryAddressesRoute,
+      arguments: deliveryAddress,
+    );
+    //
     fetchDeliveryAddresses();
   }
 
