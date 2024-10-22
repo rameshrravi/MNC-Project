@@ -79,14 +79,12 @@ class EmptyState extends StatelessWidget {
 
           //
           auth!
-              ? CustomButton(
-                  title: "Login".tr(),
-                  onPressed: () {},
-                ).centered()
+              ? CustomButton(title: "Login".tr(), onPressed: actionPressed)
+                  .centered()
               : showAction!
                   ? CustomButton(
                       title: actionText!.tr(),
-                      // onPressed: actionPressed,
+                      onPressed: actionPressed,
                     ).centered().py12()
                   : SizedBox.shrink(),
         ],

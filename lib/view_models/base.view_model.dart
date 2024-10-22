@@ -401,8 +401,9 @@ class MyBaseViewModel extends BaseViewModel with UpdateService {
   //share
   shareProduct(Product product) async {
     //
-    setBusyForObject(shareProduct, true);
+    // setBusyForObject(shareProduct, true);
     // String link = "${Api.appShareLink}/product/${product.id}";
+    //
     // final dynamicLinkParams = DynamicLinkParameters(
     //   link: Uri.parse(link),
     //   uriPrefix: AppDynamicLink.dynamicLinkPrefix,
@@ -416,7 +417,7 @@ class MyBaseViewModel extends BaseViewModel with UpdateService {
     // final dynamicLink = await FirebaseDynamicLinks.instance.buildLink(
     //   dynamicLinkParams,
     // );
-
+    //
     // String shareLink = Uri.decodeFull(
     //   Uri.decodeComponent(dynamicLink.toString()),
     // );

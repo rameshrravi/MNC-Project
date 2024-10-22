@@ -132,9 +132,9 @@ class CommerceProductListItem extends StatelessWidget {
     //   (context) => ProductDetailsPage(product: product),
     // );
 
-    // Navigator.push(
-    //     context!,
-    //     MaterialPageRoute(
-    //         builder: (context) => ProductDetailsPage(product: product)));
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => ProductDetailsPage(product: product)));
   }
 }

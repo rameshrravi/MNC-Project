@@ -77,7 +77,7 @@ class _CartPageState extends State<CartPage> {
 
                       //
                       UiSpacer.divider(height: 20),
-                      ApplyCoupon(model),
+                      //ApplyCoupon(model),
                       UiSpacer.verticalSpace(),
                       AmountTile(
                           "Total Item".tr(), model.totalCartItems.toString()),

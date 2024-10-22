@@ -35,7 +35,9 @@ class GoToCartView extends StatelessWidget {
                   color: AppColor.accentColor,
                   elevation: 1,
                   onPressed: () {
-                    //context.push((context) => CartPage());
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => CartPage()));
+                    //  context.push((context) => CartPage());
                   },
                 ),
                 //
