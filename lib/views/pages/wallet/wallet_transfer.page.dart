@@ -57,8 +57,6 @@ class WalletTransferPage extends StatelessWidget {
                 //Receiver row data
                 Row(
                   children: [
-                    // Ramesh Code
-
                     TypeAheadField<User>(
                         suggestionsCallback: (search) => vm.searchUsers(search),
                         builder: (context, controller, focusNode) {

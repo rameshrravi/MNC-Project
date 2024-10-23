@@ -20,16 +20,16 @@ class ParcelLocationPickerOptionBottomSheet extends StatelessWidget {
         CustomButton(
           title: "Delivery Address List".tr(),
           onPressed: () {
-            //Ramesh
             // context.pop(0);
+            Navigator.pop(context, 0);
           },
         ),
         UiSpacer.verticalSpace(),
         CustomTextButton(
           title: "Directly from map".tr(),
           onPressed: () {
-            //Ramesh
             //context.pop(1);
+            Navigator.pop(context, 1);
           },
         ).wFull(context),
       ],

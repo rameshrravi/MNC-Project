@@ -152,7 +152,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         fillColor: widget.fillColor,
       ),
       inputFormatters: widget.inputFormatters,
-      cursorColor: widget.cursorColor ?? AppColor.white,
+      cursorColor: widget.cursorColor ?? AppColor.primaryColorDark,
       obscureText: (widget.obscureText!) ? !makePasswordVisible : false,
       onTap: () {
         if (widget.onTap != null) {

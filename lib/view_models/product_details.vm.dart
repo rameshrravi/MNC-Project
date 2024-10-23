@@ -17,6 +17,7 @@ import 'package:midnightcity/view_models/base.view_model.dart';
 import 'package:midnightcity/views/pages/cart/cart.page.dart';
 import 'package:midnightcity/views/pages/vendor_details/vendor_details.page.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
+import 'package:midnightcity/widgets/states/cart.empty.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:midnightcity/constants/app_strings.dart';
 
@@ -305,6 +306,7 @@ class ProductDetailsViewModel extends MyBaseViewModel {
         //
         if (!skip) {
           done = await CoolAlert.show(
+            barrierDismissible: false,
             context: viewContext!,
             title: "Add to cart".tr(),
             text: "%s Added to cart".tr().fill([product.name]),
@@ -318,11 +320,12 @@ class ProductDetailsViewModel extends MyBaseViewModel {
             ),
             onConfirmBtnTap: () async {
               //
-              // debugger();
-              Navigator.of(viewContext!).pop(true);
-              viewContext!.nextPage(CartPage());
-              // Navigator.push(viewContext!,
-              //     MaterialPageRoute(builder: (context) => CartPage()));
+              Navigator.pop(viewContext!);
+              openCartPage();
+
+              //  Navigator.of(viewContext!).pop(true);
+              //  Navigator.push(viewContext!,
+              //    MaterialPageRoute(builder: (context) => CartPage()));
             },
             cancelBtnText: "Keep Shopping".tr(),
             onCancelBtnTap: () {
@@ -369,8 +372,9 @@ class ProductDetailsViewModel extends MyBaseViewModel {
         );
       }
     } catch (error) {
-      //debugger();
+      // debugger();
       print("Cart Error00 => $error");
+      openCartPage();
       setError(error);
     }
     setBusy(false);
@@ -398,5 +402,9 @@ class ProductDetailsViewModel extends MyBaseViewModel {
     } catch (error) {
       toastError("$error");
     }
+  }
+
+  void openCartPage() {
+    viewContext!.nextPage(CartPage());
   }
 }

@@ -85,9 +85,10 @@ class EditDeliveryAddressesViewModel extends BaseDeliveryAddressesViewModel {
         title: "Update Delivery Address".tr(),
         text: apiRespose.message,
         onConfirmBtnTap: () {
-          //ramesh hide
-          // viewContext!.pop();
-          //viewContext!.pop(true);
+          Navigator.pop(viewContext!);
+          Navigator.pop(viewContext!, true);
+          //  viewContext!.pop();
+          // viewContext!.pop(true);
         },
       );
       //

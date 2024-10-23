@@ -24,19 +24,16 @@ class RouteButton extends StatelessWidget {
         .roundedSM
         .make()
         .onInkTap(() async {
-      //Ramesh
-      //
-
-      // if (await MapLauncher.isMapAvailable(MapType.google!)) {
-      //   await MapLauncher.showDirections(
-      //     mapType: MapType.google,
-      //     destination: Coords(
-      //       double.parse(vendor.latitude!),
-      //       double.parse(vendor.longitude!),
-      //     ),
-      //     destinationTitle: vendor.name,
-      //   );
-      // }
+      if (await MapLauncher.isMapAvailable(MapType.google) == true) {
+        await MapLauncher.showDirections(
+          mapType: MapType.google,
+          destination: Coords(
+            double.parse(vendor.latitude!),
+            double.parse(vendor.longitude!),
+          ),
+          destinationTitle: vendor.name,
+        );
+      }
     });
   }
 }

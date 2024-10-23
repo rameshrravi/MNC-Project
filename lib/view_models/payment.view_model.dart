@@ -67,6 +67,7 @@ class PaymentViewModel extends MyBaseViewModel {
     //   ),
     // );
     //
+    print(url);
     final result = await Navigator.push(
         viewContext!,
         MaterialPageRoute(

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -46,7 +48,7 @@ class _CustomStepperState extends State<CustomStepper> {
                   qty -= 1;
                 });
                 //
-                widget!.onChange!(qty)!;
+                widget!.onChange!(qty);
               }
             }),
           ),

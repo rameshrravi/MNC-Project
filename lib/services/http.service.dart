@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'package:dio/dio.dart';
 //import 'package:dio_http_cache_lts/dio_http_cache_lts.dart';
@@ -90,7 +91,6 @@ class HttpService {
   }) async {
     //preparing the api uri/url
     String uri = "$host$url";
-
     //preparing the post options if header is required
     final mOptions = !includeHeaders
         ? null

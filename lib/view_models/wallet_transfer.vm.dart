@@ -71,8 +71,7 @@ class WalletTransferViewModel extends PaymentViewModel with QrcodeScannerTrait {
         //
         if (apiResponse.allGood) {
           toastSuccessful(apiResponse.message!);
-          //Ramesh
-          // viewContext!.pop();
+          Navigator.pop(viewContext!);
         } else {
           toastError(apiResponse.message!);
         }

@@ -41,8 +41,7 @@ class NavigationService {
     }
     //
     if (loadNext) {
-      //Ramesh
-      // context.nextPage(nextpage);
+      context!.nextPage(nextpage);
     }
   }
 

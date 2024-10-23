@@ -69,6 +69,8 @@ dependencies:
   flutter_datetime_picker_plus: ^2.2.0
   flutter_branch_sdk: ^8.2.0
   flutter_firebase_chat_core: ^1.6.8
+  #easy_dynamic_link: ^0.0.1
+  firebase_dynamic_links: ^6.0.8
 
 
 

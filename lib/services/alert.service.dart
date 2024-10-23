@@ -59,7 +59,6 @@ class AlertService {
         backgroundColor: AppColor.midnightCityDarkBlue,
         onConfirmBtnTap: () {
           result = true;
-          //Ramesh hidee
           //AppService().navigatorKey.currentContext.pop();
           AppService().navigatorKey.currentContext;
         });

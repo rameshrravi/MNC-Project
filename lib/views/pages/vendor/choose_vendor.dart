@@ -138,9 +138,8 @@ class SelectVendor extends StatelessWidget {
                       return VendorTypeListItem(
                         vendorType,
                         onPressed: () {
-                          //Ramesh
-                          // NavigationService.pageSelected(vendorType,
-                          //     context: context);
+                          NavigationService.pageSelected(vendorType,
+                              context: context);
                         },
                       );
                     },
@@ -170,9 +169,8 @@ class SelectVendor extends StatelessWidget {
                           return VendorTypeVerticalListItem(
                             vendorType,
                             onPressed: () {
-                              // NavigationService.pageSelected(vendorType,
-                              //     context: context);
-                              //Ramesh
+                              NavigationService.pageSelected(vendorType,
+                                  context: context);
                             },
                           );
                         },

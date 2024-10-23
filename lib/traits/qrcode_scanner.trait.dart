@@ -26,8 +26,7 @@ mixin QrcodeScannerTrait {
                   // controller.toggleFlash();
                   controller.scannedDataStream.listen((scanData) {
                     //close dialog
-                    //Ramesh hide
-                    // viewContext!.pop(scanData.code);
+                    Navigator.pop(viewContext!, scanData.code!);
                     // viewContext!.pop(scanData.code);
                   });
                 },

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart' hide MenuItem;
 import 'package:midnightcity/constants/app_strings.dart';
 import 'package:midnightcity/extensions/dynamic.dart';
@@ -9,6 +11,7 @@ import 'package:midnightcity/widgets/cards/help.center.card.dart';
 import 'package:midnightcity/widgets/menu_item.dart';
 import 'package:localize_and_translate/localize_and_translate.dart';
 import 'package:stacked/stacked.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 import 'package:velocity_x/velocity_x.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:whatsapp/whatsapp.dart';
@@ -86,10 +89,13 @@ class _CustomerSupportPageState extends State<CustomerSupportPage>
                         onPressed: () async {
                           final phoneNumber = '+2348092871393';
                           final url = 'tel:$phoneNumber';
-
-                          if (await canLaunch(url)) {
-                            await launch(url);
-                          }
+                          makePhoneCall(phoneNumber);
+                          // final call = Uri.parse('tel:$phoneNumber');
+                          // if (await canLaunchUrl(call)) {
+                          //   launchUrl(call);
+                          // } else {
+                          //   throw 'Could not launch $call';
+                          // }
                         },
 
                         //  label: "Phone",
@@ -184,20 +190,45 @@ class _CustomerSupportPageState extends State<CustomerSupportPage>
     var whatappURL_ios = "https://wa.me/$whatsapp?text=${Uri.parse("Hi, ")}";
     if (Platform.isIOS) {
       // for iOS phone only
-      if (await canLaunch(whatappURL_ios)) {
-        await launch(whatappURL_ios, forceSafariVC: false);
+      // if (await canLaunch(whatappURL_ios)) {
+      //   await launch(whatappURL_ios, forceSafariVC: false);
+      // } else {
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //       SnackBar(content: new Text("Whatsapp not installed")));
+      // }
+
+      if (await canLaunchUrl(Uri.parse(whatappURL_ios))) {
+        await launchUrl(Uri.parse(whatappURL_ios),
+            mode: LaunchMode.externalApplication);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: new Text("Whatsapp not installed")));
       }
     } else {
       // android , web
-      if (await canLaunch(whatsappURl_android)) {
-        await launch(whatsappURl_android);
+
+      if (await canLaunchUrl(Uri.parse(whatsappURl_android))) {
+        await launchUrl(Uri.parse(whatsappURl_android),
+            mode: LaunchMode.externalApplication);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: new Text("Whatsapp not installed")));
       }
+      // if (await canLaunch(whatsappURl_android)) {
+      //   await launch(whatsappURl_android);
+      // } else {
+      //   ScaffoldMessenger.of(context).showSnackBar(
+      //       SnackBar(content: new Text("Whatsapp not installed")));
+      // }
+    }
+  }
+
+  void makePhoneCall(String? phoneNumber) async {
+    if (phoneNumber != null && await canLaunchUrlString('tel:$phoneNumber')) {
+      await launchUrlString('tel:$phoneNumber');
+    } else {
+      // Handle error, for example, show an error message
+      log('Could not launch phone call');
     }
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:midnightcity/models/vendor.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:velocity_x/velocity_x.dart';
@@ -14,8 +15,8 @@ class CallButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Icon(
-      // FlutterIcons.phone_ant,
-      Icons.import_contacts,
+      FlutterIcons.phone_ant,
+      //Icons.import_contacts,
       size: size ?? 24,
       color: Colors.white,
     ).p8().box.color(AppColor.primaryColor!).roundedFull.make().onInkTap(() {

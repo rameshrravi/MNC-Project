@@ -112,7 +112,7 @@ class _AddressSearchViewState extends State<AddressSearchView> {
             debounceTime: 800,
             onselecteds: (Address prediction) {
               widget.addressSelected!(prediction);
-              //context.pop();
+              Navigator.pop(context);
             },
           ),
         ),

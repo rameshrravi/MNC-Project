@@ -42,8 +42,7 @@ class VendorRatingViewModel extends MyBaseViewModel {
       text: apiResponse.message,
       onConfirmBtnTap: apiResponse.allGood
           ? () {
-              //Ramesh
-              //viewContext!.pop();
+              Navigator.pop(viewContext!);
               //
               onSubmitted();
             }

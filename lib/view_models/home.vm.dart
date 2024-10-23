@@ -86,7 +86,7 @@ class HomeViewModel extends MyBaseViewModel {
   void initialise() async {
     //
 
-    handleAppLink();
+    //handleAppLink();
 
     //determine if homeview should be multiple vendor types or single vendor page
     if (AppStrings.isSingleVendorMode) {
@@ -328,42 +328,64 @@ class HomeViewModel extends MyBaseViewModel {
     notifyListeners();
   }
 
+  // handleAppLink() async {
+  //   // Get any initial links
+  //   final PendingDynamicLinkData initialLink =
+  //       await FirebaseDynamicLinks.instance.getInitialLink();
+  //   if (initialLink != null) {
+  //     final Uri deepLink = initialLink.link;
+  //     openPageByLink(deepLink);
+  //   }
   //
-  handleAppLink() async {
-    //Get any initial links
-
-    // final PendingDynamicLinkData initialLink =
-    //     await FirebaseDynamicLinks.instance.getInitialLink();
-    // if (initialLink != null) {
-    //   final Uri deepLink = initialLink.link;
-    //   openPageByLink(deepLink);
-    // }
-    //
-    // //
-    // FirebaseDynamicLinks.instance.onLink.listen(
-    //   (dynamicLinkData) {
-    //     //
-    //     openPageByLink(dynamicLinkData.link);
-    //   },
-    // ).onError(
-    //   (error) {
-    //     // Handle errors
-    //     print("error opening link ==> $error");
-    //   },
-    // );
-    // await FlutterBranchSdk.init(enableLogging: false, disableTracking: false);
-    // FlutterBranchSdk.listSession().listen((data) {
-    //   debugger();
-    //   if (data.containsKey('+clicked_branch_link') &&
-    //       data['+clicked_branch_link'] == true) {
-    //     final Uri? deepLink = Uri.parse(data['~referring_link']);
-    //     if (deepLink != null) {
-    //       debugger();
-    //       openPageByLink(deepLink);
-    //     }
-    //   }
-    // });
-  }
+  //   //
+  //   FirebaseDynamicLinks.instance.onLink.listen(
+  //     (dynamicLinkData) {
+  //       //
+  //       openPageByLink(dynamicLinkData.link);
+  //     },
+  //   ).onError(
+  //     (error) {
+  //       // Handle errors
+  //       print("error opening link ==> $error");
+  //     },
+  //   );
+  // }
+  //
+  // handleAppLink() async {
+  //   //Get any initial links
+  //
+  //   // final PendingDynamicLinkData initialLink =
+  //   //     await FirebaseDynamicLinks.instance.getInitialLink();
+  //   // if (initialLink != null) {
+  //   //   final Uri deepLink = initialLink.link;
+  //   //   openPageByLink(deepLink);
+  //   // }
+  //   //
+  //   // //
+  //   // FirebaseDynamicLinks.instance.onLink.listen(
+  //   //   (dynamicLinkData) {
+  //   //     //
+  //   //     openPageByLink(dynamicLinkData.link);
+  //   //   },
+  //   // ).onError(
+  //   //   (error) {
+  //   //     // Handle errors
+  //   //     print("error opening link ==> $error");
+  //   //   },
+  //   // );
+  //   // await FlutterBranchSdk.init(enableLogging: false, disableTracking: false);
+  //   // FlutterBranchSdk.listSession().listen((data) {
+  //   //   debugger();
+  //   //   if (data.containsKey('+clicked_branch_link') &&
+  //   //       data['+clicked_branch_link'] == true) {
+  //   //     final Uri? deepLink = Uri.parse(data['~referring_link']);
+  //   //     if (deepLink != null) {
+  //   //       debugger();
+  //   //       openPageByLink(deepLink);
+  //   //     }
+  //   //   }
+  //   // });
+  // }
 
   //
   openPageByLink(Uri deepLink) async {

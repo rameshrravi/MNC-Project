@@ -38,6 +38,11 @@ import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:stacked/stacked.dart';
 import 'package:velocity_x/velocity_x.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MyBaseViewModel extends BaseViewModel with UpdateService {
   //
@@ -157,6 +162,7 @@ class MyBaseViewModel extends BaseViewModel with UpdateService {
   //
   addToCartDirectly(Product product, int qty, {bool force = false}) async {
     //
+
     if (qty <= 0) {
       //
       final mProductsInCart = CartServices.productsInCart;
@@ -237,7 +243,7 @@ class MyBaseViewModel extends BaseViewModel with UpdateService {
         );
       }
     } catch (error) {
-      print("Cart Error => $error");
+      print("Cart Errorrames => $error");
       setError(error);
     }
   }
@@ -401,52 +407,52 @@ class MyBaseViewModel extends BaseViewModel with UpdateService {
   //share
   shareProduct(Product product) async {
     //
-    // setBusyForObject(shareProduct, true);
-    // String link = "${Api.appShareLink}/product/${product.id}";
-    //
-    // final dynamicLinkParams = DynamicLinkParameters(
-    //   link: Uri.parse(link),
-    //   uriPrefix: AppDynamicLink.dynamicLinkPrefix,
-    //   androidParameters: AndroidParameters(
-    //     packageName: await AppDynamicLink.androidDynamicLinkId,
-    //   ),
-    //   iosParameters: IOSParameters(
-    //     bundleId: await AppDynamicLink.iOSDynamicLinkId,
-    //   ),
-    // );
-    // final dynamicLink = await FirebaseDynamicLinks.instance.buildLink(
-    //   dynamicLinkParams,
-    // );
-    //
-    // String shareLink = Uri.decodeFull(
-    //   Uri.decodeComponent(dynamicLink.toString()),
-    // );
-    // await Share.share(shareLink);
-    // setBusyForObject(shareProduct, false);
+    setBusyForObject(shareProduct, true);
+    String link = "${Api.appShareLink}/product/${product.id}";
+
+    final dynamicLinkParams = DynamicLinkParameters(
+      link: Uri.parse(link),
+      uriPrefix: AppDynamicLink.dynamicLinkPrefix,
+      androidParameters: AndroidParameters(
+        packageName: await AppDynamicLink.androidDynamicLinkId,
+      ),
+      iosParameters: IOSParameters(
+        bundleId: await AppDynamicLink.iOSDynamicLinkId,
+      ),
+    );
+    final dynamicLink = await FirebaseDynamicLinks.instance.buildLink(
+      dynamicLinkParams,
+    );
+
+    String shareLink = Uri.decodeFull(
+      Uri.decodeComponent(dynamicLink.toString()),
+    );
+    await Share.share(shareLink);
+    setBusyForObject(shareProduct, false);
   }
 
   shareVendor(Vendor vendor) async {
     //
     setBusyForObject(shareVendor, true);
     String link = "${Api.appShareLink}/vendor/${vendor.id}";
-    // final dynamicLinkParams = DynamicLinkParameters(
-    //   link: Uri.parse(link),
-    //   uriPrefix: AppDynamicLink.dynamicLinkPrefix,
-    //   androidParameters: AndroidParameters(
-    //     packageName: await AppDynamicLink.androidDynamicLinkId,
-    //   ),
-    //   iosParameters: IOSParameters(
-    //     bundleId: await AppDynamicLink.iOSDynamicLinkId,
-    //   ),
-    // );
-    // final dynamicLink = await FirebaseDynamicLinks.instance.buildLink(
-    //   dynamicLinkParams,
-    // );
+    final dynamicLinkParams = DynamicLinkParameters(
+      link: Uri.parse(link),
+      uriPrefix: AppDynamicLink.dynamicLinkPrefix,
+      androidParameters: AndroidParameters(
+        packageName: await AppDynamicLink.androidDynamicLinkId,
+      ),
+      iosParameters: IOSParameters(
+        bundleId: await AppDynamicLink.iOSDynamicLinkId,
+      ),
+    );
+    final dynamicLink = await FirebaseDynamicLinks.instance.buildLink(
+      dynamicLinkParams,
+    );
 
-    // String shareLink = Uri.decodeFull(
-    //  // Uri.decodeComponent(dynamicLink.toString()),
-    // );
-//    await Share.share(shareLink);
+    String shareLink = Uri.decodeFull(
+      Uri.decodeComponent(dynamicLink.toString()),
+    );
+    await Share.share(shareLink);
     setBusyForObject(shareVendor, false);
   }
 
@@ -454,24 +460,24 @@ class MyBaseViewModel extends BaseViewModel with UpdateService {
     //
     setBusyForObject(shareService, true);
     String link = "${Api.appShareLink}/service/${service.id}";
-    // final dynamicLinkParams = DynamicLinkParameters(
-    //   link: Uri.parse(link),
-    //   uriPrefix: AppDynamicLink.dynamicLinkPrefix,
-    //   androidParameters: AndroidParameters(
-    //     packageName: await AppDynamicLink.androidDynamicLinkId,
-    //   ),
-    //   iosParameters: IOSParameters(
-    //     bundleId: await AppDynamicLink.iOSDynamicLinkId,
-    //   ),
-    // );
-    // final dynamicLink = await FirebaseDynamicLinks.instance.buildLink(
-    //   dynamicLinkParams,
-    // );
+    final dynamicLinkParams = DynamicLinkParameters(
+      link: Uri.parse(link),
+      uriPrefix: AppDynamicLink.dynamicLinkPrefix,
+      androidParameters: AndroidParameters(
+        packageName: await AppDynamicLink.androidDynamicLinkId,
+      ),
+      iosParameters: IOSParameters(
+        bundleId: await AppDynamicLink.iOSDynamicLinkId,
+      ),
+    );
+    final dynamicLink = await FirebaseDynamicLinks.instance.buildLink(
+      dynamicLinkParams,
+    );
 
-    // String shareLink = Uri.decodeFull(
-    //   //Uri.decodeComponent(dynamicLink.toString()),
-    // );
-    //  await Share.share(shareLink);
+    String shareLink = Uri.decodeFull(
+      Uri.decodeComponent(dynamicLink.toString()),
+    );
+    await Share.share(shareLink);
     setBusyForObject(shareService, false);
   }
 

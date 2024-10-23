@@ -34,7 +34,7 @@ class SplashViewModel extends MyBaseViewModel {
     if (AuthServices.authenticated()) {
       await AuthServices.getCurrentUser(force: true);
     }
-    //Ramesh Code update
+
   }
 
   //

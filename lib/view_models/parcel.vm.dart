@@ -118,7 +118,6 @@ class ParcelViewModel extends MyBaseViewModel {
     controller.scannedDataStream.listen((scanData) {
       //cloe dialog
       Navigator.pop(viewContext!);
-
       //start searching
       trackOrder(scanData.code!);
     });

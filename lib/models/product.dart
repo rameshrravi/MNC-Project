@@ -241,10 +241,20 @@ class Product {
   // }
   bool optionGroupRequirementCheck() {
     //check if the option groups with required setting has an option selected
-    OptionGroup optionGroupRequired = this.optionGroups!.firstWhere(
-          (e) => e.required == 1,
-          //  orElse: () => null,
-        );
+    OptionGroup? optionGroupRequired;
+
+    if (optionGroups!.isNotEmpty) {
+      optionGroups!.forEach((element) {
+        if (element.required == 1) {
+          optionGroupRequired = element;
+        }
+      });
+    }
+
+    // OptionGroup optionGroupRequired = this.optionGroups!.firstWhere(
+    //       (e) => e.required == 1,
+    //       //  orElse: () => null,
+    //     );
 
     if (optionGroupRequired == null ||
         (optionGroupRequired != null && this.optionGroups!.length <= 1)) {
